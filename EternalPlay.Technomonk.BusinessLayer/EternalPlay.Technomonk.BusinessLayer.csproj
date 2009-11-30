@@ -106,7 +106,6 @@
   <ItemGroup>
     <Compile Include="CycleDefinition.cs" />
     <Compile Include="Cycle.cs" />
-    <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Quality.cs" />
     <Compile Include="QualityPeriod.cs" />
@@ -121,6 +120,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="EternalPlay.Public.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReusableCore\EternalPlay.ReusableCore\EternalPlay.ReusableCore.csproj">
+      <Project>{4AA44811-456E-40A7-B137-A39056134CE0}</Project>
+      <Name>EternalPlay.ReusableCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

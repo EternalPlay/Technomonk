@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
+using EternalPlay.ReusableCore.Extensions;
 
 namespace EternalPlay.Technomonk.BusinessLayer.UnitTest {
     /// <summary>

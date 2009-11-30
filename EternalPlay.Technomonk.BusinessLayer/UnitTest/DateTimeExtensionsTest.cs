@@ -1,11 +1,9 @@
 ﻿using EternalPlay.Technomonk.BusinessLayer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using EternalPlay.ReusableCore.Extensions;
 
-namespace EternalPlay.Technomonk.BusinessLayer.UnitTest
-{
-    
-    
+namespace EternalPlay.Technomonk.BusinessLayer.UnitTest {    
     /// <summary>
     ///This is a test class for DateTimeExtensionsTest and is intended
     ///to contain all DateTimeExtensionsTest Unit Tests

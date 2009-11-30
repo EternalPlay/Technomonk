@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Linq;
 using System.IO;
 using System.Reflection;
+using EternalPlay.ReusableCore.Extensions;
 
 namespace EternalPlay.Technomonk.BusinessLayer {
     /// <summary>
