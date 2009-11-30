@@ -8,12 +8,13 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
+using EternalPlay.ReusableCore.Web;
 
 namespace EternalPlay.Technomonk.Web {
     /// <summary>
     /// Base page for all Technomonk content pages
     /// </summary>
-    public class ContentPage : System.Web.UI.Page {
+    public class ContentPage : BasePage {
         /// <summary>
         /// Perform pre initialization specific activities
         /// 

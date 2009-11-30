@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F0237913-0D11-42E5-954E-9D21DC115E10}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
@@ -210,6 +210,14 @@
       <Project>{ABF5D68E-9F28-4229-9F81-A6B0D04FB993}</Project>
       <Name>EternalPlay.Technomonk.BusinessLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ReusableCore\EternalPlay.ReusableCore.Web\EternalPlay.ReusableCore.Web.csproj">
+      <Project>{278944F1-1CCC-4DD8-9041-BD124ADB39CF}</Project>
+      <Name>EternalPlay.ReusableCore.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReusableCore\EternalPlay.ReusableCore\EternalPlay.ReusableCore.csproj">
+      <Project>{4AA44811-456E-40A7-B137-A39056134CE0}</Project>
+      <Name>EternalPlay.ReusableCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -234,6 +242,9 @@
           <IISUrl>
           </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
