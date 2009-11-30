@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EternalPlay.ReusableCore", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EternalPlay.ReusableCore.Web", "ReusableCore\EternalPlay.ReusableCore.Web\EternalPlay.ReusableCore.Web.csproj", "{278944F1-1CCC-4DD8-9041-BD124ADB39CF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTest", "UnitTest", "{6D5E9DC4-D395-4C5E-AC29-886269D2408B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EternalPlay.ReusableCore.UnitTest", "ReusableCore\EternalPlay.ReusableCore\UnitTest\EternalPlay.ReusableCore.UnitTest.csproj", "{5C4EE4C6-5E1B-4F63-AD04-76B08856DBFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +87,14 @@ Global
 		{278944F1-1CCC-4DD8-9041-BD124ADB39CF}.Release|x64.Build.0 = Release|x64
 		{278944F1-1CCC-4DD8-9041-BD124ADB39CF}.Release|x86.ActiveCfg = Release|x86
 		{278944F1-1CCC-4DD8-9041-BD124ADB39CF}.Release|x86.Build.0 = Release|x86
+		{5C4EE4C6-5E1B-4F63-AD04-76B08856DBFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C4EE4C6-5E1B-4F63-AD04-76B08856DBFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C4EE4C6-5E1B-4F63-AD04-76B08856DBFF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5C4EE4C6-5E1B-4F63-AD04-76B08856DBFF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5C4EE4C6-5E1B-4F63-AD04-76B08856DBFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C4EE4C6-5E1B-4F63-AD04-76B08856DBFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C4EE4C6-5E1B-4F63-AD04-76B08856DBFF}.Release|x64.ActiveCfg = Release|Any CPU
+		{5C4EE4C6-5E1B-4F63-AD04-76B08856DBFF}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,5 +103,7 @@ Global
 		{0BEA45ED-68A1-4352-88FF-D5ADD774E058} = {C977299E-A6B0-4C01-9417-5BFDA26828E5}
 		{4AA44811-456E-40A7-B137-A39056134CE0} = {C384E2FD-63E3-43EA-9BE4-AF8023AC856A}
 		{278944F1-1CCC-4DD8-9041-BD124ADB39CF} = {C384E2FD-63E3-43EA-9BE4-AF8023AC856A}
+		{6D5E9DC4-D395-4C5E-AC29-886269D2408B} = {C384E2FD-63E3-43EA-9BE4-AF8023AC856A}
+		{5C4EE4C6-5E1B-4F63-AD04-76B08856DBFF} = {6D5E9DC4-D395-4C5E-AC29-886269D2408B}
 	EndGlobalSection
 EndGlobal
