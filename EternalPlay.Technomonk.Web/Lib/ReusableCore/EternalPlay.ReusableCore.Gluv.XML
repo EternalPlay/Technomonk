@@ -1,0 +1,2349 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EternalPlay.ReusableCore.Gluv</name>
+    </assembly>
+    <members>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.SchemaClassData">
+            <summary>
+            Item specific persistable data items
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.SchemaClassData.IsArchived">
+            <summary>
+            Flag indicating that the item is archived
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.SchemaClassData.SchemaName">
+            <summary>
+            Name of the schema
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.SchemaClassData.CodeNamespace">
+            <summary>
+            Primary client code namespace for the schema
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.SchemaData">
+            <summary>
+            Static data layer class for accesing assignee factory data
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.SchemaData.LoadCurrentIds(System.Guid)">
+            <summary>
+            Gets a list of current assignee unique ids for the given parent application unique id
+            </summary>
+            <param name="parentUniqueId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.SchemaData.LoadHistoricIds(System.Guid,System.DateTime)">
+            <summary>
+            Gets a list of historic assignee unique ids for the given parent application unique id and as of date
+            </summary>
+            <param name="parentUniqueId"></param>
+            <param name="asOf"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.SchemaData.LoadSpecific(System.Guid)">
+            <summary>
+            Loads a specific Schema Version
+            </summary>
+            <param name="specificId">Unique id of the version to load</param>
+            <returns>Data row with the schema version data</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.SchemaData.Save(System.Guid,System.Nullable{System.Guid},System.Guid,System.String,System.DateTime,System.Boolean,System.String,System.String)">
+            <summary>
+            Saves a schema version
+            </summary>
+            <param name="uniqueId">Schema version unique id</param>
+            <param name="previousUniqueId">Previous schema version id, or null if first version</param>
+            <param name="parentUniqueId">Parent application unique id</param>
+            <param name="enteredBy">User that entered the new version</param>
+            <param name="enteredOn">Timestamp of the version</param>
+            <param name="isArchived">Boolean indicating of the schema is archived</param>
+            <param name="schemaName">Name of the schema</param>
+            <param name="codeNamespace">Code Namespace the schema represents</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationInformationDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationInformationDataSet.ApplicationInformationVersionsDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationInformationDataSet.ApplicationInformationVersionsRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationInformationDataSet.ApplicationInformationVersionsRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.Model.LookupGroupFactory">
+            <summary>
+            Manages a group of benefits for an application
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupGroupFactory.CreateNewLookupGroup">
+            <summary>
+            Creates a new benefit (loaded and added)
+            </summary>
+            <returns>Reference to New Benefit</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupGroupFactory.OnLoadCurrent(System.Guid)">
+            <summary>
+            Load current item data
+            </summary>
+            <param name="parentUniqueId">Parent Item Identification</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupGroupFactory.OnLoadHistoric(System.Guid,System.DateTime)">
+            <summary>
+            Load historic item data
+            </summary>
+            <param name="parentUniqueId">Parent Item Identification</param>
+            <param name="rootAsOf">Date to load as-of</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.TranslationClassData">
+            <summary>
+            Item specific persistable data items
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.TranslationClassData.IsArchived">
+            <summary>
+            Flag indicating that the item is archived
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.TranslationClassData.CultureId">
+            <summary>
+            Culture identification of the translation
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.TranslationClassData.TranslatedValue">
+            <summary>
+            Translated Value (i.e. Most culture appropriate value)
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.TranslationData">
+            <summary>
+            Static data layer class for accesing assignee factory data
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.TranslationData.LoadLookupGroupTranslationCurrentIds(System.Guid)">
+            <summary>
+            Gets a list of current assignee unique ids for the given parent application unique id
+            </summary>
+            <param name="parentUniqueId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.TranslationData.LoadLookupGroupTranslationHistoricIds(System.Guid,System.DateTime)">
+            <summary>
+            Gets a list of historic assignee unique ids for the given parent application unique id and as of date
+            </summary>
+            <param name="parentUniqueId"></param>
+            <param name="asOf"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.TranslationData.LoadLookupValueTranslationCurrentIds(System.Guid)">
+            <summary>
+            Gets a list of current assignee unique ids for the given parent application unique id
+            </summary>
+            <param name="parentUniqueId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.TranslationData.LoadLookupValueTranslationHistoricIds(System.Guid,System.DateTime)">
+            <summary>
+            Gets a list of historic assignee unique ids for the given parent application unique id and as of date
+            </summary>
+            <param name="parentUniqueId"></param>
+            <param name="asOf"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.TranslationData.LoadSpecific(System.Guid)">
+            <summary>
+            Loads a specific Translation Version
+            </summary>
+            <param name="specificId">Unique id of the version to load</param>
+            <returns>Data row with the schema version data</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.TranslationData.Save(System.Guid,System.Nullable{System.Guid},System.Guid,System.String,System.DateTime,System.Boolean,System.Nullable{System.Guid},System.String)">
+            <summary>
+            Saves a Translation version
+            </summary>
+            <param name="uniqueId">Schema version unique id</param>
+            <param name="previousUniqueId">Previous schema version id, or null if first version</param>
+            <param name="parentUniqueId">Parent application unique id</param>
+            <param name="enteredBy">User that entered the new version</param>
+            <param name="enteredOn">Timestamp of the version</param>
+            <param name="isArchived">Boolean indicating of the schema is archived</param>
+            <param name="cultureId">Culture id of the translation</param>
+            <param name="translatedValue">Translated string</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.Model.LookupGroup">
+            <summary>
+            Encapsulate information for a specific basic benefit
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.#ctor">
+            <summary>
+            Assign load children functions to enable bypass of lazy load pattern
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.OnLoadNew">
+            <summary>
+            Prepare a new item
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.OnLoadSpecific(System.Guid)">
+            <summary>
+            Load specific item
+            </summary>
+            <param name="uniqueId"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.OnSave(System.String,System.Nullable{System.Guid})">
+            <summary>
+            Persist item data
+            </summary>
+            <param name="userId">User Identification</param>
+            <param name="previousUniqueId">Identification representing the last loaded version of the item</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.AssignLoadChildrenFunctions">
+            <summary>
+            Add all child load methods to the LoadChildren delegate
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.LoadLookupValueFactory">
+            <summary>
+            Loads LookupValueFactory child
+            </summary>
+            <returns>Delegate to remove from future child load calls</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.LoadLookupGroupTranslationFactory">
+            <summary>
+            Loads LookupGroupTranslationFactory child
+            </summary>
+            <returns>Delegate to remove from future child load calls</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.GetWordMaches(System.String)">
+            <summary>
+            Gets a regex match collection of words from the given source string
+            </summary>
+            <param name="source">String to get word matches from</param>
+            <returns>Regex MatchCollection</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.PascalCaseWord(System.String)">
+            <summary>
+            Converts the given source string to Pascal casing
+            </summary>
+            <param name="source">String to pascal case</param>
+            <returns>Source string converted to pascal case</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.RemoveNonAlphaNumerics(System.String)">
+            <summary>
+            Removes all non alpha numeric charachters from a string
+            </summary>
+            <param name="source">String to modify</param>
+            <returns>Modified version of the original source string</returns>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.GluvId">
+            <summary>
+            Gets the id consumed by clients
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.CodeReadyInvariantName">
+            <summary>
+            Gets a version of the invariant name that is appropriate to use as a .NET property moniker
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.InvariantName">
+            <summary>
+            Gets the invariant culture name of the group
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.IsReadOnly">
+            <summary>
+            Gets a flag indicating if the group is a read only group
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.LookupValues">
+            <summary>
+            Lookup Values associacted with this Group
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.Name">
+            <summary>
+            Gets the cultural relevant name of the lookup group
+            </summary>
+            <remarks>
+            Gets the translated name based on the CurrentUICulture, or if not found the invariant name
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.ProgrammaticLookupValues">
+            <summary>
+            Gets an enumerable collection of all values contained in this group that can be used programmatically
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.Translations">
+            <summary>
+            Translations of the lookup group name
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.Constants">
+            <summary>
+            Constants used by the parent class
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.Constants.PascalWordFormat">
+            <summary>
+            Format string for use in creating pascal cased words
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.Constants.RegExWordMatchPattern">
+            <summary>
+            Regular expression word match pattern
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.Model.LookupGroup.Constants.RegExNonWordCharacterPattern">
+            <summary>
+            Regular expression non word character match pattern
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.ApplicationInformationData">
+            <summary>
+            Static data layer class to support data operations for NBApplicationInformationVersions
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.ApplicationInformationData.LoadCurrent(System.Guid)">
+            <summary>
+            Loads the current ApplicationInformation version for the given parent unique nb application id
+            </summary>
+            <param name="parentUniqueId">Parent Application unique id</param>
+            <returns>Data Row</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.ApplicationInformationData.LoadHistoric(System.Guid,System.DateTime)">
+            <summary>
+            Loads a historic ApplicationInformation version for the given parent unique nb application id and as of date
+            </summary>
+            <param name="parentUniqueId">Parent Application unique id</param>
+            <param name="asOf">As of date</param>
+            <returns>Data Row</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.ApplicationInformationData.SaveVersion(System.Guid,System.Guid,System.String,System.DateTime,System.Boolean,System.String)">
+            <summary>
+            Saves a new ApplicationInformation version
+            </summary>
+            <param name="uniqueId"></param>
+            <param name="parentUniqueId"></param>
+            <param name="enteredBy"></param>
+            <param name="enteredOn"></param>
+            <param name="isArchived"></param>
+            <param name="applicationName"></param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.Model.TranslationFactoryBase">
+            <summary>
+            Common base class for translation factory classes
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.TranslationFactoryBase.GetTranslation(System.String)">
+            <summary>
+            Gets a translatin string from the factory, from the given culture code
+            </summary>
+            <param name="cultureCode">Culture code of the translation to get</param>
+            <returns>Translated value, or empty string if no translation is available for the given culture code</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.TranslationFactoryBase.GetTranslation(System.Globalization.CultureInfo)">
+            <summary>
+            Gets a translatin string from the factory, from the given CultureInfo object
+            </summary>
+            <param name="cultureInfo">Culture code of the translation to get</param>
+            <returns>Translated value, or empty string if no translation is available for the given CultureInfo</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.TranslationFactoryBase.GetTranslation(EternalPlay.ReusableCore.Gluv.Culture)">
+            <summary>
+            Gets a translatin string from the factory, from the given Culture
+            </summary>
+            <param name="culture">Culture code of the translation to get</param>
+            <returns>Translated value, or empty string if no translation is available for the given Culture</returns>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.TranslationFactoryBase.TranslationItems">
+            <summary>
+            Gets a type specific enumerable collection of Items from the translation factory
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.Model.LookupValueFactory">
+            <summary>
+            Manages a group of benefits for an application
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupValueFactory.CreateNewLookupValue">
+            <summary>
+            Creates a new benefit (loaded and added)
+            </summary>
+            <returns>Reference to New Benefit</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupValueFactory.OnLoadCurrent(System.Guid)">
+            <summary>
+            Load current item data
+            </summary>
+            <param name="parentUniqueId">Parent Item Identification</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupValueFactory.OnLoadHistoric(System.Guid,System.DateTime)">
+            <summary>
+            Load historic item data
+            </summary>
+            <param name="parentUniqueId">Parent Item Identification</param>
+            <param name="rootAsOf">Date to load as-of</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.GluvException">
+            <summary>
+            Foundational exception type for EternalPlay.ReusableCore.Web.
+            </summary>
+            <remarks>
+            Any more customized exceptions under EternalPlay.ReusableCore.Web should derive from this class.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.GluvException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.Gluv.GluvException">LoggingException</see> class.
+            </summary>
+            <remarks>
+            <para>
+            This constructor initializes the <see cref="P:System.Exception.Message">Message</see> property of the new
+            instance to a system-supplied message that describes the error and takes into account the current system
+            culture.  This constructor will leave the <see cref="P:System.Exception.InnerException">InnerException</see>
+            property null.
+            </para>
+            <para>
+            All derived classes should provide this default constructor.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.GluvException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.Gluv.GluvException">LoggingException</see> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">
+            The message that describes the error. 
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.GluvException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.Gluv.GluvException">LoggingException</see> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">
+            The message that describes the error. 
+            </param>
+            <param name="innerException">
+            The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if
+            no inner exception is specified.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.GluvException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.Gluv.GluvException">LoggingException</see> class with serialized
+            data. 
+            </summary>
+            <param name="info">
+            The <see cref="T:System.Runtime.Serialization.SerializationInfo">SerializationInfo</see> that holds the serialized object data about the
+            exception being thrown. 
+            </param>
+            <param name="context">
+            The <see cref="T:System.Runtime.Serialization.StreamingContext">StreamingContext</see> that contains contextual information about the
+            source or destination.
+            </param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.CultureData">
+            <summary>
+            Static class for accessing culture data
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.CultureData.Add(System.Guid,System.String,System.String,System.String)">
+            <summary>
+            Adds a new culture
+            </summary>
+            <param name="cultureId">Culture id</param>
+            <param name="cultureCode">Culture code</param>
+            <param name="invariantCultureName">Invariant culture name</param>
+            <param name="cultureName">Native culture name</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.CultureData.Archive(System.Guid)">
+            <summary>
+            Archives a culture
+            </summary>
+            <param name="cultureId">Culture id to archive</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.CultureData.GetAllCultures">
+            <summary>
+            Gets a collection of cultures for all cultures in the database
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.Model.LookupValueTranslationFactory">
+            <summary>
+            Manages a group of translations for a lookup group
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupValueTranslationFactory.CreateNewTranslation">
+            <summary>
+            Creates a new benefit (loaded and added)
+            </summary>
+            <returns>Reference to New Translation</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupValueTranslationFactory.OnLoadCurrent(System.Guid)">
+            <summary>
+            Load current item data
+            </summary>
+            <param name="parentUniqueId">Parent Item Identification</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupValueTranslationFactory.OnLoadHistoric(System.Guid,System.DateTime)">
+            <summary>
+            Load historic item data
+            </summary>
+            <param name="parentUniqueId">Parent Item Identification</param>
+            <param name="rootAsOf">Date to load as-of</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.Model.ApplicationRoot">
+            <summary>
+            Root item for the application model.
+            Construct with this class to gain access to the NB application model.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.ApplicationRoot.#ctor">
+            <summary>
+            Assign load children functions to enable bypass of lazy load pattern
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.ApplicationRoot.FindLookupGroup(System.Guid)">
+            <summary>
+            Retrieves the LookupGroup item from the application heirarchy
+            </summary>
+            <param name="gluvId">LookupGroup GluvId to search for</param>
+            <returns>LookupGroup or null if no item found.</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.ApplicationRoot.FindLookupValue(System.Guid)">
+            <summary>
+            Retrieves the LookupValue item from the application heirarchy
+            </summary>
+            <param name="gluvId">LookupValue Gluv Id to search for</param>
+            <returns>LookupValue or null if no item found.</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.ApplicationRoot.OnSave(System.String,System.Nullable{System.Guid})">
+            <summary>
+            Persist item data
+            </summary>
+            <param name="userId">User Identification</param>
+            <param name="previousUniqueId">Identification representing the last loaded version of the item</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.ApplicationRoot.OnLoadCurrent(System.Guid)">
+            <summary>
+            Loads the created on and created by properties for a given Incident.
+            </summary>
+            <param name="parentUniqueId">Unique Id for the organization to load</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.ApplicationRoot.OnLoadHistoric(System.Guid,System.DateTime)">
+            <summary>
+            Loads the created on and created by properties for a given Incident.
+            </summary>
+            <param name="parentUniqueId">Unique Id for the organization to load</param>
+            <param name="rootAsOf">Historical as of date to load into the rest of the model</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.ApplicationRoot.OnLoadNew">
+            <summary>
+            Because RootItems do not really capture data, we have to automatically
+            set the IsDirty flag to true during first creation so that a new root item can be inserted into the Database.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.ApplicationRoot.LoadFromDataRow(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationDataSet.ApplicationRow)">
+            <summary>
+            Reusable function that loads internal state data from a typed data row.  This method can be reused by the various
+            load methods to avoid duplicating tedious assignment code.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.ApplicationRoot.AssignLoadChildrenFunctions">
+            <summary>
+            Add all child load methods to the LoadChildren delegate
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.ApplicationRoot.Information">
+            <summary>
+            Basic information for this Application
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.ApplicationRoot.Schemas">
+            <summary>
+            Schemas assigned to this application
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSet.LookupValueFactoryDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSet.LookupValueVersionsDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSet.LookupValueFactoryRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSet.LookupValueVersionsRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSet.LookupValueFactoryRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSet.LookupValueVersionsRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSetTableAdapters.LookupValueFactoryTableAdapter">
+             <summary>
+            Represents the connection and commands used to retrieve and save data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSetTableAdapters.LookupValueVersionsTableAdapter">
+             <summary>
+            Represents the connection and commands used to retrieve and save data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSetTableAdapters.TableAdapterManager">
+             <summary>
+            TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSetTableAdapters.TableAdapterManager.UpdateUpdatedRows(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSet,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Update rows in top-down order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSetTableAdapters.TableAdapterManager.UpdateInsertedRows(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Insert rows in top-down order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSetTableAdapters.TableAdapterManager.UpdateDeletedRows(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Delete rows in bottom-up order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSetTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSetTableAdapters.TableAdapterManager.UpdateAll(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSet)">
+             <summary>
+            Update all changes to the dataset.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSetTableAdapters.TableAdapterManager.UpdateOrderOption">
+             <summary>
+            Update Order Option
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupValueDataSetTableAdapters.TableAdapterManager.SelfReferenceComparer">
+             <summary>
+            Used to sort self-referenced table's rows
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.Culture">
+            <summary>
+            Simple class representing the elements of a culture
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Culture.#ctor(System.Guid,System.String,System.String,System.String)">
+            <summary>
+            Constructs the structure from the given individual parts
+            </summary>
+            <param name="cultureId">Id that represents the culture</param>
+            <param name="cultureCode">Culture code</param>
+            <param name="invariantCultureName">Invariant name of the culture</param>
+            <param name="cultureName">Native name of the culture</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Culture.#ctor(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.CultureDataSet.CultureRow)">
+            <summary>
+            Consructs a culture from a culture data row
+            </summary>
+            <param name="row">Data row with the culture data</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Culture.GetCulture(System.Globalization.CultureInfo)">
+            <summary>
+            Gets a Culture object based on the given CultureInfo
+            </summary>
+            <param name="cultureInfo">CultureInfo to get culture for</param>
+            <returns>Culture or null if no culture exists that corresponds to the given CultureInfo</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Culture.GetCulture(System.String)">
+            <summary>
+            Gets a Culture object based on the given culture code
+            </summary>
+            <param name="cultureCode">Culture code to get culture for</param>
+            <returns>Culture or null if no culture exists that corresponds to the given culture code</returns>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Culture.CultureCode">
+            <summary>
+            Gets a string representing the culture code using the Microsoft format for culture codes
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Culture.CultureId">
+            <summary>
+            Gets the id that represents the culture
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Culture.CultureName">
+            <summary>
+            Gets the native name of the culture, e.g. Español
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Culture.InvariantCultureName">
+            <summary>
+            Gets the invariant name of the culture, e.g. Spanish
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.Model.IItemExtensions">
+            <summary>
+            Extends the business model IItem interface
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.IItemExtensions.FindItems``1(EternalPlay.ReusableCore.BusinessModel.IItem,System.Func{``0,System.Boolean})">
+            <summary>
+            Extends IItem to allow collecting all items that match a given lamda expression
+            </summary>
+            <param name="item">Instance of type being extended</param>
+            <param name="predicate">Func(T, bool) expression for matching items</param>
+            <returns>IList(T) of items that matched the expression</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.IItemExtensions.FindItem``1(EternalPlay.ReusableCore.BusinessModel.IItem,System.Func{``0,System.Boolean})">
+            <summary>
+            Returns an item from the item heirarchy that matches the given predicate expression or null if not found.
+            </summary>
+            <remarks>
+            This method should only be used with expressions that are guaranteed to return a unique match.  If a single
+            item is desired for an expression that may return multiple matches, use FindFirstItem(T).
+            </remarks>
+            <param name="item">Parent item to search</param>
+            <param name="predicate">Func(T, bool) expression for matching item</param>
+            <returns>Matching item reference or null if no item is found in the heirarchy</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.IItemExtensions.FindFirstItem``1(EternalPlay.ReusableCore.BusinessModel.IItem,System.Func{``0,System.Boolean})">
+            <summary>
+            Returns the first item in the heirarchy that matches the given expresion, or null if no items are found.
+            </summary>
+            <param name="item">Parent item to search</param>
+            <param name="predicate">Func(T, bool) expression for matching item</param>
+            <returns>Matching item reference or null if no item is found in the heirarchy</returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.ApplicationData">
+            <summary>
+            Static data layer class to support data operations for NBApplication
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.ApplicationData.Load(System.Guid)">
+            <summary>
+            Loads a data row w/ nbapplication data based on the given unique id
+            </summary>
+            <param name="applicationUniqueId">Unique id</param>
+            <returns>Data row</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.ApplicationData.GetAllIdsAndNames">
+            <summary>
+            Gets a dictionary of all non archived application ids and names
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.ApplicationData.GetApplicationIdFromApplicationName(System.String)">
+            <summary>
+            Gets the application id for the application with the provided name
+            </summary>
+            <param name="applicationName">Application name to retrieve id for</param>
+            <returns>Application id or null if the named application is not found</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.ApplicationData.Purge(System.Guid,System.Boolean)">
+            <summary>
+            Purges an application from the database
+            </summary>
+            <param name="applicationUniqueId">Unique id of the application to purge</param>
+            <param name="purgeSchemas">Boolean indicating if schemas associated to the
+            application should also be purged
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.ApplicationData.Save(System.Guid,System.String,System.DateTime)">
+            <summary>
+            Saves a new nbapplication
+            </summary>
+            <param name="applicationUniqueId">Unique id</param>
+            <param name="enteredBy"></param>
+            <param name="enteredOn"></param>
+            <returns>Data row</returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSet.LookupGroupFactoryDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSet.LookupGroupVersionsDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSet.LookupGroupFactoryRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSet.LookupGroupVersionsRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSet.LookupGroupFactoryRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSet.LookupGroupVersionsRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSetTableAdapters.LookupGroupFactoryTableAdapter">
+             <summary>
+            Represents the connection and commands used to retrieve and save data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSetTableAdapters.LookupGroupVersionsTableAdapter">
+             <summary>
+            Represents the connection and commands used to retrieve and save data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSetTableAdapters.TableAdapterManager">
+             <summary>
+            TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSetTableAdapters.TableAdapterManager.UpdateUpdatedRows(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSet,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Update rows in top-down order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSetTableAdapters.TableAdapterManager.UpdateInsertedRows(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Insert rows in top-down order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSetTableAdapters.TableAdapterManager.UpdateDeletedRows(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Delete rows in bottom-up order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSetTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSetTableAdapters.TableAdapterManager.UpdateAll(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSet)">
+             <summary>
+            Update all changes to the dataset.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSetTableAdapters.TableAdapterManager.UpdateOrderOption">
+             <summary>
+            Update Order Option
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.LookupGroupDataSetTableAdapters.TableAdapterManager.SelfReferenceComparer">
+             <summary>
+            Used to sort self-referenced table's rows
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.GluvConfiguration">
+            <summary>
+            Static class for accessing Gluv configuration settings
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.GluvConfiguration.LoadConfigurationItemReadConnectionString">
+            <summary>
+            Loads the configured read connection string for the application or web configuration file
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.GluvConfiguration.LoadConfigurationItemWriteConnectionString">
+            <summary>
+            Loads the configured write connection string for the application or web configuration file
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.GluvConfiguration.LoadConfigurationItemApplicationId">
+            <summary>
+            Loads the default configured application id from the configured application name
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.GluvConfiguration.LoadConfigurationItemApplicationName">
+            <summary>
+            Loads the default configured application name from the application or web configuration file.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.GluvConfiguration.ResetConfiguration">
+            <summary>
+            Resets the configuration.  This method only exists for unit test support
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.GluvConfiguration.IsNullOrEmpty(System.Nullable{System.Guid})">
+            <summary>
+            Method for nullable guid that returns true if the value is null or empty;
+            </summary>
+            <param name="item">Item to check</param>
+            <returns>True if the item is null or has a default value.</returns>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.GluvConfiguration.ApplicationName">
+            <summary>
+            Gets or sets the currently configured application name.
+            </summary>
+            <remarks>
+            Changing this value will alter the name for the current life of the AppDomain environment that GLUV is being exected under,
+            but will not permenantly alter any application configuration files where default configuration values are loaded from.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.GluvConfiguration.ApplicationId">
+            <summary>
+            Gets or sets the application id associated with the currently configured application name
+            </summary>
+            <remarks>
+            Changing this value will alter the name for the current life of the AppDomain environment that GLUV is being exected under,
+            but will not permenantly alter the id associated with the curront application name in the GLUV data store.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.GluvConfiguration.ReadConnectionString">
+            <summary>
+            Gets or sets the current read connection string
+            </summary>
+            <remarks>
+            Changing this value will alter the read connection string for the current life of the AppDomain environment that GLUV is being exected under,
+            but will not permenantly alter any application configuration files where default configuration values are loaded from.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.GluvConfiguration.WriteConnectionString">
+            <summary>
+            Gets or sets the current write connection string
+            </summary>
+            <remarks>
+            Changing this value will alter the write connection string for the current life of the AppDomain environment that GLUV is being exected under,
+            but will not permenantly alter any application configuration files where default configuration values are loaded from.
+            </remarks>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupValueClassData">
+            <summary>
+            Item specific persistable data items
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupValueClassData.IsArchived">
+            <summary>
+            Flag indicating that the item is archived
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupValueClassData.IsReadOnly">
+            <summary>
+            Flag indicating that the item is in a read-only state
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupValueClassData.GluvId">
+            <summary>
+            Id consumed by clients
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupValueClassData.InvariantDescription">
+            <summary>
+            Invariant culture name of the lookupGroup
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupValueClassData.Sequence">
+            <summary>
+            Sequence of the value within it's parent group
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupValueData">
+            <summary>
+            Static data layer class for accesing assignee factory data
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupValueData.LoadCurrentIds(System.Guid)">
+            <summary>
+            Gets a list of current assignee unique ids for the given parent application unique id
+            </summary>
+            <param name="parentUniqueId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupValueData.LoadHistoricIds(System.Guid,System.DateTime)">
+            <summary>
+            Gets a list of historic assignee unique ids for the given parent application unique id and as of date
+            </summary>
+            <param name="parentUniqueId"></param>
+            <param name="asOf"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupValueData.LoadSpecific(System.Guid)">
+            <summary>
+            Loads a specific LookupGroup Version
+            </summary>
+            <param name="specificId">Unique id of the version to load</param>
+            <returns>Data row with the lookupGroup version data</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupValueData.SaveVersion(System.Guid,System.Nullable{System.Guid},EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.BaseData,EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupValueClassData)">
+            <summary>
+            Persists a new version of this item
+            </summary>
+            <param name="parentUniqueId">Id of the parent item</param>
+            <param name="previousUniqueId">Id of the item before save</param>
+            <param name="baseData">Model Data</param>
+            <param name="classData">Class Data</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationDataSet.ApplicationDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationDataSet.ApplicationIdsDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationDataSet.ApplicationRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationDataSet.ApplicationIdsRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationDataSet.ApplicationRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationDataSet.ApplicationIdsRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationDataSetTableAdapters.ApplicationTableAdapter">
+             <summary>
+            Represents the connection and commands used to retrieve and save data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationDataSetTableAdapters.ApplicationIdsTableAdapter">
+             <summary>
+            Represents the connection and commands used to retrieve and save data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupGroupClassData">
+            <summary>
+            Item specific persistable data items
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupGroupClassData.IsArchived">
+            <summary>
+            Flag indicating that the item is archived
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupGroupClassData.IsReadOnly">
+            <summary>
+            Flag indicating that the item is in a read-only state
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupGroupClassData.GluvId">
+            <summary>
+            Id consumed by clients
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupGroupClassData.InvariantName">
+            <summary>
+            Invariant culture name of the group
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupGroupData">
+            <summary>
+            Static data layer class for accesing assignee factory data
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupGroupData.LoadCurrentIds(System.Guid)">
+            <summary>
+            Gets a list of current assignee unique ids for the given parent application unique id
+            </summary>
+            <param name="parentUniqueId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupGroupData.LoadHistoricIds(System.Guid,System.DateTime)">
+            <summary>
+            Gets a list of historic assignee unique ids for the given parent application unique id and as of date
+            </summary>
+            <param name="parentUniqueId"></param>
+            <param name="asOf"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupGroupData.LoadSpecific(System.Guid)">
+            <summary>
+            Loads a specific Schema Version
+            </summary>
+            <param name="specificId">Unique id of the version to load</param>
+            <returns>Data row with the schema version data</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupGroupData.SaveVersion(System.Guid,System.Nullable{System.Guid},EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.BaseData,EternalPlay.ReusableCore.Gluv.DataLayer.Classes.LookupGroupClassData)">
+            <summary>
+            Persists a new version of this item
+            </summary>
+            <param name="parentUniqueId">Id of the parent item</param>
+            <param name="previousUniqueId">Id of the item before save</param>
+            <param name="baseData">Model Data</param>
+            <param name="classData">Class Data</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator">
+            <summary>
+            Gluv template code generator for generating SQL scripts
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.ICodeGenerator`1">
+            <summary>
+            Interface for classes that generate template code for gluv access
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.ICodeGenerator`1.WriteCode(System.IO.TextWriter,`0)">
+            <summary>
+            Method to write code to a TextWriter
+            </summary>
+            <param name="writer">TextWriter to write generated code to.</param>
+            <param name="itemToWrite">Item to generate code for.</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.WriteCode(System.IO.TextWriter,EternalPlay.ReusableCore.Gluv.Model.ApplicationRoot)">
+            <summary>
+            Method to write code to a TextWriter
+            </summary>
+            <param name="writer">TextWriter to write generated code to.</param>
+            <param name="itemToWrite">Application to write code for</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.WriteGluvSqlCode(System.IO.TextWriter,EternalPlay.ReusableCore.Gluv.Model.ApplicationRoot,System.String,System.DateTime)">
+            <summary>
+            Writes Gluv SQL code to the given text writer
+            </summary>
+            <param name="writer">Writer to write the generated code to</param>
+            <param name="application">Application with data that is the source of the generated code</param>
+            <param name="enteredBy">Name to use for entered by</param>
+            <param name="enteredOn">Date to use for entered on</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.WriteApplication(System.IO.TextWriter,EternalPlay.ReusableCore.Gluv.Model.ApplicationRoot,System.String,System.DateTime)">
+            <summary>
+            Writes code for the given application
+            </summary>
+            <param name="writer">Writer to write the generated code to</param>
+            <param name="application">Application with data that is the source of the generated code</param>
+            <param name="enteredBy">Name to use for entered by</param>
+            <param name="enteredOn">Date to use for entered on</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.WriteApplicationSchemas(System.IO.TextWriter,System.Collections.Generic.IEnumerable{EternalPlay.ReusableCore.Gluv.Model.Schema},System.String,System.DateTime)">
+            <summary>
+            Writes code for the given schemas
+            </summary>
+            <param name="writer">Writer to write the generated code to</param>
+            <param name="schemas">Enumerable collection of schemsa with data that is the source of the generated code</param>
+            <param name="enteredBy">Name to use for entered by</param>
+            <param name="enteredOn">Date to use for entered on</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.WriteApplicationTableInserts(System.IO.TextWriter,EternalPlay.ReusableCore.Gluv.Model.ApplicationRoot,System.String,System.DateTime)">
+            <summary>
+            Writes Table insert code for the given application
+            </summary>
+            <param name="writer">Writer to write the generated code to</param>
+            <param name="application">Application with data that is the source of the generated code</param>
+            <param name="enteredBy">Name to use for entered by</param>
+            <param name="enteredOn">Date to use for entered on</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.WriteSchema(System.IO.TextWriter,EternalPlay.ReusableCore.Gluv.Model.Schema,System.String,System.DateTime)">
+            <summary>
+            Writes code for the given schema
+            </summary>
+            <param name="writer">Writer to write the generated code to</param>
+            <param name="schema">Schema with data that is the source of the generated code</param>
+            <param name="enteredBy">Name to use for entered by</param>
+            <param name="enteredOn">Date to use for entered on</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.WriteSchemaLookupGroups(System.IO.TextWriter,System.Collections.Generic.IEnumerable{EternalPlay.ReusableCore.Gluv.Model.LookupGroup},System.String,System.DateTime)">
+            <summary>
+            Writes code for the given lookup groups
+            </summary>
+            <param name="writer">Writer to write the generated code to</param>
+            <param name="lookupGroups">Enumerable collection of LookupGroups</param>
+            <param name="enteredBy">Name to use for entered by</param>
+            <param name="enteredOn">Date to use for entered on</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.WriteSchemaTableInserts(System.IO.TextWriter,EternalPlay.ReusableCore.Gluv.Model.Schema,System.String,System.DateTime)">
+            <summary>
+            Writes Table insert statements for the given schema
+            </summary>
+            <param name="writer">Writer to write the generated code to</param>
+            <param name="schema">Schema with data that is the source of the generated code</param>
+            <param name="enteredBy">Name to use for entered by</param>
+            <param name="enteredOn">Date to use for entered on</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.WriteLookupGroup(System.IO.TextWriter,EternalPlay.ReusableCore.Gluv.Model.LookupGroup,System.String,System.DateTime)">
+            <summary>
+            Writes code for the given lookup group
+            </summary>
+            <param name="writer">Writer to write the generated code to</param>
+            <param name="lookupGroup">LookupGroup with data that is the source of the generated code</param>
+            <param name="enteredBy">Name to use for entered by</param>
+            <param name="enteredOn">Date to use for entered on</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.WriteLookupGroupLookupValues(System.IO.TextWriter,System.Collections.Generic.IEnumerable{EternalPlay.ReusableCore.Gluv.Model.LookupValue},System.String,System.DateTime)">
+            <summary>
+            Writes code for the given lookup values
+            </summary>
+            <param name="writer">Writer to write the generated code to</param>
+            <param name="lookupValues">Enumerable collection of LookupValues with data that is the source of the generated code</param>
+            <param name="enteredBy">Name to use for entered by</param>
+            <param name="enteredOn">Date to use for entered on</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.WriteLookupGroupTableInserts(System.IO.TextWriter,EternalPlay.ReusableCore.Gluv.Model.LookupGroup,System.String,System.DateTime)">
+            <summary>
+            Writes table insert statements for the given lookup group
+            </summary>
+            <param name="writer">Writer to write the generated code to</param>
+            <param name="lookupGroup">LookupGroup with data that is the source of the generated code</param>
+            <param name="enteredBy">Name to use for entered by</param>
+            <param name="enteredOn">Date to use for entered on</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.GetLookupValueSequence(EternalPlay.ReusableCore.Gluv.Model.LookupValue)">
+            <summary>
+            Gets a string for the sequence for a lookup value group, or the string "null" if no sequence is defined.
+            </summary>
+            <param name="lookupValue">LookupValue to retrieve sequence string for</param>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.WriteLookupValue(System.IO.TextWriter,EternalPlay.ReusableCore.Gluv.Model.LookupValue,System.String,System.DateTime)">
+            <summary>
+            Writes code for the given lookup value
+            </summary>
+            <param name="writer">Writer to write the generated code to</param>
+            <param name="lookupValue">LookupValue with data that is the source of the generated code</param>
+            <param name="enteredBy">Name to use for entered by</param>
+            <param name="enteredOn">Date to use for entered on</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.WriteLookupValueTableInserts(System.IO.TextWriter,EternalPlay.ReusableCore.Gluv.Model.LookupValue,System.String,System.DateTime)">
+            <summary>
+            Writes table inserts for the given lookup value
+            </summary>
+            <param name="writer">Writer to write the generated code to</param>
+            <param name="lookupValue">LookupValue with data that is the source of the generated code</param>
+            <param name="enteredBy">Name to use for entered by</param>
+            <param name="enteredOn">Date to use for entered on</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.GetSqlBit(System.Boolean)">
+            <summary>
+            Gets the string representation of a sql bit field based on the given boolean value
+            </summary>
+            <param name="bitValue">Boolean bit value to get the string for</param>
+            <returns>String representation of the bit field</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.WriteFlowerBox(System.IO.TextWriter,System.Int32,System.Int32,System.String)">
+            <summary>
+            Writes a comment flower box, with padding and a given comment
+            </summary>
+            <param name="writer">Writer to write the generated code to</param>
+            <param name="paddingLinesTop">Number of lines to pad above the flower box</param>
+            <param name="paddingLinesBottom">Number of lines to pad below the flower box</param>
+            <param name="comment">Comment to insert inside the flower box</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.WritePaddedCodeLines(System.IO.TextWriter,System.Int32,System.Int32,System.String[])">
+            <summary>
+            Writes the given code lines to the writer, inserting padding around the lines
+            </summary>
+            <param name="writer">Writer to write the generated code to</param>
+            <param name="paddingLinesTop">Number of lines to pad above the code lines</param>
+            <param name="paddingLinesBottom">Number of lines to pad below the code lines</param>
+            <param name="codeLines">Params string array with lines of code to write.</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.WritePaddingLines(System.IO.TextWriter,System.Int32)">
+            <summary>
+            Writes padding lines to the writer
+            </summary>
+            <param name="writer">Writer to write lines to</param>
+            <param name="paddingLines">Number of lines of padding to write</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.Constants">
+            <summary>
+            Private static class containing constants used by the parent class
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.Constants.EnteredBy">
+            <summary>
+            Entered by user name to use when generating the SQL insert statements
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.Constants.SqlBitTrue">
+            <summary>
+            String representation of SQL bit that corresponds to boolean true
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.Constants.SqlBitFalse">
+            <summary>
+            String representation of SQL bit that corresponds to boolean false
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.Constants.SqlNull">
+            <summary>
+            String representation of SQL null
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.Constants.SqlCommandBeginTransaction">
+            <summary>
+            SQL statement for beginning a transation
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.Constants.SqlCommandEndTransaction">
+            <summary>
+            SQL statement for commiting a transaction
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.Constants.EnteredOn">
+            <summary>
+            Entered on date time to use when generating the SQL insert statements
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlComments">
+            <summary>
+            Private static class for SQL comment string literals 
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlComments.FlowerBoxApplicationSection">
+            <summary>
+            Comment for Application section flower box
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlComments.FloweBoxAutoGenerationBegin">
+            <summary>
+            Comment for beginning of auto generated code flower box
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlComments.FlowerBoxAutoGenerationEnd">
+            <summary>
+            Comment for end of auto generated code flower box
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlComments.FlowerBoxLine">
+            <summary>
+            Comment used for flower box boundary lines
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlComments.FlowerBoxSchemaSection">
+            <summary>
+            Comment used for schema section flower box
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlComments.SectionHeaderLookupGroup">
+            <summary>
+            Comment used for lookup group section header
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlComments.SectionHeaderLookupValue">
+            <summary>
+            Comment used for lookup value section header
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlInsertStatements">
+            <summary>
+            Private static class for SQL insert statement string literals
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlInsertStatements.Application">
+            <summary>
+            Instert statement for Gluv.Application table
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlInsertStatements.ApplicationInformationVersions">
+            <summary>
+            Insert statement for Gluv.ApplicationInformationVersions table
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlInsertStatements.LookupGroup">
+            <summary>
+            Insert statement for Gluv.LookupGroup table
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlInsertStatements.LookupGroupFactory">
+            <summary>
+            Insert statement for Gluv.LookupGroupFactory table
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlInsertStatements.LookupGroupVersions">
+            <summary>
+            Insert statement for LookupGroupVersions table
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlInsertStatements.LookupValue">
+            <summary>
+            Insert statement for LookupValue table
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlInsertStatements.LookupValueFactory">
+            <summary>
+            Insert statement for LookupValueFactory table
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlInsertStatements.LookupValueVersions">
+            <summary>
+            Insert statement for LookupValueVersions table
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlInsertStatements.Schema">
+            <summary>
+            Insert statement for Schema table
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlInsertStatements.SchemaFactory">
+            <summary>
+            Insert statement for SchemaFactory table
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.SqlCodeGenerator.SqlInsertStatements.SchemaVersions">
+            <summary>
+            Insert statement for SchemaVersions table
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.Model.ApplicationInformation">
+            <summary>
+            New Business application information item
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.ApplicationInformation.OnLoadCurrent(System.Guid)">
+            <summary>
+            Load current item data
+            </summary>
+            <param name="parentUniqueId">Parent Item Identification</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.ApplicationInformation.OnLoadHistoric(System.Guid,System.DateTime)">
+            <summary>
+            Load historic item data
+            </summary>
+            <param name="parentUniqueId">parent Item Identification</param>
+            <param name="rootAsOf">Date to load as-of</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.ApplicationInformation.OnLoadNew">
+            <summary>
+            Prepare a new item
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.ApplicationInformation.OnSave(System.String,System.Nullable{System.Guid})">
+            <summary>
+            Persist item data
+            </summary>
+            <param name="userId">User Identification</param>
+            <param name="previousUniqueId">Identification representing the last loaded version of the item</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.ApplicationInformation.LoadFromDataRow(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationInformationDataSet.ApplicationInformationVersionsRow)">
+            <summary>
+            Reusable function that loads internal state data from a typed data row.  This method can be reused by the various
+            load methods to avoid duplicating tedious assignment code.
+            </summary>
+            <returns>True if successful load</returns>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.ApplicationInformation.Name">
+            <summary>
+            The name of the application consuming Gluv
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.ApplicationInformation.IsArchived">
+            <summary>
+            Flag indicating if the application is archived
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.Model.SchemaFactory">
+            <summary>
+            Manages a group of benefits for an application
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.SchemaFactory.CreateNewSchema">
+            <summary>
+            Creates a new benefit (loaded and added)
+            </summary>
+            <returns>Reference to New Benefit</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.SchemaFactory.OnLoadCurrent(System.Guid)">
+            <summary>
+            Load current item data
+            </summary>
+            <param name="parentUniqueId">Parent Item Identification</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.SchemaFactory.OnLoadHistoric(System.Guid,System.DateTime)">
+            <summary>
+            Load historic item data
+            </summary>
+            <param name="parentUniqueId">Parent Item Identification</param>
+            <param name="rootAsOf">Date to load as-of</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.CultureDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.CultureDataSet.CultureDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.CultureDataSet.CultureRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.CultureDataSet.CultureRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.CultureDataSetTableAdapters.CultureTableAdapter">
+             <summary>
+            Represents the connection and commands used to retrieve and save data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.CultureDataSetTableAdapters.TableAdapterManager">
+             <summary>
+            TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.CultureDataSetTableAdapters.TableAdapterManager.UpdateUpdatedRows(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.CultureDataSet,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Update rows in top-down order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.CultureDataSetTableAdapters.TableAdapterManager.UpdateInsertedRows(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.CultureDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Insert rows in top-down order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.CultureDataSetTableAdapters.TableAdapterManager.UpdateDeletedRows(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.CultureDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Delete rows in bottom-up order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.CultureDataSetTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.CultureDataSetTableAdapters.TableAdapterManager.UpdateAll(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.CultureDataSet)">
+             <summary>
+            Update all changes to the dataset.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.CultureDataSetTableAdapters.TableAdapterManager.UpdateOrderOption">
+             <summary>
+            Update Order Option
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.CultureDataSetTableAdapters.TableAdapterManager.SelfReferenceComparer">
+             <summary>
+            Used to sort self-referenced table's rows
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.Model.LookupValue">
+            <summary>
+            Encapsulate information for a specific basic benefit
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupValue.#ctor">
+            <summary>
+            Assign load children functions to enable bypass of lazy load pattern
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupValue.OnLoadNew">
+            <summary>
+            Prepare a new item
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupValue.OnLoadSpecific(System.Guid)">
+            <summary>
+            Load specific item
+            </summary>
+            <param name="uniqueId"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupValue.OnSave(System.String,System.Nullable{System.Guid})">
+            <summary>
+            Persist item data
+            </summary>
+            <param name="userId">User Identification</param>
+            <param name="previousUniqueId">Identification representing the last loaded version of the item</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupValue.AssignLoadChildrenFunctions">
+            <summary>
+            Add all child load methods to the LoadChildren delegate
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupValue.LoadLookupValueTranslationFactory">
+            <summary>
+            Loads LookupValueTranslationFactory child
+            </summary>
+            <returns>Delegate to remove from future child load calls</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupValue.GetWordMaches(System.String)">
+            <summary>
+            Gets a regex match collection of words from the given source string
+            </summary>
+            <param name="source">String to get word matches from</param>
+            <returns>Regex MatchCollection</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupValue.PascalCaseWord(System.String)">
+            <summary>
+            Converts the given source string to Pascal casing
+            </summary>
+            <param name="source">String to pascal case</param>
+            <returns>Source string converted to pascal case</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupValue.ReplaceNonAlphaNumerics(System.String)">
+            <summary>
+            Removes all non alpha numeric charachters from a string
+            </summary>
+            <param name="source">String to modify</param>
+            <returns>Modified version of the original source string</returns>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.LookupValue.GluvId">
+            <summary>
+            Gets the id consumed by clients
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.LookupValue.CodeReadyInvariantDescription">
+            <summary>
+            Gets a version of the invariant description that is appropriate to use as a .NET property moniker
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.LookupValue.InvariantDescription">
+            <summary>
+            Gets the invariant culture name of the lookupGroup
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.LookupValue.IsProgrammatic">
+            <summary>
+            Gets a boolean indicating if this value is available to be used programmatically
+            </summary>
+            <remarks>
+            This is only true for values that are read only, or are members of a readonly group.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.LookupValue.IsReadOnly">
+            <summary>
+            Gets a flag indicating if the item is read only
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.LookupValue.Sequence">
+            <summary>
+            Gets and sets the sequence of the value within it's parent group
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.LookupValue.Description">
+            <summary>
+            Gets the cultural relevant description of the lookup value
+            </summary>
+            <remarks>
+            Gets the translated description based on the CurrentUICulture, or if not found the invariant description
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.LookupValue.Translations">
+            <summary>
+            Translations of the lookup value description
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.Model.LookupValue.Constants">
+            <summary>
+            Constants used by the parent class
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.Model.LookupValue.Constants.PascalWordFormat">
+            <summary>
+            Format string for use in creating pascal cased words
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.Model.LookupValue.Constants.RegExWordMatchPattern">
+            <summary>
+            Regular expression word match pattern
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.Model.LookupValue.Constants.RegExNonWordCharacterPattern">
+            <summary>
+            Regular expression non word character match pattern
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.Model.Schema">
+            <summary>
+            Encapsulate information for a specific basic benefit
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.Schema.#ctor">
+            <summary>
+            Assign load children functions to enable bypass of lazy load pattern
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.Schema.OnLoadNew">
+            <summary>
+            Prepare a new item
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.Schema.OnLoadSpecific(System.Guid)">
+            <summary>
+            Load specific item
+            </summary>
+            <param name="uniqueId"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.Schema.OnSave(System.String,System.Nullable{System.Guid})">
+            <summary>
+            Persist item data
+            </summary>
+            <param name="userId">User Identification</param>
+            <param name="previousUniqueId">Identification representing the last loaded version of the item</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.Schema.AssignLoadChildrenFunctions">
+            <summary>
+            Add all child load methods to the LoadChildren delegate
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.Schema.LoadLookupGroupFactory">
+            <summary>
+            Loads LookupGroupFactory child
+            </summary>
+            <returns>Delegate to remove from future child load calls</returns>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.Schema.CodeNamespace">
+            <summary>
+            Gets the primary client code namespace for the schema
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.Schema.Name">
+            <summary>
+            Gets the name of the schema
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.Schema.LookupGroups">
+            <summary>
+            Lookup Groups associacted with this Schema
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSet.SchemaFactoryDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSet.SchemaVersionsDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSet.SchemaFactoryRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSet.SchemaVersionsRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSet.SchemaFactoryRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSet.SchemaVersionsRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSetTableAdapters.SchemaFactoryTableAdapter">
+             <summary>
+            Represents the connection and commands used to retrieve and save data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSetTableAdapters.SchemaVersionsTableAdapter">
+             <summary>
+            Represents the connection and commands used to retrieve and save data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSetTableAdapters.TableAdapterManager">
+             <summary>
+            TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSetTableAdapters.TableAdapterManager.UpdateUpdatedRows(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSet,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Update rows in top-down order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSetTableAdapters.TableAdapterManager.UpdateInsertedRows(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Insert rows in top-down order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSetTableAdapters.TableAdapterManager.UpdateDeletedRows(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Delete rows in bottom-up order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSetTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSetTableAdapters.TableAdapterManager.UpdateAll(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSet)">
+             <summary>
+            Update all changes to the dataset.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSetTableAdapters.TableAdapterManager.UpdateOrderOption">
+             <summary>
+            Update Order Option
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.SchemaDataSetTableAdapters.TableAdapterManager.SelfReferenceComparer">
+             <summary>
+            Used to sort self-referenced table's rows
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator">
+            <summary>
+            Gluv code template generator for generating CSharp classes
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.WriteCode(System.IO.TextWriter,EternalPlay.ReusableCore.Gluv.Model.Schema)">
+            <summary>
+            Method to write code to a TextWriter
+            </summary>
+            <param name="writer">TextWriter to write generated code to.</param>
+            <param name="itemToWrite">Schema to generate code for.</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.InitializeCodeNamespace(System.CodeDom.CodeNamespace,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{EternalPlay.ReusableCore.Gluv.Model.LookupGroup})">
+            <summary>
+            Builds the codenamespace that contains all the generated code
+            </summary>
+            <param name="codeNamespace">Namespace name</param>
+            <param name="importNameSpaces">Enumerable collection of namespace strings to import</param>
+            <param name="lookupGroups">Enumerable collection of lookupgroups to generate TypeDeclarations for inside the code namespace</param>
+            <returns>Fully constructed and populated code namespace</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.InitializeCodeCompileUnit(System.CodeDom.CodeCompileUnit,System.CodeDom.CodeNamespace)">
+            <summary>
+            Initializes the given code compile unit with the given code namespace
+            </summary>
+            <param name="codeCompileUnit">CodeCompileUnit to initialize</param>
+            <param name="codeNamespace">CodeNamespace to initialize compile unit with</param>
+            <returns>Initialized CodeCompileUnit</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.CreateLookupValuePropertyMember(EternalPlay.ReusableCore.Gluv.Model.LookupValue)">
+            <summary>
+            Creates a lookup group TypeDeclaration code member property to represent the given lookup value.
+            </summary>
+            <remarks>
+            This method creates a property that geneartes in the form:
+            
+            public static Guid [LookupValue.CodeReadyInvariantDescription] { get { return "xxxx-xxxx-xxxx-xxxx-xxxxxxxx"; } }
+            
+            where [LookupValue.CodeReadyInvariantDescription] is the actual Description of the given lookup value and
+            xxxx-xxxx-xxxx-xxxx-xxxxxxxx represents the GluvId of that lookup value.
+            </remarks>
+            <param name="lookupValue">LookupValue to generate member from</param>
+            <returns>Newly created and populated CodeMemberProperty</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.CreateLookupValuePropertyMembers(System.Collections.Generic.IEnumerable{EternalPlay.ReusableCore.Gluv.Model.LookupValue})">
+            <summary>
+            Creates an enumerable collection of CodeMemberProperty objects that represent a collection of lookup values
+            </summary>
+            <param name="lookupValues">Enumerable collection of LookupValue objects to generate member properties for</param>
+            <returns>Enumerable collection of CodeMemberProperty objects</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.CreateLookupGroupIdPropertyMember(EternalPlay.ReusableCore.Gluv.Model.LookupGroup)">
+            <summary>
+            Creates a CodeMemberProperty LookupGroupId, for a LookupGroup CodeTypeDeclaration
+            </summary>
+            <remarks>
+            This method creates a property that geneartes in the form:
+            
+            public static Guid LookupGroupId { get { return new Guid("xxxx-xxxx-xxxx-xxxx-xxxxxxxx"); } }
+            
+            where xxxx-xxxx-xxxx-xxxx-xxxxxxxx represents the GluvId of the given LookupGroup
+            </remarks>
+            <param name="lookupGroup">LookupGroup to create the member property from</param>
+            <returns>Newly created and populated CodeMemberProperty</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.CreateTypeDeclaration(EternalPlay.ReusableCore.Gluv.Model.LookupGroup)">
+            <summary>
+            Creates the type declartion for a specific lookup group
+            </summary>
+            <param name="lookupGroup">LookupGroup object with the data to use for generating the type.</param>
+            <returns>Fully constructed TypeDeclaration, including all generated TypeMembers</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.CreateTypeDeclarations(System.Collections.Generic.IEnumerable{EternalPlay.ReusableCore.Gluv.Model.LookupGroup})">
+            <summary>
+            Creates an enumerable collection of CodeTypeDeclarations for a collection of LookupGroups
+            </summary>
+            <param name="lookupGroups">Enumerable collection of LookupGroups to create CodeTypeDeclarations for</param>
+            <returns>Enumerable collection of CodeTypeDeclarations</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.CreateTypeMembers(System.CodeDom.CodeTypeDeclaration,EternalPlay.ReusableCore.Gluv.Model.LookupGroup)">
+            <summary>
+            Creates and addes the CodeTypeMembers for a lookup group CodeTypeDeclaration
+            </summary>
+            <param name="lookupGroupType">LookupGroup CodeTypeDeclaration</param>
+            <param name="lookupGroup">LookupGroup with data about the members to generate</param>
+            <returns>The modified CodeTypeDeclaration with all members added</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.CreateCodeGeneratorOptions">
+            <summary>
+            Creates the CodeGeneratorOptions used for code generation by this class
+            </summary>
+            <returns>Constructed and initialized CodeGeneratorOptions</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.InitializeCodeGeneratorOptions(System.CodeDom.Compiler.CodeGeneratorOptions)">
+            <summary>
+            Initializes the vaules for a CodeGeneratorOptions object
+            </summary>
+            <param name="options">CodeGeneratorOptions option to initialize</param>
+            <returns>The CodeGeneratorOptions with modified values</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.CreateDirectReturnStatement``1(``0)">
+            <summary>
+            Creates a code statement that is a return of type T with the given valueExpression
+            </summary>
+            <typeparam name="T">Type of the returned value</typeparam>
+            <param name="valueExpression">Expression of the value to return</param>
+            <returns>New CodeStatment initialzed to return the given value expression</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.CreateCodeDocumentTag(System.String,System.String)">
+            <summary>
+            Creates a code comment statement collection that represents a document element
+            </summary>
+            <param name="tagName">Name fo the document element</param>
+            <param name="tagContents">Contents of the element</param>
+            <returns>CodeCommentStatementCollection of the document summary</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.CreateCloseTag(System.String)">
+            <summary>
+            Creates a string representation of the open tag for a code document element
+            </summary>
+            <param name="tagName">Name of the tag</param>
+            <returns>String representation of the open tag</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.CreateOpenTag(System.String)">
+            <summary>
+            Creates a string representation of the close tag for a code document element
+            </summary>
+            <param name="tagName">Name of the tag</param>
+            <returns>String representation of the close tag</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.InitializeBasicPropertyDeclaration``1(System.CodeDom.CodeMemberProperty,System.String,System.CodeDom.MemberAttributes)">
+            <summary>
+            Initializes the basic features of a property member declaration
+            </summary>
+            <typeparam name="T">Type of property to generate</typeparam>
+            <param name="property">Property to initialize</param>
+            <param name="propertyName">Name of the property</param>
+            <param name="attributes">Attributes of the property</param>
+            <returns>Initialized CodeMemberProperty</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.InitializeMemberDocumentComment(System.CodeDom.CodeTypeMember,System.String)">
+            <summary>
+            Initializes the DocumentComment for a type member with summary element whose contents are given in summary.
+            </summary>
+            <param name="member">CodeTypeMember to initialize document comments for</param>
+            <param name="summary">Contents of the summary element</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.InitializePropertyDirectReturn``1(System.CodeDom.CodeMemberProperty,``0)">
+            <summary>
+            Initializes a direct value return for a CodeMemberProperty
+            </summary>
+            <typeparam name="T">Type of the property</typeparam>
+            <param name="property">Property to initialize</param>
+            <param name="propertyValue">Value to return from the property get accessor</param>
+            <returns>Initialized CodeMemberProperty</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.InitializePublicStaticAbstractClass(System.CodeDom.CodeTypeDeclaration)">
+            <summary>
+            Initializes a CodeTypeDeclaration as static abstract class
+            </summary>
+            <param name="codeType">Name of the class</param>
+            <returns>Initialized CodeTypeDeclaration</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.InitializePublicStaticProperty``1(System.CodeDom.CodeMemberProperty,System.String,``0)">
+            <summary>
+            Initializes a public static property of the type specified
+            </summary>
+            <remarks>
+            This method creates a property that geneartes in the form:
+            
+            public static T [propertyName] { get { return new T([propertyValue]); } }
+            
+            where T is the givent property type, propertyName is the given name of the property, and propertyValue is the returned property value.
+            </remarks>
+            <typeparam name="T">Type of property to generate</typeparam>
+            <param name="codeMemberProperty">Property to initialize</param>
+            <param name="propertyName">Name of the property</param>
+            <param name="propertyValue">Value to return from the property get accessor</param>
+            <returns>Initialized CodeMemberProperty</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.InitializeTypeComments(System.CodeDom.CodeTypeDeclaration,System.String)">
+            <summary>
+            Initializes the DocumentComment for a code type with a summary element whose contents are given in summary.
+            </summary>
+            <param name="type">CodeTypeDeclaration to initialize document comments for</param>
+            <param name="summary">Contents of the summary element</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.Constants">
+            <summary>
+            Private static class containing constants used by the parent class
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.Constants.BracingStyleBlock">
+            <summary>
+            Bracing style used for code generation
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.Constants.CloseTag">
+            <summary>
+            Code document close tag structure
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.Constants.IndentTabString">
+            <summary>
+            String used for code indentation
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.Constants.PropertyNameLookupGroupId">
+            <summary>
+            Property name: LookupGroupId, added to all lookup group static classes
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.Constants.OpenTag">
+            <summary>
+            Code document open tag structure
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.Constants.TagSummary">
+            <summary>
+            Code document tag for summary
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.Constants.ImportedNamespaces">
+            <summary>
+            Namespaces imported in to generated types
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.CodeComments">
+            <summary>
+            Private static class for string literals
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.CodeComments.LookupGroupTypeSummaryComment">
+            <summary>
+            Comment for lookup group types
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.CodeComments.LookupGroupIdPropertySummaryComment">
+            <summary>
+            Comment for Lookup Group ID properties in lookup group static classes
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.CSharpCodeGenerator.CodeComments.LookupValuePropertySummaryComment">
+            <summary>
+            Commennt for Lookup Value properties in lookup group static classes
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.GluvManager">
+            <summary>
+            Static glass for managing access to Gluv
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.GluvManager.#cctor">
+            <summary>
+            Static constructor for gluv manager for initializing static fields
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Gluv.GluvManager._configuredApplication">
+            <summary>
+            Private member for the ConfiguredApplication property
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.GluvManager.AddCulture(EternalPlay.ReusableCore.Gluv.Culture)">
+            <summary>
+            Adds a culture to the database
+            </summary>
+            <param name="culture">Culture to add</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.GluvManager.ArchiveCulture(System.Guid)">
+            <summary>
+            Archives a culture in the database
+            </summary>
+            <param name="cultureId"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.GluvManager.PurgeApplication(System.Guid,System.Boolean)">
+            <summary>
+            Purges an application from the gluv write database
+            </summary>
+            <param name="applicationUniqueId">Id of the application to purge</param>
+            <param name="purgeSchemas">Boolean specifying if schemas associated to the application should also be purged</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.GluvManager.LoadConfiguredApplication">
+            <summary>
+            Loads the internal static application based on the gluv configuration
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.GluvManager.ConfiguredApplication">
+            <summary>
+            Gets and loads an applicatior root corresponding to the application specified in the app config
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.GluvManager.AllApplicationIdsAndNames">
+            <summary>
+            Gets a dictionary of all non archived application ids and names in the configured gluv read database connection
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.GluvManager.AllCultures">
+            <summary>
+            Gets a collection of all non archived cultures stored in the database
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationInformationDataSetTableAdapters.ApplicationInformationVersionsTableAdapter">
+             <summary>
+            Represents the connection and commands used to retrieve and save data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationInformationDataSetTableAdapters.TableAdapterManager">
+             <summary>
+            TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationInformationDataSetTableAdapters.TableAdapterManager.UpdateUpdatedRows(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationInformationDataSet,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Update rows in top-down order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationInformationDataSetTableAdapters.TableAdapterManager.UpdateInsertedRows(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationInformationDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Insert rows in top-down order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationInformationDataSetTableAdapters.TableAdapterManager.UpdateDeletedRows(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationInformationDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Delete rows in bottom-up order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationInformationDataSetTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationInformationDataSetTableAdapters.TableAdapterManager.UpdateAll(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationInformationDataSet)">
+             <summary>
+            Update all changes to the dataset.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationInformationDataSetTableAdapters.TableAdapterManager.UpdateOrderOption">
+             <summary>
+            Update Order Option
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.ApplicationInformationDataSetTableAdapters.TableAdapterManager.SelfReferenceComparer">
+             <summary>
+            Used to sort self-referenced table's rows
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.Model.Translation">
+            <summary>
+            Encapsulate information for a specific translation
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.Translation.OnLoadNew">
+            <summary>
+            Prepare a new item
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.Translation.OnLoadSpecific(System.Guid)">
+            <summary>
+            Load specific item
+            </summary>
+            <param name="uniqueId"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.Translation.OnSave(System.String,System.Nullable{System.Guid})">
+            <summary>
+            Persist item data
+            </summary>
+            <param name="userId">User Identification</param>
+            <param name="previousUniqueId">Identification representing the last loaded version of the item</param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.Translation.CultureId">
+            <summary>
+            Gets the culture id of the translation
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Gluv.Model.Translation.TranslatedValue">
+            <summary>
+            Gets the translated value (i.e. Most culture appropriate value)
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSet.LookupGroupTranslationFactoryDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSet.LookupValueTranslationFactoryDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSet.TranslationVersionsDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSet.LookupGroupTranslationFactoryRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSet.LookupValueTranslationFactoryRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSet.TranslationVersionsRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSet.LookupGroupTranslationFactoryRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSet.LookupValueTranslationFactoryRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSet.TranslationVersionsRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSetTableAdapters.LookupGroupTranslationFactoryTableAdapter">
+             <summary>
+            Represents the connection and commands used to retrieve and save data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSetTableAdapters.LookupValueTranslationFactoryTableAdapter">
+             <summary>
+            Represents the connection and commands used to retrieve and save data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSetTableAdapters.TranslationVersionsTableAdapter">
+             <summary>
+            Represents the connection and commands used to retrieve and save data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSetTableAdapters.TableAdapterManager">
+             <summary>
+            TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSetTableAdapters.TableAdapterManager.UpdateUpdatedRows(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSet,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Update rows in top-down order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSetTableAdapters.TableAdapterManager.UpdateInsertedRows(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Insert rows in top-down order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSetTableAdapters.TableAdapterManager.UpdateDeletedRows(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSet,System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Delete rows in bottom-up order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSetTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSetTableAdapters.TableAdapterManager.UpdateAll(EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSet)">
+             <summary>
+            Update all changes to the dataset.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSetTableAdapters.TableAdapterManager.UpdateOrderOption">
+             <summary>
+            Update Order Option
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.DataLayer.DataSets.TranslationDataSetTableAdapters.TableAdapterManager.SelfReferenceComparer">
+             <summary>
+            Used to sort self-referenced table's rows
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Gluv.Model.LookupGroupTranslationFactory">
+            <summary>
+            Manages a group of translations for a lookup group
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupGroupTranslationFactory.CreateNewTranslation">
+            <summary>
+            Creates a new benefit (loaded and added)
+            </summary>
+            <returns>Reference to New Translation</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupGroupTranslationFactory.OnLoadCurrent(System.Guid)">
+            <summary>
+            Load current item data
+            </summary>
+            <param name="parentUniqueId">Parent Item Identification</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Gluv.Model.LookupGroupTranslationFactory.OnLoadHistoric(System.Guid,System.DateTime)">
+            <summary>
+            Load historic item data
+            </summary>
+            <param name="parentUniqueId">Parent Item Identification</param>
+            <param name="rootAsOf">Date to load as-of</param>
+        </member>
+    </members>
+</doc>

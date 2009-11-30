@@ -1,0 +1,1377 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EternalPlay.ReusableCore.BusinessModel</name>
+    </assembly>
+    <members>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.ItemBase">
+            <summary>
+            Item is the foundational class of the BusinessModel model, enabling the composite pattern.
+            All parts of the BusinessModel model derive from BusinessModel Item.
+            </summary>
+            <remarks>
+            - Provides basic support for "Top-Down Instantiation" load (i.e. current, historic and new)
+            - Provides support for cascading save
+            - Provides support for managing a list of child items
+            - Provides support for searching child items by unique id
+            - Proivdes some basic support for loading child items (bypassing lazy load pattern in concrete implementations)
+            
+            plus, lots of supporting properties and functions to aid these primary goals
+            </remarks>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.IItem">
+            <summary>
+            Public interface applicable for all items in the BusinessModel model.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.IItem.Save(System.String)">
+            <summary>
+            Saves the item's data if it was changed, and passes the save call on to all its mutable children.
+            </summary>
+            <param name="userId">Unique user identification responsible for the Save.</param>
+            <returns>Indication if save for this item was needed.</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.IItem.FindItem(System.Guid)">
+            <summary>
+            Recursively searches the item dictionary for an item with a matching unique identifier.  
+            </summary>
+            <param name="uniqueId">Unique identifer acting as the target of the search</param>
+            <returns>Reference for item found or null if not found</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.IItem.LoadNew(EternalPlay.ReusableCore.BusinessModel.IItem)">
+            <summary>
+            Derived classes must support a load new method to enable items to be newly constructed and loaded when the model is not in a new state - often used by factory items
+            </summary>
+            <param name="parent">Reference to the new item's parent</param>
+            <returns>Reference to this</returns>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.IItem.BaseData">
+            <summary>
+            Holds the persistent model data for the item
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.IItem.EnteredBy">
+            <summary>
+            Unique user identification responsible for the loaded version of the data.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.IItem.EnteredOn">
+            <summary>
+            Date and time the loaded version of data was saved.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.IItem.HasItems">
+            <summary>
+            Returns true if the Items dictionary has at least one item.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.IItem.IsDirty">
+            <summary>
+            Indicates whether property values have changed on this item since it was loaded.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.IItem.IsDirtyRecursive">
+            <summary>
+            Indicates whether property values have changed on this item or any child item since they were loaded
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.IItem.Items">
+            <summary>
+            Dictionary of Items that are "children" of this item in the composite.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.IItem.Parent">
+            <summary>
+            Reference to the parent of the item.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.IItem.Root">
+            <summary>
+            Reference to the root of the BusinessModel model.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.IItem.UniqueId">
+            <summary>
+            The unique identification for the item within the BusinessModel model
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.FindItem(System.Guid)">
+            <summary>
+            Recursively searches the item dictionary for an item with a matching unique identifier.  
+            </summary>
+            <param name="uniqueId">Unique identifer acting as the target of the search</param>
+            <returns>Reference for item found or null if not found</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.FindItem``1(System.Guid)">
+            <summary>
+            Strongly typed recursive search for a contained item fo the specified type.  
+            Failure to find the Id or failure to cast to the specified type will return null.
+            </summary>
+            <typeparam name="T">Type of item searched for</typeparam>
+            <param name="uniqueId">Unique identifer acting as the target of the search</param>
+            <returns>Typed reference for item found or null if not found or not of specified type</returns>
+            //VALIDSUPPRESSION: The typing here can be inferred as it is given back in the return
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.LoadNew(EternalPlay.ReusableCore.BusinessModel.IItem)">
+            <summary>
+            Supports loading for a new item that is part of a "Top-Down Instantiation" construction pattern
+            </summary>
+            <param name="parent">Reference to the item's parent</param>
+            <returns>Reference to this</returns>
+            <remarks>
+            Factory items make heavy use of this load method.
+            This load method is primarily useful when creating new objects to be children of a root item whose state is Current.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.Save(System.String)">
+            <summary>
+            Performs save for this item if it is dirty and calls into the save methods for all of its child items
+            </summary>
+            <param name="userId">Unique user identification responsible for the Save.</param>
+            <returns>Indication if save for this item or one of its children was needed.</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.AddItem``1(``0)">
+            <summary>
+            Takes an item and adds it to the items collection.
+            Also sets the parent reference to itself.
+            </summary>
+            <param name="item">Item reference to add</param>
+            <returns>Reference to the added item</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.RemoveItem(System.Guid)">
+            <summary>
+            Takes an item and removes it from the items collection.
+            Also sets the parent reference to null.
+            </summary>
+            <param name="uniqueId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.LoadSingularChild``1">
+            <summary>
+            Load singular child item:  construct, load and add item.
+            </summary>
+            <remarks>
+            Usage:
+            ------
+            Call within OnLoad~ functions in concrete classes
+            Call within from individual LoadChild functions
+            -
+            
+            Since the items are singular they can be constructed and loaded in the same call automatically.
+            -
+            the calling instance is assumed to be the parent of the child (i.e. this)
+            </remarks>
+            <typeparam name="T">Type of the child item to be loaded</typeparam>
+            <returns>Reference to loaded child item</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.LoadSingularChild``1(EternalPlay.ReusableCore.BusinessModel.IItem)">
+            <summary>
+            Load singular child item:  construct, load and add item.
+            </summary>
+            <remarks>
+            Usage:
+            ------
+            Call within OnLoad~ functions in concrete classes
+            Call within from individual LoadChild functions
+            -
+            
+            Since the items are singular they can be constructed and loaded in the same call automatically.
+            </remarks>
+            <typeparam name="T">Type of the child item to be loaded</typeparam>
+            <param name="parent">Object to pass into the load method as the parent of the item</param>
+            <returns>Reference to loaded child item</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.LoadRootChild``1(System.Guid)">
+            <summary>
+            Load root child item:  construct, load and add item.
+            </summary>
+            <typeparam name="T">Root Type</typeparam>
+            <param name="uniqueId">Root Unique Id</param>
+            <returns>Root child</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.LoadRootChild``1(System.Guid,EternalPlay.ReusableCore.BusinessModel.IItem)">
+            <summary>
+            Load root child item:  construct, load and add item.
+            </summary>
+            <typeparam name="T">Root Type</typeparam>
+            <param name="uniqueId">Root Unique Id</param>
+            <param name="parent">Explicit parent</param>
+            <returns>Root child</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.OnLoadNew">
+            <summary>
+            Concrete classes deriving from this class should implement this function so that load logic to prepare a new item is executed.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.OnSave(System.String,System.Nullable{System.Guid})">
+            <summary>
+            Concrete classes deriving from this class should implement this function so that 
+            </summary>
+            <param name="userId">Unique user identification responsible for the Save.</param>
+            <param name="previousUniqueId">Unique identification of the item as it was loaded.</param>
+            <remarks>The Save method updates the UniqueId value before calling OnSave.</remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.AssignDirty``1(``0,``0)">
+            <summary>
+            Helper function for implementing value type property accessors in derived classes
+            </summary>
+            <typeparam name="TProperty">Type of the property assigning a value</typeparam>
+            <param name="currentValue">Current property value</param>
+            <param name="newValue">New property value</param>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.AssignItemData``1(EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.IPersistable{``0},EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.ItemData{``0})">
+            <summary>
+            Assign item data to a persistable item
+            </summary>
+            <typeparam name="TClassData">Type of class data held within item data</typeparam>
+            <param name="persistableItem">Persistable item</param>
+            <param name="itemData">Item Data</param>
+            <returns>True if item data assigned to item</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.ValidateUniqueIdParameter(System.Guid)">
+            <summary>
+            Simply validates that the unique id is not an empty guid
+            </summary>
+            <param name="uniqueId">UniqueId parameter value from calling method</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.ValidateNonNullParameter``1(``0[])">
+            <summary>
+            Simply validates that the parameters are not null
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="parameters"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.ValidateItemLoad(EternalPlay.ReusableCore.BusinessModel.IItem)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.SearchChildren(System.Collections.Generic.ICollection{EternalPlay.ReusableCore.BusinessModel.IItem},System.Guid)">
+            <summary>
+            Call find on all child items, returning as soon as a FindItem call returns non null
+            </summary>
+            <param name="children">Collection of children belonging to this item</param>
+            <param name="targetUniqueId">Unique Id of child being searched for</param>
+            <returns>Found item or null</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.VerifyRootIsEditable(EternalPlay.ReusableCore.BusinessModel.ItemBase,System.String)">
+            <summary>
+            Validate root is editable: Only doing it once, when save depth is zero, after that it would be redundant.
+            </summary>
+            <param name="item"></param>
+            <param name="userId"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.VerifyRootNotHistoricOrNone(EternalPlay.ReusableCore.BusinessModel.IItem)">
+            <summary>
+            Validate that provided root is not historic or none
+            </summary>
+            <param name="parent"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.PreSave(EternalPlay.ReusableCore.BusinessModel.ItemBase,System.String)">
+            <summary>
+            Perform actions appropriate before the concrete impelementation of save is called
+            </summary>
+            <param name="item"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.PostSave(EternalPlay.ReusableCore.BusinessModel.ItemBase)">
+            <summary>
+            Perform actions appropriate after the concrete impelementation of save is called
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.CascadeSaveToChildren(EternalPlay.ReusableCore.BusinessModel.ItemBase,System.String)">
+            <summary>
+            Call Save method on item's children.
+            </summary>
+            <param name="item"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemBase.CleanUpRelationship(EternalPlay.ReusableCore.BusinessModel.ItemBase,EternalPlay.ReusableCore.BusinessModel.IItem,System.Guid)">
+            <summary>
+            Clean up unique ids in the parent item's items collection so that it matches new Id of child item after save
+            </summary>
+            <param name="parentItem">Item containing saved child</param>
+            <param name="childItem">Child item just saved</param>
+            <param name="previousUniqueId">Child item before it was saved</param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemBase.BaseData">
+            <summary>
+            Holds the persistent model data for the item
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemBase.EnteredBy">
+            <summary>
+            Unique user identification responsible for the loaded version of the data.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemBase.EnteredOn">
+            <summary>
+            Date and time the loaded version of data was saved.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemBase.UniqueId">
+            <summary>
+            The unique identification for the item within the BusinessModel model
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemBase.HasItems">
+            <summary>
+            Returns true if the Items dictionary has at least one item.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemBase.IsDirty">
+            <summary>
+            Indicates whether property values have changed on this item since it was loaded.
+            </summary>
+            <remarks>
+            Items can not become "dirty" until after load has completed (i.e. IsLoaded == true).  Attempts to set before this will be ignored.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemBase.IsDirtyRecursive">
+            <summary>
+            Indicates whether property values have changed on this item or any child item since they were loaded
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemBase.IsLoaded">
+            <summary>
+            Indicates whether the class has been loaded.
+            </summary>
+            <remarks>
+            Items can not become "dirty" until after load has completed (i.e. IsLoaded == true).
+            This is set to true by the OnLoad* protected methods immediately before they raise the OnLoadComplete event.
+            All implementing classes should wait until they have completed their custom load logic before calling into the base classes LoadHandler (Recommended), or if they are not calling into the base they shoudld set IsLoaded to true themselves, if it is indeed true.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemBase.IsNew">
+            <summary>
+            Indicates if the item is new (i.e. it loaded New)
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemBase.ContainedItems">
+            <summary>
+            Dictionary of Items that are "children" of this item in the composite.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemBase.Items">
+            <summary>
+            Dictionary of items that are contained by this item.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemBase.Parent">
+            <summary>
+            Reference to the parent of the item
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemBase.Root">
+            <summary>
+            Reference to the root of the BusinessModel model.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemBase.HasUniqueId">
+            <summary>
+            Introspection property identify if the unique Id has been assigned
+            </summary>
+            <remarks>
+            Intended to be used to verify that concrete load implementations have assigned a unqiue id
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemBase.LoadChildren">
+            <summary>
+            Item load child methods are added to this during construction and removed when lazy loaded.
+            </summary>
+            <remarks>
+            Find Items uses this to bypass lazy the load pattern in derived classes.
+            Null indicatezs that all children are loaded, or that none are present to load
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemBase.Item(System.Guid)">
+            <summary>
+            Index operator retrieving a direct child item by its unique id
+            </summary>
+            <param name="uniqueId">Id of child item to retrieve</param>
+            <returns>Child item or null if Id not within items</returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.ItemBase.LoadChild">
+            <summary>
+            Delegate definition for member methods employed to load child items
+            </summary>
+            <returns>The concrete load method type</returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.BusinessModelException">
+            <summary>
+            The basic BusinessModel exception thrown when no more specific exception is appropriate
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.BusinessModelException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.BusinessModel.BusinessModelException">BusinessModelException</see> class.
+            </summary>
+            <remarks>
+            <para>
+            This constructor initializes the <see cref="P:System.Exception.Message">Message</see> property of the new
+            instance to a system-supplied message that describes the error and takes into account the current system
+            culture.  This constructor will leave the <see cref="P:System.Exception.InnerException">InnerException</see>
+            property null.
+            </para>
+            <para>
+            All derived classes should provide this default constructor.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.BusinessModelException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.BusinessModel.BusinessModelException">BusinessModelException</see> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">
+            The message that describes the error. 
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.BusinessModelException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.BusinessModel.BusinessModelException">BusinessModelException</see> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">
+            The message that describes the error. 
+            </param>
+            <param name="inner">
+            The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if
+            no inner exception is specified.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.BusinessModelException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.BusinessModel.BusinessModelException">BusinessModelException</see> class with serialized
+            data. 
+            </summary>
+            <param name="info">
+            The SerializationInfo&gt; that holds the serialized object data about the
+            exception being thrown. 
+            </param>
+            <param name="context">
+            The StreamingContext that contains contextual information about the
+            source or destination.
+            </param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.BusinessModelLoadException">
+            <summary>
+            The basic BusinessModel exception thrown for general load errors
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.BusinessModelLoadException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.BusinessModel.BusinessModelLoadException">BusinessModelLoadException</see> class.
+            </summary>
+            <remarks>
+            <para>
+            This constructor initializes the <see cref="P:System.Exception.Message">Message</see> property of the new
+            instance to a system-supplied message that describes the error and takes into account the current system
+            culture.  This constructor will leave the <see cref="P:System.Exception.InnerException">InnerException</see>
+            property null.
+            </para>
+            <para>
+            All derived classes should provide this default constructor.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.BusinessModelLoadException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.BusinessModel.BusinessModelLoadException">BusinessModelLoadException</see> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">
+            The message that describes the error. 
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.BusinessModelLoadException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.BusinessModel.BusinessModelLoadException">BusinessModelLoadException</see> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">
+            The message that describes the error. 
+            </param>
+            <param name="inner">
+            The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if
+            no inner exception is specified.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.BusinessModelLoadException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.BusinessModel.BusinessModelLoadException">BusinessModelLoadException</see> class with serialized
+            data. 
+            </summary>
+            <param name="info">
+            The SerializationInfo that holds the serialized object data about the
+            exception being thrown. 
+            </param>
+            <param name="context">
+            The StreamingContext that contains contextual information about the
+            source or destination.
+            </param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.ItemFactory">
+            <summary>
+            Factory items serve a single purpose, to load other items.  They have no data of their own, they encapsulate the logic needed to 
+            construct other items and contain them within the model.
+            </summary>
+            <remarks>
+            Design:
+            -------
+            Derive from Factory Item when you need to encapsulate construction logic for a group of other items.
+            
+            Load:
+            -----
+            Singular, loads with a parent reference only.  No data is loaded for the factory item, since it has none of its own.
+            
+            Save:
+            -----
+            Item normal
+            </remarks>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.SingularBase">
+            <summary>
+            Singular base provides basic functionality for singular items.  
+            Singular items exist as the only one of their kind beneath their parent.
+            </summary>
+            <remarks>
+            Load:
+            -----
+            Load methods provided by item classes deriving from this one.
+            
+            Save:
+            -----
+            Item normal
+            
+            Design:
+            -------
+            Do not derive concrete classes directly from SingularBase.  Instead derive from those abstract classes that derive from this one.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.SingularBase.ParentLoad(EternalPlay.ReusableCore.BusinessModel.IItem)">
+            <summary>
+            Supports loading from a parent object.
+            </summary>
+            <param name="parent">Reference to the item's parent</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.SingularBase.OnLoadCurrent(System.Guid)">
+            <summary>
+            Concrete classes deriving from this one should implement this function so that current item data is loaded.
+            </summary>
+            <param name="parentUniqueId">Indentification of the items's parent item</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.SingularBase.OnLoadHistoric(System.Guid,System.DateTime)">
+            <summary>
+            Concrete classes deriving from this class should implement this function so that historic item data is loaded.
+            </summary>
+            <param name="parentUniqueId">Indentification of the item's parent item</param>
+            <param name="rootAsOf">Date and time the root was loaded to represent.</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.ISingular">
+            <summary>
+            Classes supporting this interface are singular and can be loaded solely with a reference to 
+            their parent.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ISingular.Load(EternalPlay.ReusableCore.BusinessModel.IItem)">
+            <summary>
+            Supports loading from a parent object.
+            </summary>
+            <param name="parent">Reference to the item's parent</param>
+            <returns>Reference to this</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemFactory.CreateNew``1">
+            <summary>
+            Constructs, loads and adds new item to the factory's Items collection, and returns a reference
+            </summary>
+            <typeparam name="T">Item Type</typeparam>
+            <returns>Reference to newly created item</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemFactory.Load(EternalPlay.ReusableCore.BusinessModel.IItem)">
+            <summary>
+            Supports loading from a root object, usually as part of a "Top-Down Instantiation" construction pattern.
+            </summary>
+            <param name="parent">Reference to the item's parent</param>
+            <returns>Reference to this</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemFactory.LoadNew(EternalPlay.ReusableCore.BusinessModel.IItem)">
+            <summary>
+            Supports loading for a new item that is part of a "Top-Down Instantiation" construction pattern
+            </summary>
+            <param name="parent">Reference to the new item's parent</param>
+            <returns>Reference to this</returns>
+            <remarks>
+            Factory items make heavy use of this load method.
+            This load method is primarily useful when creating new objects to be children of a root item whose state is Current.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemFactory.LoadSpecificChildren``1(System.Collections.Generic.IEnumerable{System.Guid})">
+            <summary>
+            Encapsulates the loading of child items of the Specific Item type.  
+            If the factory will load multiple types of specific items (not normal) then multiple calls to this function should be made.
+            </summary>
+            <remarks>
+            This is very common functionality for factory items and the encapsulation of this functionality should be used as it hides a specific 
+            oddity - the passing of the factory's parent as the parent reference, bypassing itself. This is due to the fact that factories do not 
+            exist in a persistant way and the unique Id of the factory's parent is the true parent.
+            </remarks>
+            <typeparam name="T">Concrete type derived from Specific Item</typeparam>
+            <param name="childUniqueIds">List of Guids representing the unique Ids of items to be loaded</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.IPersistable`1">
+            <summary>
+            Indicates that the item is persistable and as such exposes properties for model and class data
+            </summary>
+            <typeparam name="TClassData"></typeparam>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.IPersistable`1.BaseData">
+            <summary>
+            Data for the base class of a business model item
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.IPersistable`1.ClassData">
+            <summary>
+            Data for the concrete class of a business model item
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.ItemData`1">
+            <summary>
+            Persistable data for business model items
+            </summary>
+            <typeparam name="TClassData"></typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.ItemData`1.#ctor">
+            <summary>
+            Creates class data and assigns to property
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.ItemData`1.#ctor(System.String,System.DateTime,System.Guid)">
+            <summary>
+            Creates class data and assigns to property, plus constructs base data with values
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.ItemData`1.BaseData">
+            <summary>
+            Persistable data owned by item base
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.ItemData`1.ClassData">
+            <summary>
+            Persistable data owned by the concrete implementation of the item
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.BaseData">
+            <summary>
+            Data for the base class of a business model item
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.BaseData.#ctor">
+            <summary>
+            Load up without assignment
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.BaseData.#ctor(System.String,System.DateTime,System.Guid)">
+            <summary>
+            Assigns base data to properties
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.BaseData.HasValue">
+            <summary>
+            Indicates that all base data members have value
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.BaseData.EnteredBy">
+            <summary>
+            Unique user identification responsible for the loaded version of the data. 
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.BaseData.EnteredOn">
+            <summary>
+            Date and time the loaded version of data was saved.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.BaseData.UniqueId">
+            <summary>
+            The unique identification for the item within the BusinessModel model
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.ISpecific">
+            <summary>
+            Classes supporting this interface are singular and can be loaded solely with a reference to 
+            their parent.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ISpecific.Load(System.Guid,EternalPlay.ReusableCore.BusinessModel.IItem)">
+            <summary>
+            Supports construction of a specific model item, usually part of a "Top-Down Instantiation" construction pattern.
+            </summary>
+            <param name="uniqueId">Unique identifier for the item being constructed</param>
+            <param name="parent">Reference to the item's parent</param>
+            <returns>Reference to this</returns>
+            <remarks>
+            Factory items make heavy use of this load method on their child objects (factory's themselves do not support this load method)
+            This is provided for items with a one to many relationship with root - there is potentially more than a single current or historic item for the given root, so the identification is provided to this load method.
+            </remarks>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.ExceptionLiterals">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ExceptionLiterals.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ExceptionLiterals.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ExceptionLiterals.ItemLoadDidNotAssignBaseDataValues">
+            <summary>
+              Looks up a localized string similar to The concrete implementation of Load did not assign BaseData values.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ExceptionLiterals.LoadIsOnlyValidForCurrentNewAndHistoric">
+            <summary>
+              Looks up a localized string similar to Load is only valid for specific items created as part of a current, new or historic instance model..
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ExceptionLiterals.LoadNewIsOnlyValidForCurrentAndNew">
+            <summary>
+              Looks up a localized string similar to LoadNew is only valid for specific items created as part of a current or new instance model..
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ExceptionLiterals.LoadSpecificDidNotAssignRootRefOrIdentification">
+            <summary>
+              Looks up a localized string similar to The concrete implementation of OnLoadSpecific did not assign a root reference or root id..
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ExceptionLiterals.LocksForCurrentRootsOnly">
+            <summary>
+              Looks up a localized string similar to A lock can not be assigned to the aggregate when its state is other than Current..
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ExceptionLiterals.SaveFailureRootNotEditable">
+            <summary>
+              Looks up a localized string similar to Save was called but the root is not editable.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.DataLayer.DataSets.Locking">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.DataLayer.DataSets.Locking.LockDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.DataLayer.DataSets.Locking.LockRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.DataLayer.DataSets.Locking.LockRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.DataLayer.DataSets.LockingTableAdapters.LockTableAdapter">
+             <summary>
+            Represents the connection and commands used to retrieve and save data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.DataLayer.DataSets.LockingTableAdapters.TableAdapterManager">
+             <summary>
+            TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.DataLayer.DataSets.LockingTableAdapters.TableAdapterManager.UpdateUpdatedRows(EternalPlay.ReusableCore.BusinessModel.DataLayer.DataSets.Locking,System.Collections.Generic.List{System.Data.DataRow},System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Update rows in top-down order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.DataLayer.DataSets.LockingTableAdapters.TableAdapterManager.UpdateInsertedRows(EternalPlay.ReusableCore.BusinessModel.DataLayer.DataSets.Locking,System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Insert rows in top-down order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.DataLayer.DataSets.LockingTableAdapters.TableAdapterManager.UpdateDeletedRows(EternalPlay.ReusableCore.BusinessModel.DataLayer.DataSets.Locking,System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Delete rows in bottom-up order.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.DataLayer.DataSets.LockingTableAdapters.TableAdapterManager.GetRealUpdatedRows(System.Data.DataRow[],System.Collections.Generic.List{System.Data.DataRow})">
+             <summary>
+            Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.DataLayer.DataSets.LockingTableAdapters.TableAdapterManager.UpdateAll(EternalPlay.ReusableCore.BusinessModel.DataLayer.DataSets.Locking)">
+             <summary>
+            Update all changes to the dataset.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.DataLayer.DataSets.LockingTableAdapters.TableAdapterManager.UpdateOrderOption">
+             <summary>
+            Update Order Option
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.DataLayer.DataSets.LockingTableAdapters.TableAdapterManager.SelfReferenceComparer">
+             <summary>
+            Used to sort self-referenced table's rows
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager">
+            <summary>
+            Manages thread-safe, concurrent user safe, locking for the BusinessModel model.  
+            RootItem is the single point of contention for changing information in the aggregate.  All locks are acquired and released on this object.
+            </summary>
+            <remarks>
+            RootItemLockManager implements a thread safe singleton pattern.
+            The factory property Instance returns a reference to the single instance of RootItemLockManager. 
+            This is the only way to get a reference to an instance of this class.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager.#ctor">
+            <summary>
+            Private constructor only called by the Instance property's get accessor which lazy loads the single instance of this class.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager.IsRootLocked(System.Guid)">
+            <summary>
+            Checks to see if the root item has an active lock.
+            </summary>
+            <param name="rootUniqueId">Unique identifier for the root item</param>
+            <returns>Indicates if the root item has an active lock</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager.AcquireLock(System.Guid,System.String,System.String)">
+            <summary>
+            Attempts to acquire a lock on the specified root item for the specified user id.  If the root item is already locked it returns null.
+            </summary>
+            <param name="rootUniqueId">Unique identifier for the root item</param>
+            <param name="userId">Unique identification of the user requesting the lock</param>
+            <param name="sessionId">Unique identification of the user session</param>
+            <remarks>Processes that automatically acquire locks for users should Release them when possible by passing the RootItemLock as a parameter.</remarks>
+            <returns>Acquired lock or null if unable to acquire</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager.GetActiveLock(System.Guid)">
+            <summary>
+            Gets an active lock if one exists for the specified root item.
+            </summary>
+            <param name="rootUniqueId">Unique identifier for the root item</param>
+            <returns>Active recruit lock or null</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager.GetUserLocks(System.String)">
+            <summary>
+            Retrieve all active locks for the specified user.  If there are none the list will be empty.
+            </summary>
+            <param name="userId">Unique identification of the user</param>
+            <returns>List of locks or empty list</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager.MigrateUserSession(System.Guid,System.String)">
+            <summary>
+            Migrates the locks associated with one session to the one specified.
+            </summary>
+            <param name="userId">User whose locks are being migrated</param>
+            <param name="newSessionId">Session receiving user locks</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager.ReleaseLock">
+            <summary>
+            Releases all recruit locks in the system.  This is expected to be called by the Application Start event.
+            </summary>
+            <returns>Returns true if any locks were cleared, false if none.</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager.ReleaseLock(System.String)">
+            <summary>
+            Releases all recruit locks in the specified session.  This is expected to be called by the Session End event.
+            </summary>
+            <param name="sessionId">Session to clear</param>
+            <returns>Returns true if any locks were cleared, false if none.</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager.ReleaseLock(EternalPlay.ReusableCore.BusinessModel.IRootItemLock)">
+            <summary>
+            Releases the provided lock.
+            </summary>
+            <param name="rootLock">Lock to release</param>
+            <returns>Returns true if any locks were cleared, false if none.</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager.GetConcurrencyLockingToken(System.Guid)">
+            <summary>
+            Gets a concurrency locking token for the specified recruit Id
+            </summary>
+            <param name="rootUniqueId">Unique identifier for the root item</param>
+            <returns>Concurrency Locking Token</returns>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager.Instance">
+            <summary>
+            Provides a reference to the single instance of the RootItemLockManager.
+            </summary>
+            <remarks>
+            This is the only way to get a reference to an instance of this class.  
+            The single instance is lazy loaded.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager.ConcurrencyLockingTokens">
+            <summary>
+            Concurrency tokens are used to lock threads, so that method calls are thread safe at a root item level of granularity.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager.RootItemLock">
+            <summary>
+            Represents a coarse grained lock on the BusinessModel aggregate.
+            Root item lock is nested within Root Item Lock Manager and is scoped as private.
+            Public access occurs through the public IRootItemLock interface.
+            </summary>
+            <remarks>RootItemLock construction only occurs in the following factory methods on the containing class:  AcquireLock, GetActiveLock and GetUserLocks.</remarks>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.IRootItemLock">
+            <summary>
+            Represents a coarse grained lock on the BusinessModel aggregate.
+            Root item lock is nested within Root Item Lock Manager and is scoped as private.
+            Public access occurs through the public IRootItemLock interface.
+            </summary>
+            <remarks>RootItemLock construction only occurs in the following factory methods on the containing class:  AcquireLock, GetActiveLock and GetUserLocks.</remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.IRootItemLock.IsOwner(System.String)">
+            <summary>
+            Compares the provided user id to the user id on the lock object.
+            </summary>
+            <param name="userId">Unique identification for a user</param>
+            <returns>True if the user holds the lock, false otherwise</returns>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.IRootItemLock.AcquiredBy">
+            <summary>
+            Unique identification of the user holding the lock.
+            </summary>
+            <remarks>This property's related private field is defined as readonly, set only from constructors and therefore guarenteed stable after construction.</remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.IRootItemLock.AcquiredOn">
+            <summary>
+            Datetime of lock acquisition
+            </summary>
+            <remarks>This property's related private field is defined as readonly, set only from constructors and therefore guarenteed stable after construction.</remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.IRootItemLock.RootUniqueId">
+            <summary>
+            Unique identification of the locked root item
+            </summary>
+            <remarks>This property's related private field is defined as readonly, set only from constructors and therefore guarenteed stable after construction.</remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager.RootItemLock.#ctor(System.DateTime,System.String,System.Guid)">
+            <summary>
+            Root item locks are only constructable by the Root Item Lock Manager class since Root Item Lock is nested and scoped private.
+            </summary>
+            <param name="acquiredOn">Datetime of lock acquisition</param>
+            <param name="acquiredBy">Unique identifier for the user holding the lock</param>
+            <param name="rootUniqueId">Unique identifier for the root item</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager.RootItemLock.IsOwner(System.String)">
+            <summary>
+            Compares the provided user id to the user id on the lock object.
+            </summary>
+            <param name="userId">Unique identification for a user</param>
+            <returns>True if the user holds the lock, false otherwise</returns>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager.RootItemLock.AcquiredBy">
+            <summary>
+            Unique identification of the user holding the lock.
+            </summary>
+            <remarks>This property's related private field is defined as readonly, set only from constructors and therefore guarenteed stable after construction.</remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager.RootItemLock.AcquiredOn">
+            <summary>
+            Datetime of lock acquisition
+            </summary>
+            <remarks>This property's related private field is defined as readonly, set only from constructors and therefore guarenteed stable after construction.</remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.RootItemLockManager.RootItemLock.RootUniqueId">
+            <summary>
+            Unique identification of the locked root item
+            </summary>
+            <remarks>This property's related private field is defined as readonly, set only from constructors and therefore guarenteed stable after construction.</remarks>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.LockData">
+            <summary>
+            Static data access layer class for working with locking data
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.LockData.Acquire(System.Guid,System.String,System.String,System.DateTime)">
+            <summary>
+            If possible, acquires a new lock for the given data object
+            </summary>
+            <param name="dataId">Unique id of the item to acquire a lock for</param>
+            <param name="sessionId">Id of the session associated with the lock</param>
+            <param name="acquiredBy">User id of the user acquiring the lock</param>
+            <param name="acquiredOn">Timestamp of when the lock is acquired</param>
+            <returns>A Lock row with lock data conformation, or null if no lock was acquired</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.LockData.GetActiveLock(System.Guid)">
+            <summary>
+            If possible, gets an existing lock for the given data item
+            </summary>
+            <param name="dataId">Unique id of the item to get the existing lock for</param>
+            <returns>A Lock row with lock data conformation, or null if no lock was found</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.LockData.GetUserLocks(System.String)">
+            <summary>
+            Gets all locks held by the given user
+            </summary>
+            <param name="userId">User id of the user to get locks for</param>
+            <returns>LockDataTable with the user locks, or null if the user has acquired no locks</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.LockData.IsLocked(System.Guid)">
+            <summary>
+            Determines if a data item is locked
+            </summary>
+            <param name="dataId">Unique id of the data item to check</param>
+            <returns>True if item is locked, otherwise false</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.LockData.MigrateSessions(System.String,System.String)">
+            <summary>
+            Migrates a users locks from an existing session to a new one
+            </summary>
+            <param name="userId">User to migrate session for</param>
+            <param name="sessionId">New session id</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.LockData.ReleaseAll">
+            <summary>
+            Releases all system locks
+            </summary>
+            <returns>True if successful, otherwise false</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.LockData.ReleaseSession(System.String)">
+            <summary>
+            Releases all locks for the given session
+            </summary>
+            <param name="sessionId">Session id to release locks for</param>
+            <returns>True if successful, otherwise false</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.LockData.ReleaseSpecific(System.Guid,System.String)">
+            <summary>
+            Releases a specific lock
+            </summary>
+            <param name="dataId">Unique id of the locked item</param>
+            <param name="acquiredBy">Id of the user holding the lock</param>
+            <returns>True if successful, otherwise false</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.DataLayer.Classes.LockData.ReleaseUserLocks(System.String)">
+            <summary>
+            Releases all locks for a given user
+            </summary>
+            <param name="userId">Id of the user holding locks</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.VersionState">
+            <summary>
+            Represents the version state of a RootItem
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.BusinessModel.VersionState.None">
+            <summary>
+            Default value representing Unknown or Unassigned
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.BusinessModel.VersionState.New">
+            <summary>
+            Represents a new root item that has not been saved
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.BusinessModel.VersionState.Current">
+            <summary>
+            Represents a root item showing current data
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.BusinessModel.VersionState.Historic">
+            <summary>
+            Represents a root item showing historic data
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.ItemSpecific`1">
+            <summary>
+            Specific items are loaded with a provided unique Id, or a unique id and an as-of date.  They care who their parents are but require 
+            a unique id to load since there are multiple of their type under the parent.
+            
+            Direct Instantiation:
+            ---------------------
+            ...TBD... Being rethought.  Refactor forthcoming.  See deprecated method below...
+            </summary>
+            <remarks>
+            Design:
+            -------
+            Derive from this class if the concrete class will be represented more than once under its parent.
+            
+            Load:
+            -----
+            Unique ids are required to load.
+            
+            Save:
+            -----
+            Item normal
+            </remarks>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.IArchival">
+            <summary>
+            Items that can be archived will support this interface
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.IArchival.IsArchived">
+            <summary>
+            Flag indicating that the item is archived
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemSpecific`1.Load(System.Guid,EternalPlay.ReusableCore.BusinessModel.IItem)">
+            <summary>
+            Supports construction of a specific model item, usually part of a "Top-Down Instantiation" construction pattern.
+            </summary>
+            <param name="uniqueId">Unique identifier for the item being constructed</param>
+            <param name="parent">Reference to the item's parent</param>
+            <returns>Reference to this</returns>
+            <remarks>
+            Factory items make heavy use of this load method on their child objects (factory's themselves do not support this load method)
+            This is provided for items with a one to many relationship with root - there is potentially more than a single current or historic item for the given root, so the identification is provided to this load method.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemSpecific`1.LoadNew(EternalPlay.ReusableCore.BusinessModel.IItem)">
+            <summary>
+            Supports loading for a new item that is part of a "Top-Down Instantiation" construction pattern
+            </summary>
+            <param name="parent">Reference to the item's parent</param>
+            <returns>Reference to this</returns>
+            <remarks>
+            Factory items make heavy use of this load method.
+            This load method is primarily useful when creating new objects to be children of a root item whose state is Current.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemSpecific`1.OnLoadSpecific(System.Guid)">
+            <summary>
+            Concrete implementations of this are expected to be able to load up the object from the unique id
+            </summary>
+            <param name="uniqueId">Identification of the unique item</param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemSpecific`1.ClassData">
+            <summary>
+            Persistable data for this item
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemSpecific`1.IsArchived">
+            <summary>
+            Indicates if this item is archived
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.ItemRoot">
+            <summary>
+            Root item acts as the top of the model representing the coarse grained lock on the aggregate.
+            </summary>
+            <remarks>
+            Normally, you will only have one class that derives from RootItem and it will act as the root of the consuming object model.
+            Note, a model may contain or reference the root or specific items of another model but they are not locked as an aggregate.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemRoot.#ctor">
+            <summary>
+            Empty constructor declared PROTECTED internal to limit construction potential to derived classes and other BusinessModel classes
+            </summary>
+            <remarks>Set as protected INTERNAL so this class can be direclty constructed by BusinessModel.Item.</remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemRoot.OnSave(System.String,System.Nullable{System.Guid})">
+            <summary>
+            Handle root specific functionality that needs to occur after a concrete save and before SaveComplete event is thrown
+            </summary>
+            <param name="userId"></param>
+            <param name="previousUniqueId"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemRoot.EnsureEditable(System.String,System.String)">
+            <summary>
+            Acquires a lock if one is needed, when possible, to make the root item editable for the responsible user.
+            </summary>
+            <param name="userId">Unique identifier for the user responsible</param>
+            <param name="sessionId">Unique identifier for the user's session</param>
+            <returns>True if the item is editable</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemRoot.EnsureReadOnly(System.String)">
+            <summary>
+            Releases the lock if one is held by the responsible user, when possible.
+            </summary>
+            <param name="userId">Unique identifier for the user responsible</param>
+            <returns>True if the item is readonly.</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemRoot.IsEditable(System.String)">
+            <summary>
+            Introspective property indicating if the BusinessModel model is currently editable for user.
+            </summary>
+            <param name="userId">Unique identifier for the user responsible</param>
+            <returns>True if the item is editable</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemRoot.IsReadOnly(System.String)">
+            <summary>
+            Introspective property indicating if the BusinessModel model is currently read only (i.e. not currently editable).
+            </summary>
+            <param name="userId">Unique identifier for the user responsible</param>
+            <returns>True if the item is read only</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemRoot.EnsureEditableRecursive(System.String,System.String)">
+            <summary>
+            Recursively ensure editable on this root and all of its child roots
+            Success indicates that all roots are editable
+            Failure indicates that no roots are editable
+            </summary>
+            <param name="userId"></param>
+            <param name="sessionId"></param>
+            <returns>Success or Failure</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemRoot.EnsureReadOnlyRecursive(System.String)">
+            <summary>
+            Recursively ensure read only on this root and all of its child roots
+            Success indicates that all roots are readonly
+            Failure indicates that all roots are not readonly
+            </summary>
+            <param name="userId"></param>
+            <returns>Success or Failure</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemRoot.Load(System.Guid)">
+            <summary>
+            Constructs a specific root item
+            </summary>
+            <param name="uniqueId">Unique identifier for the root item to be constructed.</param>
+            <remarks>Constructors are protected internal so this class can be lazy loaded from BusinessModel.Item but not outside the assembly</remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemRoot.Load(System.Guid,System.DateTime)">
+            <summary>
+            Constructs a specific root item for a given data and time.
+            </summary>
+            <param name="uniqueId">Unique identifier for the root item to be constructed.</param>
+            <param name="historicAsOf">Date and time the root should represent</param>
+            <remarks>Constructors are protected internal so this class can be lazy loaded from BusinessModel.Item but not outside the assembly</remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemRoot.Load(EternalPlay.ReusableCore.BusinessModel.IRootItemLock)">
+            <summary>
+            Constructs a root item from a lock
+            </summary>
+            <param name="itemLock">Lock on the root item to be created.</param>
+            <remarks>Constructors are protected internal so this class can be lazy loaded from BusinessModel.Item but not outside the assembly</remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemRoot.LoadNew">
+            <summary>
+            Supports construction of a new root item
+            </summary>
+            <returns>Reference to this</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemRoot.LoadNew(EternalPlay.ReusableCore.BusinessModel.IItem)">
+            <summary>
+            Supports construction of a new root item as a child of another item
+            </summary>
+            <param name="parent">Reference to the new root item's parent</param>
+            <returns>Reference to this</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemRoot.ChildRoots(EternalPlay.ReusableCore.BusinessModel.IItem)">
+            <summary>
+            Provides list of first child roots of the item provided
+            </summary>
+            <param name="item">Item within which to look for roots</param>
+            <returns>List of child roots</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemRoot.ChildRoots(EternalPlay.ReusableCore.BusinessModel.IItem,System.Collections.Generic.IList{EternalPlay.ReusableCore.BusinessModel.ItemRoot})">
+            <summary>
+            First child roots of the item are added to the provided list
+            </summary>
+            <param name="item">Item potentially containing child root items</param>
+            <param name="childRoots">List to hold first child roots</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemRoot.AcquireLock(EternalPlay.ReusableCore.BusinessModel.ItemRoot,System.String,System.String)">
+            <summary>
+            Acquire lock for root item.
+            </summary>
+            <param name="root">Root item for which to acquire lock</param>
+            <param name="userId">User requresting lock</param>
+            <param name="sessionId">Session within lock is being requrested</param>
+            <returns>True if lock acquired, False if one wasn't</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemRoot.ReleaseLock(EternalPlay.ReusableCore.BusinessModel.ItemRoot)">
+            <summary>
+            Release lock on the root item
+            </summary>
+            <param name="root">Root item for which to release lock</param>
+            <returns>True if lock released, False if one wasn't</returns>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemRoot.AsOf">
+            <summary>
+            The datetime for which the entire model should load and save
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemRoot.IsLocked">
+            <summary>
+            Introspective property indicating if the aggregate is locked or not.  
+            If this returns true you are guarenteed to have a lock object available in the Lock property.
+            </summary>
+            <remarks>
+            This will not acquire a lock but it will retrieve one from the data layer if one exists.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemRoot.IsLockable">
+            <summary>
+            Introspective property indicating if the aggregate is can be locked,
+            meaning that it is current and not currently locked.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemRoot.Lock">
+            <summary>
+            Represents the coarse grained lock currently held on the aggregate
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemRoot.SaveDepth">
+            <summary>
+            Represents the save depth during the cascading save process.
+            </summary>
+            <remarks>The set accessor is internal since nothing outside this model should, namely ItemBase, should ever increment or decrement the value.</remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.BusinessModel.ItemRoot.State">
+            <summary>
+            The load state of the model.  This value is only set when the root is constructed.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.BusinessModel.ItemSingular">
+            <summary>
+            Singular items can be loaded from a parent reference only.  Singular items exist as the only one of their kind beneath their parent. 
+            </summary>
+            <remarks>
+            Design:
+            -------
+            Derive from singular item when your concrete class will exist uniquely under its parent.  
+            
+            Load:
+            -----
+            Singular, loads with a parent reference only.
+            
+            Save:
+            -----
+            Item normal
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemSingular.Load(EternalPlay.ReusableCore.BusinessModel.IItem)">
+            <summary>
+            Supports loading from a root object, usually as part of a "Top-Down Instantiation" construction pattern.
+            </summary>
+            <param name="parent">Reference to the item's parent</param>
+            <returns>Reference to this</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.BusinessModel.ItemSingular.LoadNew(EternalPlay.ReusableCore.BusinessModel.IItem)">
+            <summary>
+            Supports loading for a new item that is part of a "Top-Down Instantiation" construction pattern
+            </summary>
+            <param name="parent">Reference to the item's parent</param>
+            <returns>Reference to this</returns>
+            <remarks>
+            Factory items make heavy use of this load method.
+            This load method is primarily useful when creating new objects to be children of a root item whose state is Current.
+            </remarks>
+        </member>
+    </members>
+</doc>

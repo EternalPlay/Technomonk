@@ -1,0 +1,26 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Technomonk.master.cs" Inherits="EternalPlay.Technomonk.Web.TechnomonkMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>NOT SET</title>
+    
+    <link rel="Stylesheet" type="text/css" href="Style/Technomonk.Master.css" />
+    <script language="javascript" type="text/javascript" src="Script/jquery.js" />
+    
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</head>
+<body>
+    <form id="mainForm" runat="server">
+        <div class="PageTitle"><asp:Localize runat="server" meta:resourcekey="TechnomonkTitle" /></div>
+        
+        <div class="ContentHeader">
+            <asp:ContentPlaceHolder ID="ContentHeader" runat="server" />
+        </div>       
+        <div class="ContentMain">
+            <asp:ContentPlaceHolder ID="ContentMain" runat="server" />
+        </div>
+    </form>
+</body>
+</html>

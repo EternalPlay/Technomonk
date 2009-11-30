@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<qualities>
+  <quality name="Week 1" sortOrder="1">
+    <shortDescription>Mentally Healthy</shortDescription>
+    <longDescription />
+  </quality>
+  <quality name="Week 2" sortOrder="2">
+    <shortDescription>Socially Healthy</shortDescription>
+    <longDescription />
+  </quality>
+  <quality name="Week 3" sortOrder="3">
+    <shortDescription>Physically Healthy</shortDescription>
+    <longDescription />
+  </quality>
+  <quality name="Week 4" sortOrder="4">
+    <shortDescription>Financially Healthy</shortDescription>
+    <longDescription />
+  </quality>
+  <quality name="Week 5" sortOrder="5">
+    <shortDescription>Always Learning</shortDescription>
+    <longDescription />
+  </quality>
+  <quality name="Week 6" sortOrder="6">
+    <shortDescription>Always Creating</shortDescription>
+    <longDescription />
+  </quality>
+  <quality name="Week 7" sortOrder="7">
+    <shortDescription>Always Teaching</shortDescription>
+    <longDescription />
+  </quality>
+  <quality name="Week 8" sortOrder="8">
+    <shortDescription>Week of Rest</shortDescription>
+    <longDescription />
+  </quality>
+</qualities>

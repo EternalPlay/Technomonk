@@ -1,0 +1,3394 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EternalPlay.ReusableCore.Logging</name>
+    </assembly>
+    <members>
+        <member name="T:EternalPlay.ReusableCore.Logging.Significances">
+            <summary>
+            Enumerated values for representing the significance of a <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see>
+            </summary>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.LogEntry"/>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Logging.Significances.None">
+            <summary>
+            Represents an entry with no defined significance.
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Logging.Significances.Low">
+            <summary>
+            Represents an entry with low significance.
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Logging.Significances.Medium">
+            <summary>
+            Represents an entry with medium significance.
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Logging.Significances.High">
+            <summary>
+            Represents an entry with high significance.
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Logging.Significances.All">
+            <summary>
+            Represents an entry with all significance flags set
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.UserActivityLogEntry">
+            <summary>
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> for representing normal user activity.
+            </summary>
+            <remarks>
+            <para>
+            This <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> type should be used to represent normal activity that occurs within
+            a system and is initiated by the user.  For example, a log entry could be entered when a user adds or deletes
+            a data record.
+            </para>
+            <para>
+            This class is serializable to meet the requirments of the logging system for log entries.  If updating or
+            extending this class, any properties should either be value typed, or typed as objects that support
+            serialization and derivatives should be properly marked as serializable.
+            </para>
+            </remarks>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.LogEntry"/>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.LogEntry">
+            <summary>
+            Abstract class for representing and managing log entry data common to all log entry types.
+            </summary>
+            <remarks>
+            LogEntry is a serializable property holder.  For proper functioning of the logging system, any derived classes
+            implementing a new log entry type must also be serializable.  This allows the ability to store any log entry
+            type generically in any destination as XML.
+            </remarks>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.ILogEntry">
+            <summary>
+            Interface for managing EternalPlay.ReusableCore log entry data common to all log entry types.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.ILogEntry.Route">
+            <summary>
+            Sends the event log entry to the <see cref="T:EternalPlay.ReusableCore.Logging.LoggingManager">LoggingManager</see> for routing to all the
+            appropriately configured destinations.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.ILogEntry.Application">
+            <summary>
+            Gets and sets the application associated with the log entry
+            </summary>
+            <remarks>
+            The application is an arbitrary token specified in the logging configuration that allows multiple
+            applications to use the same repositories for persistent logging destinations.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.ILogEntry.ApplicationVersion">
+            <summary>
+            Gets a string that represents version information about the application that created the log entry
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.ILogEntry.Category">
+            <summary>
+            Gets and sets the category associated with the log entry.
+            </summary>
+            <remarks>
+            The category is an arbitrary token that can be used by consumers of the Logging system to group log entries
+            together.  For example all log entries associated with an XML parsing component or sub system could be given
+            a category of <b>XML Parsing</b>, or all entries from user interface layers could be categorized as
+            <b>UI</b>.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.ILogEntry.CustomData">
+            <summary>
+            Gets and sets any custom data associated with the log entry.
+            </summary>
+            <remarks>
+            Custom data is a place for implementing applications to store additional data regarding the log entry,
+            for example the id of an item associated with the entry.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.ILogEntry.Description">
+            <summary>
+            Gets and sets the general description of the nature of the log entry.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.ILogEntry.EntryId">
+            <summary>
+            Gets the unique id for the log entry.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.ILogEntry.EntryGroupId">
+            <summary>
+            Gets and sets a unique id associated with a group of events related to this event
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.ILogEntry.EntrySequenceNumber">
+            <summary>
+            Gets and sets the sequence number of the event
+            </summary>
+            <remarks>
+            This value is used in conjuction with the event group id, to further group events together.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.ILogEntry.HasWebData">
+            <summary>
+            Gets and sets a booean that indicates if the log entry contains extended web related data
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.ILogEntry.MachineName">
+            <summary>
+            Gets and sets the Windows machine name on which the event occurred
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.ILogEntry.Significance">
+            <summary>
+            Gets and sets the <see cref="P:EternalPlay.ReusableCore.Logging.ILogEntry.Significance">Significance</see> value associated with the log entry.
+            </summary>
+            <seealso cref="P:EternalPlay.ReusableCore.Logging.ILogEntry.Significance"/>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.ILogEntry.Timestamp">
+            <summary>
+            Gets and sets the date and time that the log entry occured.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.ILogEntry.UserId">
+            <summary>
+            Gets and sets the user identification token associated with the log entry.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.IWebLogEntry">
+            <summary>
+            Interface for accessing web specific data common to all log entry types
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.IWebLogEntry.BrowserName">
+            <summary>
+            Gets and sets the name of the browser type used to make the web request
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.IWebLogEntry.BrowserVersion">
+            <summary>
+            Gets and sets the version of the browser type used to make the web request
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.IWebLogEntry.ClientData">
+            <summary>
+            Gets and sets an <see cref="T:System.Xml.XPath.IXPathNavigable">IXPathNavigable</see> reference to an XML element containing
+            all data collected for the request, including form data, cookie data and querystring data.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.IWebLogEntry.ClientHostName">
+            <summary>
+            Gets and sets the DNS host name of the client that made the web request
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.IWebLogEntry.ClientIPAddress">
+            <summary>
+            Gets and sets the TCP IP Address of the client that made the web request.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.IWebLogEntry.ClientLanguages">
+            <summary>
+            Gets the collection of language/culture names supported by the client that made the web request.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.IWebLogEntry.ClientPlatform">
+            <summary>
+            Gets and sets the platform name of the client that made the web request.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.IWebLogEntry.HttpMethod">
+            <summary>
+            Gets and sets the method used to make the web request.
+            </summary>
+            <remarks>
+            This value corrisponds to eithe a GET request or a POST request.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.IWebLogEntry.RequestedPage">
+            <summary>
+            Gets and sets the name and virtual path to the page requested when the log entry was made
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.IWebLogEntry.Url">
+            <summary>
+            Gets and sets a <see cref="T:System.Uri">Uri</see> represting the URL requested when the log entry was made
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.IWebLogEntry.UrlReferrer">
+            <summary>
+            Gets and sets a <see cref="T:System.Uri">Uri</see> representing the URL that referred the current request.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LogEntry.#ctor">
+            <summary>
+            Default constructor for <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> base class.
+            </summary>
+            <remarks>
+            All construction chains should terminate with this constructor, as it is responsible for setting default
+            values for all LogEntry data.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LogEntry.#ctor(System.String,System.String)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> with the given <i>category</i> and <i>description</i>.
+            </summary>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="description">
+            General description of the nature of the log entry.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LogEntry.#ctor(System.String,System.String,EternalPlay.ReusableCore.Logging.Significances)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> with the given <i>category</i>, <i>description</i> and
+            <i>significance</i>
+            </summary>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="description">
+            General description of the nature of the log entry.
+            </param>
+            <param name="significance">
+            <see cref="P:EternalPlay.ReusableCore.Logging.LogEntry.Significance">Significance</see> value that describes the importance of the log entry.
+            </param>
+            <seealso cref="P:EternalPlay.ReusableCore.Logging.LogEntry.Significance"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LogEntry.#ctor(System.String,System.String,EternalPlay.ReusableCore.Logging.Significances,System.String)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> with the given <i>category</i>, <i>description</i>,
+            <i>significance</i> and <i>userId</i>.
+            </summary>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="description">
+            General description of the nature of the log entry.
+            </param>
+            <param name="significance">
+            <see cref="P:EternalPlay.ReusableCore.Logging.LogEntry.Significance">Significance</see> value that describes the importance of the log entry.
+            </param>
+            <seealso cref="P:EternalPlay.ReusableCore.Logging.LogEntry.Significance"/>
+            <param name="userId">
+            User identification token to associate with the log entry.
+            </param>
+            <seealso cref="P:EternalPlay.ReusableCore.Logging.LogEntry.Significance"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LogEntry.#ctor(EternalPlay.ReusableCore.Logging.LogEntry)">
+            <summary>
+            Copy constructor for use by derived classes implementing the IClonable interface
+            </summary>
+            <param name="logEntry">LogEntry to copy for cloning</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LogEntry.SetDefaults">
+            <summary>
+            Sets the default values for log entry data
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LogEntry.WriteWebDataXml(System.Xml.XmlWriter)">
+            <summary>
+            Converts web logging data to its XML representation
+            </summary>
+            <param name="writer">
+            The <see cref="T:System.Xml.XmlWriter">XmlWriter</see> stream to which the XML data will be written.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LogEntry.ReadWebDataXml(System.Xml.XPath.XPathNavigator)">
+            <summary>
+            Populates the web logging data from its XML representation. 
+            </summary>
+            <param name="navigator">
+            The <see cref="T:System.Xml.XPath.XPathNavigator">XPathNavigator</see> containing the web data XML.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LogEntry.ToString">
+            <summary>
+            Gets a string representation of the <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see>.
+            </summary>
+            <returns>
+            String representation of the <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see>.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LogEntry.Deserialize(System.Xml.XPath.IXPathNavigable,System.Type)">
+            <summary>
+            Deserializes the given <i>logEntryXml</i> into an instance of the given <i>logEntryType</i>.
+            </summary>
+            <param name="logEntryXml">
+            <see cref="T:System.Xml.XPath.IXPathNavigable">IXPathNavigable</see> reference to the xml representation of the SystemErrorLogEntry.
+            </param>
+            <param name="logEntryType">
+            Derived <see cref="T:System.Type">Type</see> of the log entry to deserialize.
+            </param>
+            <returns>
+            Base class reference to the deserialized <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see>.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LogEntry.Deserialize(System.String,System.Type)">
+            <summary>
+            Deserializes the given <i>logEntryXml</i> into an instance of the given <i>logEntryType</i>.
+            </summary>
+            <param name="logEntryXml">
+            XML string representation of the SystemErrorLogEntry.
+            </param>
+            <param name="logEntryType">
+            Derived <see cref="T:System.Type">Type</see> of the log entry to deserialize.
+            </param>
+            <returns>
+            Base class reference to the deserialized <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see>.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LogEntry.Serialize">
+            <summary>
+            Gets the XML serialized representation of the <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> instance.
+            </summary>
+            <returns>
+            <see cref="T:System.Xml.XPath.IXPathNavigable">IXPathNavigable</see> reference to the XML representation of the given
+            <i>logEntry</i>.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LogEntry.ToSerializedXmlString">
+            <summary>
+            Gets the XML serialized representation of the <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> as a string.
+            </summary>
+            <returns>
+            XML string of the serialized <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> object.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LogEntry.Route">
+            <summary>
+            Sends the event log entry to the <see cref="T:EternalPlay.ReusableCore.Logging.LoggingManager">LoggingManager</see> for routing to all the
+            appropriately configured destinations.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LogEntry.GetSchema">
+            <summary>
+            Provides an XmlSchema that describes the XML representation of the <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> that
+            is produced by the <see cref="M:EternalPlay.ReusableCore.Logging.LogEntry.WriteXml(System.Xml.XmlWriter)">WriteXml</see> method and consumed by the
+            <see cref="M:EternalPlay.ReusableCore.Logging.LogEntry.ReadXml(System.Xml.XmlReader)">ReadXml</see> method.
+            </summary>
+            <returns>Null <see cref="T:System.Xml.Schema.XmlSchema">XmlSchema</see> reference</returns>
+            <remarks>
+            This method currently returns null.  This means that log entries are not suitable for serialization into
+            and out of web service calls.  Future support of this method is required for web service usage.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LogEntry.ReadXml(System.Xml.XmlReader)">
+            <summary>
+            Generates a <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> from its XML representation. 
+            </summary>
+            <param name="reader">
+            The <see cref="T:System.Xml.XmlReader">XmlReader</see> stream from which the object is deserialized.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LogEntry.WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            Converts the <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to its XML representation.
+            </summary>
+            <param name="writer">
+            The <see cref="T:System.Xml.XmlWriter">XmlWriter</see> stream to which the XML data will be written.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LogEntry.Clone">
+            <summary>
+            Abstract definition of the IClonable inteface, to be implemented by deriving classes.
+            </summary>
+            <returns>object reference to a cloned copy of the log entry</returns>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.Application">
+            <summary>
+            Gets and sets the application associated with the log entry
+            </summary>
+            <remarks>
+            The application is an arbitrary token specified in the logging configuration that allows multiple
+            applications to use the same repositories for persistent logging destinations.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.ApplicationVersion">
+            <summary>
+            Gets a string that represents version information about the application that created the log entry
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.Category">
+            <summary>
+            Gets and sets the category associated with the log entry.
+            </summary>
+            <remarks>
+            The category is an arbitrary token that can be used by consumers of the Logging system to group log entries
+            together.  For example all log entries associated with an XML parsing component or sub system could be given
+            a category of <b>XML Parsing</b>, or all entries from user interface layers could be categorized as
+            <b>UI</b>.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.CustomData">
+            <summary>
+            Gets and sets any custom data associated with the log entry.
+            </summary>
+            <remarks>
+            Custom data is a place for implementing applications to store additional data regarding the log entry,
+            for example the id of an item associated with the entry.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.Description">
+            <summary>
+            Gets and sets the general description of the nature of the log entry.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.EntryGroupId">
+            <summary>
+            Gets and sets a unique id associated with a group of events related to this event
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.EntryId">
+            <summary>
+            Gets the unique id that represents the current entry
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.EntrySequenceNumber">
+            <summary>
+            Gets and sets the sequence number of the event
+            </summary>
+            <remarks>
+            This value is used in conjuction with the event group id, to further group events together.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.HasWebData">
+            <summary>
+            Gets and sets a booean that indicates if the log entry contains extended web related data
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.MachineName">
+            <summary>
+            Gets and sets the Windows machine name on which the event occurred
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.Significance">
+            <summary>
+            Gets and sets the <see cref="T:EternalPlay.ReusableCore.Logging.Significances">Significance</see> value associated with the log entry.
+            </summary>
+            <seealso cref="P:EternalPlay.ReusableCore.Logging.LogEntry.Significance"/>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.Timestamp">
+            <summary>
+            Gets and sets the date and time that the log entry occured.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.UserId">
+            <summary>
+            Gets and sets the user identification token associated with the log entry.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.BrowserName">
+            <summary>
+            Gets and sets the name of the browser type used to make the web request
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.BrowserVersion">
+            <summary>
+            Gets and sets the version of the browser type used to make the web request
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.ClientData">
+            <summary>
+            Gets and sets an <see cref="T:System.Xml.XPath.IXPathNavigable">IXPathNavigable</see> reference to an XML element containing
+            all data collected for the request, including form data, cookie data and querystring data.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.ClientHostName">
+            <summary>
+            Gets and sets the DNS host name of the client that made the web request
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.ClientIPAddress">
+            <summary>
+            Gets and sets the TCP IP Address of the client that made the web request.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.ClientLanguages">
+            <summary>
+            Gets the collection of language/culture names supported by the client that made the web request.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.ClientPlatform">
+            <summary>
+            Gets and sets the platform name of the client that made the web request.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.HttpMethod">
+            <summary>
+            Gets and sets the method used to make the web request.
+            </summary>
+            <remarks>
+            This value corrisponds to eithe a GET request or a POST request.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.RequestedPage">
+            <summary>
+            Gets and sets the name and virtual path to the page requested when the log entry was made
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.Url">
+            <summary>
+            Gets and sets a <see cref="T:System.Uri">Uri</see> represting the URL requested when the log entry was made
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LogEntry.UrlReferrer">
+            <summary>
+            Gets and sets a <see cref="T:System.Uri">Uri</see> representing the URL that referred the current request.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserActivityLogEntry.#ctor">
+            <summary>
+            Default constructor for <see cref="T:EternalPlay.ReusableCore.Logging.UserActivityLogEntry">UserActivityLogEntry</see>.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserActivityLogEntry.#ctor(System.String,System.String)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.UserActivityLogEntry">UserActivityLogEntry</see> with the given <i>category</i>
+            and <i>description</i>.
+            </summary>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="description">
+            General description of the nature of the log entry.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserActivityLogEntry.#ctor(System.String,System.String,EternalPlay.ReusableCore.Logging.Significances)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.UserActivityLogEntry">UserActivityLogEntry</see> with the given <i>category</i>,
+            <i>description</i> and <i>significance</i>
+            </summary>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="description">
+            General description of the nature of the log entry.
+            </param>
+            <param name="significance">
+            <see cref="T:EternalPlay.ReusableCore.Logging.Significances">Significance</see> value that describes the importance of the log entry.
+            </param>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.Significances"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserActivityLogEntry.#ctor(System.String,System.String,EternalPlay.ReusableCore.Logging.Significances,System.String)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.UserActivityLogEntry">UserActivityLogEntry</see> with the given <i>category</i>,
+            <i>description</i>, <i>significance</i> and <i>userId</i>.
+            </summary>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="description">
+            General description of the nature of the log entry.
+            </param>
+            <param name="significance">
+            <see cref="T:EternalPlay.ReusableCore.Logging.Significances">Significance</see> value that describes the importance of the log entry.
+            </param>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.Significances"/>
+            <param name="userId">
+            User identification token to associate with the log entry.
+            </param>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.Significances"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserActivityLogEntry.#ctor(EternalPlay.ReusableCore.Logging.UserActivityLogEntry)">
+            <summary>
+            Copy constructor for UserActivityLogEntry
+            </summary>
+            <param name="userActivityLogEntry">UserActivityLogEntry to copy</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserActivityLogEntry.Clone">
+            <summary>
+            Implementation of the IClonable interface defined on the base class.
+            </summary>
+            <returns>object reference to a cloned copy of the log entry</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserActivityLogEntry.Deserialize(System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Deserializes the given <i>logEntryXml</i> into a <see cref="T:EternalPlay.ReusableCore.Logging.UserActivityLogEntry">UserActivityLogEntry</see>
+            </summary>
+            <param name="logEntryXml">
+            <see cref="T:System.Xml.XPath.IXPathNavigable">IXPathNavigable</see> reference to the xml representation of the UserActivityLogEntry.
+            </param>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.UserActivityLogEntry">UserActivityLogEntry</see> deserialized from <i>logEntryXml</i>.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserActivityLogEntry.Deserialize(System.String)">
+            <summary>
+            Deserializes the given <i>logEntryXml</i> into a <see cref="T:EternalPlay.ReusableCore.Logging.UserActivityLogEntry">UserActivityLogEntry</see>
+            </summary>
+            <param name="logEntryXml">
+            XML string representation of the UserActivityLogEntry.
+            </param>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.UserActivityLogEntry">UserActivityLogEntry</see> deserialized from <i>logEntryXml</i>.
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.CollectionDefinition">
+            <summary>
+            Indicates an individual collection definition for garbage collection
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.CollectionDefinition.#ctor(EternalPlay.ReusableCore.Logging.CollectionType)">
+            <summary>
+            Constructs a new collection definition
+            </summary>
+            <param name="collectionType">Type of collection to perform, archival or deletion</param>
+            <remarks>
+            With no other specification, this contstructor creates a collection definition that will colllect
+            all messages.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.CollectionDefinition.#ctor(EternalPlay.ReusableCore.Logging.CollectionType,System.Nullable{System.DateTime},System.Type,System.Nullable{EternalPlay.ReusableCore.Logging.Significances})">
+            <summary>
+            Constructs a new collection definition
+            </summary>
+            <param name="collectionType">Type of collection to perform, archival or deletion</param>
+            <param name="oldestDateTimeToKeep">DateTime with the oldest message age to keep, or null if time stamps should be ignored</param>
+            <param name="logEntryType">Type of log entries to collect, or null if collecting all types</param>
+            <param name="significances">Significances to collect, or null if collecting all significances</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.CollectionDefinition.#ctor(EternalPlay.ReusableCore.Logging.CollectionType,System.Nullable{System.TimeSpan},System.Type,System.Nullable{EternalPlay.ReusableCore.Logging.Significances})">
+            <summary>
+            Constructs a new collection definition
+            </summary>
+            <param name="collectionType">Type of collection to perform, archival or deletion</param>
+            <param name="maximumAge">TimeSpan with the maximum message age to keep, or null if time stamps should be ignored</param>
+            <param name="logEntryType">Type of log entries to collect, or null if collecting all types</param>
+            <param name="significances">Significances to collect, or null if collecting all significances</param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.CollectionDefinition.CollectionType">
+            <summary>
+            Gets and sets the collection type, archival or deletion
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.CollectionDefinition.MaximumEntryAge">
+            <summary>
+            Maxium age of messages to keep
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.CollectionDefinition.LogEntryType">
+            <summary>
+            Type of messages to collect, or null if all types
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.CollectionDefinition.Significances">
+            <summary>
+            Significances to collect, or null if all significances.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.DataLayer.LoggingDataSet">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.DataLayer.LoggingDataSet.LogEntriesDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.DataLayer.LoggingDataSet.GarbageCollectionDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.DataLayer.LoggingDataSet.LogEntriesRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.DataLayer.LoggingDataSet.GarbageCollectionRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.DataLayer.LoggingDataSet.LogEntriesRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.DataLayer.LoggingDataSet.GarbageCollectionRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.DataLayer.LoggingDataSetTableAdapters.LogEntriesTableAdapter">
+             <summary>
+            Represents the connection and commands used to retrieve and save data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.DataLayer.LoggingDataSetTableAdapters.GarbageCollectionTableAdapter">
+             <summary>
+            Represents the connection and commands used to retrieve and save data.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Comparison.CategoryAscendingComparer`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.IComparer`1">IComparer&lt;T&gt;</see> implementation used to sort
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> collections by category ascending.
+            </summary>
+            <typeparam name="T">
+            Specific derived type of <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to compare.
+            </typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Comparison.CategoryAscendingComparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            <list type="table">
+            <listheader><term>Value</term><description>Condition</description></listheader>
+            <item><term>Less than zero</term><description>x is less than y</description></item>
+            <item><term>Zero</term><description>x equals y</description></item>
+            <item><term>Greater than zero</term><description>x is greater than y</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Comparison.CategoryDescendingComparer`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.IComparer`1">IComparer&lt;T&gt;</see> implementation used to sort
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> collections by category descending.
+            </summary>
+            <typeparam name="T">
+            Specific derived type of <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to compare.
+            </typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Comparison.CategoryDescendingComparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            <list type="table">
+            <listheader><term>Value</term><description>Condition</description></listheader>
+            <item><term>Less than zero</term><description>x is less than y</description></item>
+            <item><term>Zero</term><description>x equals y</description></item>
+            <item><term>Greater than zero</term><description>x is greater than y</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Comparison.DescriptionAscendingComparer`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.IComparer`1">IComparer&lt;T&gt;</see> implementation used to sort
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> collections by description ascending.
+            </summary>
+            <typeparam name="T">
+            Specific derived type of <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to compare.
+            </typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Comparison.DescriptionAscendingComparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            <list type="table">
+            <listheader><term>Value</term><description>Condition</description></listheader>
+            <item><term>Less than zero</term><description>x is less than y</description></item>
+            <item><term>Zero</term><description>x equals y</description></item>
+            <item><term>Greater than zero</term><description>x is greater than y</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Comparison.DescriptionDescendingComparer`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.IComparer`1">IComparer&lt;T&gt;</see> implementation used to sort
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> collections by description descending.
+            </summary>
+            <typeparam name="T">
+            Specific derived type of <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to compare.
+            </typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Comparison.DescriptionDescendingComparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            <list type="table">
+            <listheader><term>Value</term><description>Condition</description></listheader>
+            <item><term>Less than zero</term><description>x is less than y</description></item>
+            <item><term>Zero</term><description>x equals y</description></item>
+            <item><term>Greater than zero</term><description>x is greater than y</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Comparison.EntryGroupIdAscendingComparer`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.IComparer`1">IComparer&lt;T&gt;</see> implementation used to sort
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> collections by entry group id ascending.
+            </summary>
+            <typeparam name="T">
+            Specific derived type of <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to compare.
+            </typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Comparison.EntryGroupIdAscendingComparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            <list type="table">
+            <listheader><term>Value</term><description>Condition</description></listheader>
+            <item><term>Less than zero</term><description>x is less than y</description></item>
+            <item><term>Zero</term><description>x equals y</description></item>
+            <item><term>Greater than zero</term><description>x is greater than y</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Comparison.EntryGroupIdDescendingComparer`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.IComparer`1">IComparer&lt;T&gt;</see> implementation used to sort
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> collections by entry group id descending.
+            </summary>
+            <typeparam name="T">
+            Specific derived type of <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to compare.
+            </typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Comparison.EntryGroupIdDescendingComparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            <list type="table">
+            <listheader><term>Value</term><description>Condition</description></listheader>
+            <item><term>Less than zero</term><description>x is less than y</description></item>
+            <item><term>Zero</term><description>x equals y</description></item>
+            <item><term>Greater than zero</term><description>x is greater than y</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Comparison.EntrySequenceNumberAscendingComparer`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.IComparer`1">IComparer&lt;T&gt;</see> implementation used to sort
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> collections by entry sequence number ascending.
+            </summary>
+            <typeparam name="T">
+            Specific derived type of <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to compare.
+            </typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Comparison.EntrySequenceNumberAscendingComparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            <list type="table">
+            <listheader><term>Value</term><description>Condition</description></listheader>
+            <item><term>Less than zero</term><description>x is less than y</description></item>
+            <item><term>Zero</term><description>x equals y</description></item>
+            <item><term>Greater than zero</term><description>x is greater than y</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Comparison.EntrySequenceNumberDescendingComparer`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.IComparer`1">IComparer&lt;T&gt;</see> implementation used to sort
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> collections by entry sequence number descending.
+            </summary>
+            <typeparam name="T">
+            Specific derived type of <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to compare.
+            </typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Comparison.EntrySequenceNumberDescendingComparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            <list type="table">
+            <listheader><term>Value</term><description>Condition</description></listheader>
+            <item><term>Less than zero</term><description>x is less than y</description></item>
+            <item><term>Zero</term><description>x equals y</description></item>
+            <item><term>Greater than zero</term><description>x is greater than y</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Comparison.MachineNameAscendingComparer`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.IComparer`1">IComparer&lt;T&gt;</see> implementation used to sort
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> collections by machine name ascending.
+            </summary>
+            <typeparam name="T">
+            Specific derived type of <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to compare.
+            </typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Comparison.MachineNameAscendingComparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            <list type="table">
+            <listheader><term>Value</term><description>Condition</description></listheader>
+            <item><term>Less than zero</term><description>x is less than y</description></item>
+            <item><term>Zero</term><description>x equals y</description></item>
+            <item><term>Greater than zero</term><description>x is greater than y</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Comparison.MachineNameDescendingComparer`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.IComparer`1">IComparer&lt;T&gt;</see> implementation used to sort
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> collections by machine name descending.
+            </summary>
+            <typeparam name="T">
+            Specific derived type of <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to compare.
+            </typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Comparison.MachineNameDescendingComparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            <list type="table">
+            <listheader><term>Value</term><description>Condition</description></listheader>
+            <item><term>Less than zero</term><description>x is less than y</description></item>
+            <item><term>Zero</term><description>x equals y</description></item>
+            <item><term>Greater than zero</term><description>x is greater than y</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Comparison.SignificanceAscendingComparer`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.IComparer`1">IComparer&lt;T&gt;</see> implementation used to sort
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> collections by significance ascending.
+            </summary>
+            <typeparam name="T">
+            Specific derived type of <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to compare.
+            </typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Comparison.SignificanceAscendingComparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            <list type="table">
+            <listheader><term>Value</term><description>Condition</description></listheader>
+            <item><term>Less than zero</term><description>x is less than y</description></item>
+            <item><term>Zero</term><description>x equals y</description></item>
+            <item><term>Greater than zero</term><description>x is greater than y</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Comparison.SignificanceDescendingComparer`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.IComparer`1">IComparer&lt;T&gt;</see> implementation used to sort
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> collections by significance descending.
+            </summary>
+            <typeparam name="T">
+            Specific derived type of <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to compare.
+            </typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Comparison.SignificanceDescendingComparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            <list type="table">
+            <listheader><term>Value</term><description>Condition</description></listheader>
+            <item><term>Less than zero</term><description>x is less than y</description></item>
+            <item><term>Zero</term><description>x equals y</description></item>
+            <item><term>Greater than zero</term><description>x is greater than y</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Comparison.TimestampAscendingComparer`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.IComparer`1">IComparer&lt;T&gt;</see> implementation used to sort
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> collections by Timestamp ascending.
+            </summary>
+            <typeparam name="T">
+            Specific derived type of <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to compare.
+            </typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Comparison.TimestampAscendingComparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            <list type="table">
+            <listheader><term>Value</term><description>Condition</description></listheader>
+            <item><term>Less than zero</term><description>x is less than y</description></item>
+            <item><term>Zero</term><description>x equals y</description></item>
+            <item><term>Greater than zero</term><description>x is greater than y</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Comparison.TimestampDescendingComparer`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.IComparer`1">IComparer&lt;T&gt;</see> implementation used to sort
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> collections by Timestamp descending.
+            </summary>
+            <typeparam name="T">
+            Specific derived type of <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to compare.
+            </typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Comparison.TimestampDescendingComparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            <list type="table">
+            <listheader><term>Value</term><description>Condition</description></listheader>
+            <item><term>Less than zero</term><description>x is less than y</description></item>
+            <item><term>Zero</term><description>x equals y</description></item>
+            <item><term>Greater than zero</term><description>x is greater than y</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Comparison.UserIdAscendingComparer`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.IComparer`1">IComparer&lt;T&gt;</see> implementation used to sort
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> collections by user id ascending.
+            </summary>
+            <typeparam name="T">
+            Specific derived type of <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to compare.
+            </typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Comparison.UserIdAscendingComparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            <list type="table">
+            <listheader><term>Value</term><description>Condition</description></listheader>
+            <item><term>Less than zero</term><description>x is less than y</description></item>
+            <item><term>Zero</term><description>x equals y</description></item>
+            <item><term>Greater than zero</term><description>x is greater than y</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Comparison.UserIdDescendingComparer`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.IComparer`1">IComparer&lt;T&gt;</see> implementation used to sort
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> collections by user id descending.
+            </summary>
+            <typeparam name="T">
+            Specific derived type of <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to compare.
+            </typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Comparison.UserIdDescendingComparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            <list type="table">
+            <listheader><term>Value</term><description>Condition</description></listheader>
+            <item><term>Less than zero</term><description>x is less than y</description></item>
+            <item><term>Zero</term><description>x equals y</description></item>
+            <item><term>Greater than zero</term><description>x is greater than y</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Comparison.ExceptionTypeAscendingComparer`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.IComparer`1">IComparer&lt;T&gt;</see> implementation used to sort
+            <see cref="T:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry">SystemExceptionLogEntry</see> collections by exception type ascending.
+            </summary>
+            <typeparam name="T">
+            Specific derived type of <see cref="T:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry">SystemExceptionLogEntry</see> to compare.
+            </typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Comparison.ExceptionTypeAscendingComparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            <list type="table">
+            <listheader><term>Value</term><description>Condition</description></listheader>
+            <item><term>Less than zero</term><description>x is less than y</description></item>
+            <item><term>Zero</term><description>x equals y</description></item>
+            <item><term>Greater than zero</term><description>x is greater than y</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Comparison.ExceptionTypeDescendingComparer`1">
+            <summary>
+            <see cref="T:System.Collections.Generic.IComparer`1">IComparer&lt;T&gt;</see> implementation used to sort
+            <see cref="T:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry">SystemExceptionLogEntry</see> collections by exception type descending.
+            </summary>
+            <typeparam name="T">
+            Specific derived type of <see cref="T:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry">SystemExceptionLogEntry</see> to compare.
+            </typeparam>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Comparison.ExceptionTypeDescendingComparer`1.Compare(`0,`0)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            <list type="table">
+            <listheader><term>Value</term><description>Condition</description></listheader>
+            <item><term>Less than zero</term><description>x is less than y</description></item>
+            <item><term>Zero</term><description>x equals y</description></item>
+            <item><term>Greater than zero</term><description>x is greater than y</description></item>
+            </list>
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry">
+            <summary>
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> for representing normal user activity.
+            </summary>
+            <remarks>
+            <para>
+            This <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> type should be used to represent normal activity that occurs within
+            a system and is initiated by the user.  For example, a log entry could be entered when a user adds or deletes
+            a data record.
+            </para>
+            <para>
+            This class is serializable to meet the requirments of the logging system for log entries.  If updating or
+            extending this class, any properties should either be value typed, or typed as objects that support
+            serialization and derivatives should be properly marked as serializable.
+            </para>
+            </remarks>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.LogEntry"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry.#ctor">
+            <summary>
+            Default constructor for <see cref="T:EternalPlay.ReusableCore.Logging.UserActivityLogEntry">UserActivityLogEntry</see>.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry.#ctor(System.String)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry">UserFeedbackLogEntry</see> with the given <i>feedbackMessage</i>.
+            </summary>
+            <param name="feedbackMessage">
+            User feedback message text
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry.#ctor(System.String,System.String)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry">UserFeedbackLogEntry</see> with the given <i>category</i>
+            and <i>feedbackMessage</i>.
+            </summary>
+            <param name="feedbackMessage">
+            User feedback message text
+            </param>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry">UserFeedbackLogEntry</see> with the given <i>category</i>
+            and <i>feedbackMessage</i>.
+            </summary>
+            <param name="feedbackMessage">
+            User feedback message text
+            </param>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="userId">ID of user providing feedback message</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry.#ctor(EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry)">
+            <summary>
+            Copy constructor for UserFeedbackLogEntry
+            </summary>
+            <param name="userFeedbackLogEntry">UserFeedbackLogEntry to copy</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry.Clone">
+            <summary>
+            Implementation of the IClonable interface defined on the base class.
+            </summary>
+            <returns>object reference to a cloned copy of the log entry</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry.Deserialize(System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Deserializes the given <i>logEntryXml</i> into a <see cref="T:EternalPlay.ReusableCore.Logging.UserActivityLogEntry">UserActivityLogEntry</see>
+            </summary>
+            <param name="logEntryXml">
+            <see cref="T:System.Xml.XPath.IXPathNavigable">IXPathNavigable</see> reference to the xml representation of the UserActivityLogEntry.
+            </param>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.UserActivityLogEntry">UserActivityLogEntry</see> deserialized from <i>logEntryXml</i>.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry.Deserialize(System.String)">
+            <summary>
+            Deserializes the given <i>logEntryXml</i> into a <see cref="T:EternalPlay.ReusableCore.Logging.UserActivityLogEntry">UserActivityLogEntry</see>
+            </summary>
+            <param name="logEntryXml">
+            XML string representation of the UserActivityLogEntry.
+            </param>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.UserActivityLogEntry">UserActivityLogEntry</see> deserialized from <i>logEntryXml</i>.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry.ReadXml(System.Xml.XmlReader)">
+            <summary>
+            Generates a <see cref="T:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry">UserFeedbackLogEntry</see> from its XML representation. 
+            </summary>
+            <param name="reader">
+            The <see cref="T:System.Xml.XmlReader">XmlReader</see> stream from which the object is deserialized.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry.ToString">
+            <summary>
+            Converts class values to a string representation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry.WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            Converts the <see cref="T:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry">UserFeedbackLogEntry</see> to its XML representation.
+            </summary>
+            <param name="writer">
+            The <see cref="T:System.Xml.XmlWriter">XmlWriter</see> stream to which the XML data will be written.
+            </param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry.FeedbackMessage">
+            <summary>
+            Feedback message text provided by a user
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.CollectorState">
+            <summary>
+            Enumeration of states for a garbage collector
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Logging.CollectorState.Started">
+            <summary>
+            Indicates the garbage collector is started
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Logging.CollectorState.Stopped">
+            <summary>
+            Indicates the garbage collector is stopped
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.SystemActivityLogEntry">
+            <summary>
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> for representing normal system activity.
+            </summary>
+            <remarks>
+            <para>
+            This <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> type should be used to represent normal activity that occurs and is
+            initiated by the system.  For example, a windows service application might use a SystemActivityLogEntry when
+            service state changes, e.g. the service starts or stops.
+            </para>
+            <para>
+            This class is serializable to meet the requirments of the logging system for log entries.  If updating or
+            extending this class, any properties should either be value typed, or typed as objects that support
+            serialization and derivatives should be properly marked as serializable.
+            </para>
+            </remarks>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.LogEntry"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemActivityLogEntry.#ctor">
+            <summary>
+            Default constructor for <see cref="T:EternalPlay.ReusableCore.Logging.SystemActivityLogEntry">SystemActivityLogEntry</see>.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemActivityLogEntry.#ctor(System.String,System.String)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.SystemActivityLogEntry">SystemActivityLogEntry</see> with the given <i>category</i>
+            and <i>description</i>.
+            </summary>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="description">
+            General description of the nature of the log entry.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemActivityLogEntry.#ctor(System.String,System.String,EternalPlay.ReusableCore.Logging.Significances)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.SystemActivityLogEntry">SystemActivityLogEntry</see> with the given <i>category</i>,
+            <i>description</i> and <i>significance</i>
+            </summary>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="description">
+            General description of the nature of the log entry.
+            </param>
+            <param name="significance">
+            <see cref="T:EternalPlay.ReusableCore.Logging.Significances">Significance</see> value that describes the importance of the log entry.
+            </param>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.Significances"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemActivityLogEntry.#ctor(System.String,System.String,EternalPlay.ReusableCore.Logging.Significances,System.String)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.SystemActivityLogEntry">SystemActivityLogEntry</see> with the given <i>category</i>,
+            <i>description</i>, <i>significance</i> and <i>userId</i>.
+            </summary>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="description">
+            General description of the nature of the log entry.
+            </param>
+            <param name="significance">
+            <see cref="T:EternalPlay.ReusableCore.Logging.Significances">Significance</see> value that describes the importance of the log entry.
+            </param>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.Significances"/>
+            <param name="userId">
+            User identification token to associate with the log entry.
+            </param>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.Significances"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemActivityLogEntry.#ctor(EternalPlay.ReusableCore.Logging.SystemActivityLogEntry)">
+            <summary>
+            Copy constructor for SystemActivityLogEntry
+            </summary>
+            <param name="systemActivityLogEntry">SystemActivityLogEntry to copy</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemActivityLogEntry.Clone">
+            <summary>
+            Implementation of the IClonable interface defined on the base class.
+            </summary>
+            <returns>object reference to a cloned copy of the log entry</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemActivityLogEntry.Deserialize(System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Deserializes the given <i>logEntryXml</i> into a <see cref="T:EternalPlay.ReusableCore.Logging.SystemActivityLogEntry">SystemActivityLogEntry</see>
+            </summary>
+            <param name="logEntryXml">
+            <see cref="T:System.Xml.XPath.IXPathNavigable">IXPathNavigable</see> reference to the xml representation of the SystemActivityLogEntry.
+            </param>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemActivityLogEntry</see> deserialized from <i>logEntryXml</i>.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemActivityLogEntry.Deserialize(System.String)">
+            <summary>
+            Deserializes the given <i>logEntryXml</i> into a <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemActivityLogEntry</see>
+            </summary>
+            <param name="logEntryXml">
+            XML string representation of the SystemActivityLogEntry.
+            </param>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.SystemActivityLogEntry">SystemActivityLogEntry</see> deserialized from <i>logEntryXml</i>.
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.InternalLoggingErrorEntry">
+            <summary>
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> for representing errors that occur within the logging system.
+            </summary>
+            <remarks>
+            <para>
+            This <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> type should be used to represent error activity that occurs within
+            the logging system.
+            </para>
+            <para>
+            This class is serializable to meet the requirments of the logging system for log entries.  If updating or
+            extending this class, any properties should either be value typed, or typed as objects that support
+            serialization and derivatives should be properly marked as serializable.
+            </para>
+            </remarks>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.LogEntry"/>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry">
+            <summary>
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> for representing exception occurences during system activity.
+            </summary>
+            <remarks>
+            <para>
+            This <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> type should be used to represent exceptions that occurs within
+            a system.
+            </para>
+            <para>
+            This class is serializable to meet the requirments of the logging system for log entries.  If updating or
+            extending this class, any properties should either be value typed, or typed as objects that support
+            serialization and derivatives should be properly marked as serializable.
+            </para>
+            </remarks>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.LogEntry"/>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">
+            <summary>
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> for representing error occurences during system activity.
+            </summary>
+            <remarks>
+            <para>
+            This <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> type should be used to represent exceptions that occurs within
+            a system.
+            </para>
+            <para>
+            This class is serializable to meet the requirments of the logging system for log entries.  If updating or
+            extending this class, any properties should either be value typed, or typed as objects that support
+            serialization and derivatives should be properly marked as serializable.
+            </para>
+            </remarks>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.LogEntry"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry.#ctor">
+            <summary>
+            Default constructor for <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see>.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry.#ctor(System.String,System.String)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see> with the given <i>category</i>
+            and <i>description</i>.
+            </summary>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="description">
+            General description of the nature of the log entry.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry.#ctor(System.String,System.String,EternalPlay.ReusableCore.Logging.Significances)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see> with the given <i>category</i>,
+            <i>description</i> and <i>significance</i>
+            </summary>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="description">
+            General description of the nature of the log entry.
+            </param>
+            <param name="significance">
+            <see cref="T:EternalPlay.ReusableCore.Logging.Significances">Significance</see> value that describes the importance of the log entry.
+            </param>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.Significances"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry.#ctor(System.String,System.String,EternalPlay.ReusableCore.Logging.Significances,System.String)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see> with the given <i>category</i>,
+            <i>description</i>, <i>significance</i> and <i>userId</i>.
+            </summary>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="description">
+            General description of the nature of the log entry.
+            </param>
+            <param name="significance">
+            <see cref="T:EternalPlay.ReusableCore.Logging.Significances">Significance</see> value that describes the importance of the log entry.
+            </param>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.Significances"/>
+            <param name="userId">
+            User identification token to associate with the log entry.
+            </param>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.Significances"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry.#ctor(EternalPlay.ReusableCore.Logging.SystemErrorLogEntry)">
+            <summary>
+            Copy constructor for SystemErrorLogEntry
+            </summary>
+            <param name="systemErrorLogEntry">SystemErrorLogEntry to copy</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry.Clone">
+            <summary>
+            Implementation of the IClonable interface defined on the base class.
+            </summary>
+            <returns>object reference to a cloned copy of the log entry</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry.Deserialize(System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Deserializes the given <i>logEntryXml</i> into a <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see>
+            </summary>
+            <param name="logEntryXml">
+            <see cref="T:System.Xml.XPath.IXPathNavigable">IXPathNavigable</see> reference to the xml representation of the SystemErrorLogEntry.
+            </param>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see> deserialized from <i>logEntryXml</i>.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry.Deserialize(System.String)">
+            <summary>
+            Deserializes the given <i>logEntryXml</i> into a <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see>
+            </summary>
+            <param name="logEntryXml">
+            XML string representation of the SystemErrorLogEntry.
+            </param>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see> deserialized from <i>logEntryXml</i>.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.#ctor">
+            <summary>
+            Default constructor for <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see>.
+            </summary>
+            <remarks>
+            This constructor is required for serialization support, but should never be used directly by consumers.
+            The minimal constructor for external use is the constructor that takes an
+            <see cref="T:System.Exception">Exception</see> as its only parameter.
+            </remarks>
+            <seealso cref="M:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.#ctor(System.Exception)"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.#ctor(System.Exception)">
+            <summary>
+            Constructs a <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see> with the given <i>exception</i>.
+            </summary>
+            <param name="exception">
+            <see cref="T:System.Exception">Exception</see> base class reference to the exception being logged.  If the exception
+            instance is of a derived exception type, it must support serialization to be properly logged.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see> with the given <i>category</i>
+            and <i>description</i>.
+            </summary>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="description">
+            General description of the nature of the log entry.
+            </param>
+            <param name="exception">
+            <see cref="T:System.Exception">Exception</see> base class reference to the exception being logged.  If the exception
+            instance is of a derived exception type, it must support serialization to be properly logged.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.#ctor(System.String,System.String,EternalPlay.ReusableCore.Logging.Significances,System.Exception)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see> with the given <i>category</i>,
+            <i>description</i> and <i>significance</i>
+            </summary>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="description">
+            General description of the nature of the log entry.
+            </param>
+            <param name="significance">
+            <see cref="T:EternalPlay.ReusableCore.Logging.Significances">Significance</see> value that describes the importance of the log entry.
+            </param>
+            <param name="exception">
+            <see cref="T:System.Exception">Exception</see> base class reference to the exception being logged.  If the exception
+            instance is of a derived exception type, it must support serialization to be properly logged.
+            </param>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.Significances"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.#ctor(System.String,System.String,EternalPlay.ReusableCore.Logging.Significances,System.String,System.Exception)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see> with the given <i>category</i>,
+            <i>description</i>, <i>significance</i> and <i>userId</i>.
+            </summary>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="description">
+            General description of the nature of the log entry.
+            </param>
+            <param name="significance">
+            <see cref="T:EternalPlay.ReusableCore.Logging.Significances">Significance</see> value that describes the importance of the log entry.
+            </param>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.Significances"/>
+            <param name="userId">
+            User identification token to associate with the log entry.
+            </param>
+            <param name="exception">
+            <see cref="T:System.Exception">Exception</see> base class reference to the exception being logged.  If the exception
+            instance is of a derived exception type, it must support serialization to be properly logged.
+            </param>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.Significances"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.#ctor(EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry)">
+            <summary>
+            Copy constructor for SystemExceptionLogEntry
+            </summary>
+            <param name="systemExceptionLogEntry">SystemExceptionLogEntry to copy</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.LoadFromException(System.Exception)">
+            <summary>
+            Loads the interal state data for the <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see> from the
+            given <i>exception</i>.
+            </summary>
+            <param name="exception">
+            Reference to the exception to load state data from.
+            </param>
+            <remarks>
+            This private method is used during construction to set inital object state.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.Clone">
+            <summary>
+            Implementation of the IClonable interface defined on the base class.
+            </summary>
+            <returns>object reference to a cloned copy of the log entry</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.Deserialize(System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Deserializes the given <i>logEntryXml</i> into a <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see>
+            </summary>
+            <param name="logEntryXml">
+            <see cref="T:System.Xml.XPath.IXPathNavigable">IXPathNavigable</see> reference to the xml representation of the SystemErrorLogEntry.
+            </param>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see> deserialized from <i>logEntryXml</i>.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.Deserialize(System.String)">
+            <summary>
+            Deserializes the given <i>logEntryXml</i> into a <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see>
+            </summary>
+            <param name="logEntryXml">
+            XML string representation of the SystemErrorLogEntry.
+            </param>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see> deserialized from <i>logEntryXml</i>.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.ReadXml(System.Xml.XmlReader)">
+            <summary>
+            Generates a <see cref="T:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry">SystemExceptionLogEntry</see> from its XML representation. 
+            </summary>
+            <param name="reader">
+            The <see cref="T:System.Xml.XmlReader">XmlReader</see> stream from which the object is deserialized.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.ToString">
+            <summary>
+            Gets a string representation of the <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see>.
+            </summary>
+            <returns>
+            String representation of the <see cref="T:EternalPlay.ReusableCore.Logging.SystemErrorLogEntry">SystemErrorLogEntry</see>.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            Converts the <see cref="T:EternalPlay.ReusableCore.Logging.UserFeedbackLogEntry">UserFeedbackLogEntry</see> to its XML representation.
+            </summary>
+            <param name="writer">
+            The <see cref="T:System.Xml.XmlWriter">XmlWriter</see> stream to which the XML data will be written.
+            </param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.ErrorMessage">
+            <summary>
+            Gets and sets the message associated with the system error.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.ExceptionType">
+            <summary>
+            Gets and sets the full type name of the execption thrown.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.Method">
+            <summary>
+            Gets and sets the name of the method where the error occured.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.Source">
+            <summary>
+            Gets and sets the name of the application where the error occured.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.SystemExceptionLogEntry.StackTrace">
+            <summary>
+            Gets and sets a string representing a trace of the call stack at the time the error occured.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.InternalLoggingErrorEntry.ToString">
+            <summary>
+            Gets a string representation of the <see cref="T:EternalPlay.ReusableCore.Logging.InternalLoggingErrorEntry">InternalLoggingErrorEntry</see>.
+            </summary>
+            <returns>
+            String representation of the <see cref="T:EternalPlay.ReusableCore.Logging.InternalLoggingErrorEntry">InternalLoggingErrorEntry</see>.
+            </returns>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.InternalLoggingErrorEntry.OriginalLogEntry">
+            <summary>
+            Sets and retrieves a reference to the <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> object being processed
+            when the error occured.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.EmailLogDestination">
+            <summary>
+            Logging destination class for sending <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> objects to e-mail destinations.
+            </summary>
+            <remarks>
+            Since e-mail is not a persisted storage destination, it only supports writing to destinations and does not
+            implement the functionality of the extension interfaces for reading or garbage collection.
+            </remarks>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.DestinationWriter">
+            <summary>
+            Base class for all derived logging destinations.
+            </summary>
+            <remarks>
+            All destinations must support writing messages.  This class implements the required
+            <see cref="T:EternalPlay.ReusableCore.Logging.IDestinationWriter">IDestinationWriter</see> interface and provides common reusable functionality
+            to all derived logging destinations.
+            </remarks>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.IDestinationWriter">
+            <summary>
+            Interface implemented by logging destinations that defines functionality for writing log entries to the
+            destination.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.IDestinationWriter.WriteLogEntry(EternalPlay.ReusableCore.Logging.LogEntry)">
+            <summary>
+            Writes the log entry to the implementing destination
+            </summary>
+            <param name="logEntry">
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to write to the destination.
+            </param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.IDestinationWriter.CategoriesHandled">
+            <summary>
+            Gets a generic list of strings defining the cateory values processed by the implementing destination.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.IDestinationWriter.LogEntryTypesHandled">
+            <summary>
+            Gets a generic list of <see cref="T:System.Type">Type</see> objects defining which log entry types are processed by
+            the implementing destination.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.IDestinationWriter.SignificancesHandled">
+            <summary>
+            Gets a significance flag set defining which log entry significances are processed by the implementing
+            destination.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.DestinationWriter.#ctor">
+            <summary>
+            Constructs a <see cref="T:EternalPlay.ReusableCore.Logging.DestinationWriter">DestinationWriter</see>.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.DestinationWriter.WriteToDestination(EternalPlay.ReusableCore.Logging.LogEntry)">
+            <summary>
+            Implemented by derived classes, this method is resposnisble for actually persisting the given
+            <i>logEntry</i> to the destination.
+            </summary>
+            <param name="logEntry">
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to persist.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.DestinationWriter.WriteLogEntry(EternalPlay.ReusableCore.Logging.LogEntry)">
+            <summary>
+            Writes the given log entry to the destination.
+            </summary>
+            <param name="logEntry">
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to persist.
+            </param>
+            <remarks>
+            This method encapsulates veryfing configuration information before acutally calling the method
+            to write the method to the destination, which is an abstract method implemented by the
+            deriving type.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.DestinationWriter.HandlesAllCategories">
+            <summary>
+            Gets a boolean, true indicates that all categories will be processed by the current instance.
+            </summary>
+            <remarks>
+            This property checks to see if the <see cref="P:EternalPlay.ReusableCore.Logging.DestinationWriter.CategoriesHandled">CategoriesHandled</see>
+            collection is in the default state containing no categories.  This state indicates that all categories
+            are handled.  This property is the equivelent of the logical comparison:
+            <i>CategoriesHandled.Count == 0</i>.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.DestinationWriter.HandlesAllLogEntryTypes">
+            <summary>
+            Gets a boolean, true indicates that all log entry types will be processed by the current instance.
+            </summary>
+            <remarks>
+            This property checks to see if the
+            <see cref="P:EternalPlay.ReusableCore.Logging.DestinationWriter.LogEntryTypesHandled">LogEntryTypesHandled</see> collection is in the default
+            state containing no log entry types.  This state indicates that all log entry types are handled.  This
+            property is the equivelent of the logical comparison: <i>LogEntryTypesHandled.Count == 0</i>.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.DestinationWriter.CategoriesHandled">
+            <summary>
+            Gets a list of category values that will be processed by the current instance.
+            </summary>
+            <remarks>
+            This property defaults to an empty list, signifying that all categories are handled.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.DestinationWriter.LogEntryTypesHandled">
+            <summary>
+            Gets a list of <see cref="T:System.Type">Type</see> values representing the log entry types that will be
+            processed by the current instance.
+            </summary>
+            <remarks>
+            This property defaults to an empty list, signifying that all categories are handled.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.DestinationWriter.SignificancesHandled">
+            <summary>
+            Gets the <see cref="T:EternalPlay.ReusableCore.Logging.Significances">Significances</see> flags defining which log entry significances will
+            be processed by the current intsance.
+            </summary>
+            <remarks>
+            This property defaults to the flag set defined by <see cref="F:EternalPlay.ReusableCore.Logging.Significances.All">Significances.All</see>.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.EmailLogDestination.#ctor(System.String,System.Int32,System.String,System.String,System.Collections.Generic.IList{System.Net.Mail.MailAddress})">
+            <summary>
+            Constructs a <see cref="T:EternalPlay.ReusableCore.Logging.EmailLogDestination">EMailLogDestination</see> with the given
+            <i>destinationConfiguration</i> data.
+            </summary>
+            <param name="fromAddress">From address to specify in e-mail message</param>
+            <param name="fromName">From name to specify in e-mail message</param>
+            <param name="smtpPort">TCP/IP port to use when communicating with the SMTP server.</param>
+            <param name="smtpServer">DNS name or TCP/IP address of the SMTP server to use for sending messages.</param>
+            <param name="toAddresses">List of e-mail address to send messages to.</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.EmailLogDestination.WriteToDestination(EternalPlay.ReusableCore.Logging.LogEntry)">
+            <summary>
+            Writes the given <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to email.
+            </summary>
+            <param name="logEntry">
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> object containing information about the event to log.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.EmailLogDestination.GetMessagePriority(EternalPlay.ReusableCore.Logging.LogEntry)">
+            <summary>
+            Gets the <see cref="T:System.Net.Mail.MailPriority">MailPriority</see> value that corresponds to the
+            given <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see>.
+            </summary>
+            <param name="logEntry">
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> for which to determine entry type.
+            </param>
+            <returns>
+            <see cref="T:System.Net.Mail.MailPriority">MailPriority</see> corresponding to the given <i>logEntry</i>.
+            </returns>
+            <remarks>
+            <para>
+            The mapping for <see cref="T:System.Net.Mail.MailPriority">MailPriority</see> corresponds to the
+            <see cref="T:EternalPlay.ReusableCore.Logging.Significances">Significance</see> value of the given <i>logEntry</i>.  The table below
+            shows the mapping:
+            </para>
+            <para>
+            <list type="table">
+            <listheader>
+            <term>Significance Value</term>
+            <description>MailPriority Value</description>
+            </listheader>
+            <item>
+            <term>None &amp; Low</term>
+            <description>Low</description>
+            </item>
+            <item>
+            <term>Medium</term>
+            <description>Normal</description>
+            </item>
+            <item>
+            <term>High</term>
+            <description>High</description>
+            </item>
+            </list>
+            </para>
+            </remarks>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.LoggingConfigurationSectionHandler">
+            <summary>
+            Implementation of the <see cref="T:System.Configuration.IConfigurationSectionHandler">IConfigurationSectionHandler</see> for custom
+            logging configurations.
+            </summary>
+            <remarks>
+            This implementation of <see cref="T:System.Configuration.IConfigurationSectionHandler">IConfigurationSectionHandler</see> allows
+            <see cref="T:System.Configuration.ConfigurationManager">ConfigurationManager</see> to correctly load configuration data custom to
+            the logging system.  This class constructs a <see cref="T:EternalPlay.ReusableCore.Logging.LoggingConfiguration">LoggingConfiguration</see> object
+            from the configuration XML, which is used by the <see cref="T:EternalPlay.ReusableCore.Logging.LoggingManager">LoggingManager</see>.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingConfigurationSectionHandler.Create(System.Object,System.Object,System.Xml.XmlNode)">
+            <summary>
+            Creates a configuration section handler. 
+            </summary>
+            <param name="parent">
+            The configuration settings in a corresponding parent configuration section.
+            </param>
+            <param name="configContext">
+            An <see cref="T:System.Web.Configuration.HttpConfigurationContext">HttpConfigurationContext</see> when Create is called from the
+            ASP.NET configuration system. Otherwise, this parameter is reserved and is a null reference (<b>Nothing</b>
+            in Visual Basic).
+            </param>
+            <param name="section">
+            The <see cref="T:System.Xml.XmlNode">XmlNode</see> that contains the configuration information from the configuration
+            file. Provides direct access to the XML contents of the configuration section.
+            </param>
+            <returns>
+            A custom <see cref="T:EternalPlay.ReusableCore.Logging.LoggingConfiguration">LoggingConfiguration</see> object.
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.ISequenceManager">
+            <summary>
+            Interface implemented by objects that can provide sequence management for event log entries.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.ISequenceManager.EntryGroupId">
+            <summary>
+            Gets a reference to the <see cref="T:System.Guid">Guid</see> that represents the current entry group id.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.ISequenceManager.SequenceNumber">
+            <summary>
+            Gets the current entry sequence number.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Globalization.LoggingResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.Globalization.LoggingResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.Globalization.LoggingResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.Globalization.LoggingResources.EventLogEntryText">
+             <summary>
+               Looks up a localized string similar to {0}
+            
+            
+            Raw Log Entry XML
+            ――――――――――――――――――――――――――――――――――
+            {1}.
+             </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.Globalization.LoggingResources.LogComponentName">
+            <summary>
+              Looks up a localized string similar to Logging.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.Globalization.LoggingResources.OriginalLogEntryHeader">
+             <summary>
+               Looks up a localized string similar to 
+            
+            
+            Original log entry:
+            ――――――――――――――――――――――――――――――――――――――――――――――――――――――
+            .
+             </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.Globalization.LoggingResources.SystemErrorLogEntryText">
+             <summary>
+               Looks up a localized string similar to 
+            
+            
+            Error Data
+            ―――――――――――――――――――――――――――――――――――――――――――――――――
+            ExceptionType: {0}
+            Message: {1}
+            Application: {2}
+            Method Name: {3}
+            
+            
+            Stack Trace
+            ―――――――――――――――――――――――――――――――――――――――――――――――――
+            {4}.
+             </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.Globalization.LoggingResources.UserFeedbackDefaultCategory">
+            <summary>
+              Looks up a localized string similar to User Feedback.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.Globalization.LoggingResources.UserFeedbackDefaultDescription">
+            <summary>
+              Looks up a localized string similar to User Feedback.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.Globalization.LoggingResources.UserFeedbackLogEntryText">
+             <summary>
+               Looks up a localized string similar to {0}
+            
+            User Feedback Message
+            ――――――――――――――――――――――――――――――――――
+            {1}.
+             </summary>
+        </member>
+        <member name="T:Resources.ErrorResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Resources.ErrorResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Resources.ErrorResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Resources.ErrorResources.DeserializationError">
+            <summary>
+              Looks up a localized string similar to Error deserializing parsed XML..
+            </summary>
+        </member>
+        <member name="P:Resources.ErrorResources.InernalRoutingProblem">
+            <summary>
+              Looks up a localized string similar to Problem routing internal error..
+            </summary>
+        </member>
+        <member name="P:Resources.ErrorResources.MethodNotImplemented">
+            <summary>
+              Looks up a localized string similar to The method or operation is not implemented..
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.IDestinationReader">
+            <summary>
+            Interface implemented by logging destinations that defines functionality for reading log entries from the
+            destination.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.IDestinationReader.GetLogEntry(System.Guid)">
+            <summary>
+            Gets a log entry with the given <i>entryId</i>.
+            </summary>
+            <param name="entryId">
+            <see cref="T:System.Guid">Guid</see> entry id of the <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to retrieve.
+            </param>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> represented by the givent entry id.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.IDestinationReader.RetrieveLogEntries(System.String)">
+            <summary>
+            Gets all log entries from the destination that are associated with the given application.
+            </summary>
+            <param name="application">Application name</param>
+            <returns>
+            <see cref="T:System.Collections.Generic.IList`1">IList&lt;T&gt;</see> containing all log entries from the destination.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.IDestinationReader.RetrieveLogEntries(System.String,System.String,System.Int32)">
+            <summary>
+            Gets the given number of log entries from the destination that are associated with the given
+            application and category
+            </summary>
+            <param name="application">Application name</param>
+            <param name="category">Log entry category to retrieve</param>
+            <param name="numberOfEntries">Number of entries to retrieve</param>
+            <returns>
+            <see cref="T:System.Collections.Generic.IList`1">IList&lt;T&gt;</see> containing log entries meeting the given parameters
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.IDestinationReader.RetrieveLogEntries(System.String,System.String,System.DateTime)">
+            <summary>
+            Gets all log entries from the destination that are associated with the given
+            application and category which are no older than the given entry age
+            </summary>
+            <param name="application">Application name</param>
+            <param name="category">Log entry category to retrieve</param>
+            <param name="oldestEntryAge">Maximum entry age of messages to retrieve</param>
+            <returns>
+            <see cref="T:System.Collections.Generic.IList`1">IList&lt;T&gt;</see> containing log entries meeting the given parameters
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.IDestinationReader.RetrieveLogEntries(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Gets the given number of log entries from the destination that are associated with the given
+            application, category and user
+            </summary>
+            <param name="application">Application name</param>
+            <param name="category">Log entry category to retrieve</param>
+            <param name="user">Log entry user to retrieve</param>
+            <param name="numberOfEntries">Number of entries to retrieve</param>
+            <returns>
+            <see cref="T:System.Collections.Generic.IList`1">IList&lt;T&gt;</see> containing log entries meeting the given parameters
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.IDestinationReader.RetrieveLogEntries(System.String,System.String,System.String,System.DateTime)">
+            <summary>
+            Gets all log entries from the destination that are associated with the given
+            application, category and user which are no older than the given entry age
+            </summary>
+            <param name="application">Application name</param>
+            <param name="category">Log entry category to retrieve</param>
+            <param name="user">Log entry user to retrieve</param>
+            <param name="oldestEntryAge">Maximum entry age of messages to retrieve</param>
+            <returns>
+            <see cref="T:System.Collections.Generic.IList`1">IList&lt;T&gt;</see> containing log entries meeting the given parameters
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.IDestinationReader.RetrieveTypedLogEntries``1(System.String)">
+            <summary>
+            Gets all log entries of type <i>T</i> from the destination that are associated with the given application.
+            </summary>
+            <typeparam name="T">Type of log entries to retrieve</typeparam>
+            <param name="application">Application name</param>
+            <returns>
+            <see cref="T:System.Collections.Generic.IList`1">IList&lt;T&gt;</see> containing all log entries of type <i>T</i> from the destination.
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.DestinationFactory">
+            <summary>
+            Abstract factory class that defines the factory methods used to create logging destination related objects.
+            </summary>
+            <remarks>
+            This class implements the management of the destination configuration.  Beyond that, all imeplementation
+            is left to derived classes.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.DestinationFactory.#ctor(System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Constructs the factory with the given <i>configuration</i> XML.
+            </summary>
+            <param name="configuration">
+            <see cref="T:System.Xml.XPath.IXPathNavigable">IXPathNavigable</see> reference to the configuration XML used for creating
+            destination objects.
+            </param>
+            <seealso cref="T:System.Xml.XPath.IXPathNavigable"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.DestinationFactory.CreateDestinationReader">
+            <summary>
+            Creates an object that reads log entries from the implementing destination.
+            </summary>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.IDestinationReader">IDestinationReader</see> interface to an object that reads log entries
+            from the destination.
+            </returns>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.IDestinationReader"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.DestinationFactory.CreateDestinationWriter">
+            <summary>
+            Creates an object that writes log entries to the implementing destination.
+            </summary>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.IDestinationWriter">IDestinationWriter</see> interface to an object that writes log entries
+            to the destination.
+            </returns>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.IDestinationWriter"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.DestinationFactory.CreateDestinationGarbageCollector">
+            <summary>
+            Creates an object that runs garbage collection on the implementing destination.
+            </summary>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.IDestinationGarbageCollector">IDestinationGarbageCollector</see> interface to an object that
+            runs garbage collection on a destistination.
+            </returns>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.IDestinationGarbageCollector"/>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.DestinationFactory.Configuration">
+            <summary>
+            Gets the an <see cref="T:System.Xml.XPath.IXPathNavigable">IXPathNavigable</see> interface reference to the configuration XML
+            for the factory
+            </summary>
+            <seealso cref="T:System.Xml.XPath.IXPathNavigable"/>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.LoggingException">
+            <summary>
+            Primary exception type for all logging system exceptions.
+            </summary>
+            <remarks>
+            Any more customized exceptions within the logging system should derive from this class.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.Logging.LoggingException">LoggingException</see> class.
+            </summary>
+            <remarks>
+            <para>
+            This constructor initializes the <see cref="P:System.Exception.Message">Message</see> property of the new
+            instance to a system-supplied message that describes the error and takes into account the current system
+            culture.  This constructor will leave the <see cref="P:System.Exception.InnerException">InnerException</see>
+            property null.
+            </para>
+            <para>
+            All derived classes should provide this default constructor.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.Logging.LoggingException">LoggingException</see> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">
+            The message that describes the error. 
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.Logging.LoggingException">LoggingException</see> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">
+            The message that describes the error. 
+            </param>
+            <param name="innerException">
+            The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if
+            no inner exception is specified.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.Logging.LoggingException">LoggingException</see> class with serialized
+            data. 
+            </summary>
+            <param name="info">
+            The <see cref="T:System.Runtime.Serialization.SerializationInfo">SerializationInfo</see> that holds the serialized object data about the
+            exception being thrown. 
+            </param>
+            <param name="context">
+            The <see cref="T:System.Runtime.Serialization.StreamingContext">StreamingContext</see> that contains contextual information about the
+            source or destination.
+            </param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.LoggingConfiguration">
+            <summary>
+            Class for accessing logging system configuration information.
+            </summary>
+            <remarks>
+            This internal class is used exclusively by the <see cref="T:EternalPlay.ReusableCore.Logging.LoggingManager">LoggingManager</see> class to retrieve
+            configuration data necessary for routing <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> objects to the correct
+            destinations.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingConfiguration.#ctor">
+            <summary>
+            Constructs a <see cref="T:EternalPlay.ReusableCore.Logging.LoggingConfiguration">LoggingConfiguration</see> ojbect from the given
+            <i>configurationXml</i>.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LoggingConfiguration.ApplicationName">
+            <summary>
+            Gets and sets the configured logging application.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LoggingConfiguration.IsActive">
+            <summary>
+            Gets and sets a boolean indicating whether the logging system as a whole is active.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LoggingConfiguration.CollectExtendedData">
+            <summary>
+            Gets and sets a boolean indicating whether the logging system should capture extended data if possible.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LoggingConfiguration.DestinationWriters">
+            <summary>
+            Gets a lists of <see cref="T:EternalPlay.ReusableCore.Logging.IDestinationWriter">IDestinationWriter</see> references for all destinations
+            configured for the logging system.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LoggingConfiguration.LoggingCulture">
+            <summary>
+            Gets and sets the <see cref="T:System.Globalization.CultureInfo">CultureInfo</see> configured for logging.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.CollectionType">
+            <summary>
+            Enumeration of the types of collection
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Logging.CollectionType.Archival">
+            <summary>
+            Collection by archiving messages
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Logging.CollectionType.Deletion">
+            <summary>
+            Collection by deleting messages
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.Web.SequenceControl">
+            <summary>
+            ASP.NET Server control fro managing event sequence numbers on an ASP.NET page.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.Web.SequenceControl.OnInit(System.EventArgs)">
+            <summary>
+            Handles control initialization for the <see cref="T:EternalPlay.ReusableCore.Logging.Web.SequenceControl">SequenceControl</see>.
+            </summary>
+            <param name="e">
+            Initialization <see cref="T:System.EventArgs">EventArgs</see>.
+            </param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.Web.SequenceControl.EntryGroupId">
+            <summary>
+            Gets the unique entry group id associated with this instance of the
+            <see cref="T:EternalPlay.ReusableCore.Logging.Web.SequenceControl">SequenceControl</see>.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.Web.SequenceControl.SequenceNumber">
+            <summary>
+            Gets the sequence number associated with this instance of the
+            <see cref="T:EternalPlay.ReusableCore.Logging.Web.SequenceControl">SequenceControl</see>.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.GarbageCollectionManager">
+            <summary>
+            Class for managing logging garbage collection.
+            </summary>
+            <remarks>
+            This class is public so it can be accessed publicly via its parent LoggingManager, but construction
+            can only happen internally by the logging manager.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.GarbageCollectionManager.#ctor">
+            <summary>
+            Default constructor marked internal so it's only constructable within the assembly
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.GarbageCollectionManager.CollectGarbage(EternalPlay.ReusableCore.Logging.CollectionDefinition)">
+            <summary>
+            Run garbage collection according to the given collection definition
+            </summary>
+            <param name="collectionDefinition">Garbage collection definition</param>
+            <returns>Number of entries collected</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.GarbageCollectionManager.StartAllGarbageCollectors">
+            <summary>
+            Starts all garbage collectors
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.GarbageCollectionManager.StopAllGarbageCollectors">
+            <summary>
+            Stops all garbage collectors
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.GarbageCollectionManager.Collectors">
+            <summary>
+            Collection of individual garbage collectors for the current logging configuration
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.EmailDestinationFactory">
+            <summary>
+            Concrete factory implementation of <see cref="T:EternalPlay.ReusableCore.Logging.DestinationFactory">DestinationFactory</see> that creates objects
+            related to an e-mail destination.
+            </summary>
+            <remarks>
+            The email destination does not support persisted storage so this factory only returns instances when
+            a <see cref="T:EternalPlay.ReusableCore.Logging.IDestinationWriter">IDestinationWriter</see> is requested.  When a
+            <see cref="T:EternalPlay.ReusableCore.Logging.IDestinationReader">IDestinationReader</see> or
+            <see cref="T:EternalPlay.ReusableCore.Logging.IDestinationGarbageCollector">IDestinationGarbageCollector</see> is requested a <b>null</b>
+            reference is returned.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.EmailDestinationFactory.#ctor(System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Constructs the factory with the given <i>configuration</i> XML.
+            </summary>
+            <param name="configuration">
+            <see cref="T:System.Xml.XPath.IXPathNavigable">IXPathNavigable</see> reference to the configuration XML used for creating
+            destination objects.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.EmailDestinationFactory.CreateDestinationGarbageCollector">
+            <summary>
+            Creates an object that retrieves log entries from an e-mail destination.
+            </summary>
+            <returns>
+            Since log entries are not persisted via e-mail, there can be no garbage collection and
+            this implementation always returns <b>null</b>.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.EmailDestinationFactory.CreateDestinationReader">
+            <summary>
+            Creates an object that retrieves log entries from an e-mail destination.
+            </summary>
+            <returns>
+            Since log entries cannot be retrieved via e-mail, this implementation always returns <b>null</b>.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.EmailDestinationFactory.CreateDestinationWriter">
+            <summary>
+            Creates an object that writes log entries to an e-mail destination
+            </summary>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.IDestinationWriter">IDestinationWriter</see> interface to an object that writes log entries
+            to an e-mail destination.
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.GarbageCollector">
+            <summary>
+            Individual garbage collector for a logging destination.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.GarbageCollector.#ctor(EternalPlay.ReusableCore.Logging.LoggingConfiguration,EternalPlay.ReusableCore.Logging.IDestinationGarbageCollector)">
+            <summary>
+            Constructs a garbage collector with the given logging configuration and associated destination
+            garbage collector.
+            </summary>
+            <param name="loggingConfiguration">LoggingConfiguration instance</param>
+            <param name="destination">
+            IDestinationGarbageCollector reference to the destination that supports garbage collection
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.GarbageCollector.GetCollectionSchedules">
+            <summary>
+            Gets a list of scheduled collections executed by this garbage collector
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.GarbageCollector.SaveConfiguration(System.Boolean,System.Collections.Generic.IList{EternalPlay.ReusableCore.Logging.CollectionDefinition})">
+            <summary>
+            Saves the garbage collection configuration
+            </summary>
+            <param name="autoStart">Boolean indicating that garbage collection should auto start</param>
+            <param name="collectionDefinitions">All definitions to apply during autmated garbage collection</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.GarbageCollector.StartGarbageCollection">
+            <summary>
+            Starts garbage collection on the associated destination
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.GarbageCollector.StopGarbageCollection">
+            <summary>
+            Stops garbage collection on the associated destination
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.GarbageCollector.CollectGarbage(EternalPlay.ReusableCore.Logging.CollectionDefinition)">
+            <summary>
+            Runs a one time garbage collection for the given collection definition.
+            </summary>
+            <param name="collectionDefinition">Collection definition to run</param>
+            <returns>Number of log entries collected</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.GarbageCollector.CollectGarbage(System.Object)">
+            <summary>
+            Internal method called by thread timer when running automatic garbage collection
+            </summary>
+            <param name="state"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.GarbageCollector.Dispose(System.Boolean)">
+            <summary>
+            Handles the disposal of managed and unmanaged resources
+            </summary>
+            <param name="disposing">
+            Boolean indicating if the call is orignating from normal object disposal or object finalization.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.GarbageCollector.Dispose">
+            <summary>
+            Implementation of the IDisposable interface method.  Cleans up the thread timer used for
+            automated garbage collection.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.GarbageCollector.AutoStart">
+            <summary>
+            Boolean indicating if this collector is configured for automatic start on load
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.GarbageCollector.State">
+            <summary>
+            Indicates the current state of the garbage collector
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.GarbageCollector.Destination">
+            <summary>
+            Gets the destination associated with this garbage collector
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.GarbageCollector.DestinationType">
+            <summary>
+            Gets the destination type for this garbage collector
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.WindowsEventLogDestination">
+            <summary>
+            Logging destination class for writing <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> objects to the windows event log.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.WindowsEventLogDestination.#ctor(System.String,System.String)">
+            <summary>
+            Constructs a <see cref="T:EternalPlay.ReusableCore.Logging.WindowsEventLogDestination">WindowsEventLogDestination</see> with the given
+            <i>destinationConfiguration</i> data.
+            </summary>
+            <param name="logName">Name of the event log to write entries to.</param>
+            <param name="source">Source value to associate with log entries.</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.WindowsEventLogDestination.WriteToDestination(EternalPlay.ReusableCore.Logging.LogEntry)">
+            <summary>
+            Writes the given <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to the windows event log.
+            </summary>
+            <param name="logEntry">
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> object containing information about the event to log.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.WindowsEventLogDestination.GetEntryType(EternalPlay.ReusableCore.Logging.LogEntry)">
+            <summary>
+            Gets the <see cref="T:System.Diagnostics.EventLogEntryType">EventLogEntryType</see> value that corresponds to the
+            given <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see>.
+            </summary>
+            <param name="logEntry">
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> for which to determine entry type.
+            </param>
+            <returns>
+            <see cref="T:System.Diagnostics.EventLogEntryType">EventLogEntryType</see> corresponding to the given <i>logEntry</i>.
+            </returns>
+            <remarks>
+            <para>
+            The mapping for <see cref="T:System.Diagnostics.EventLogEntryType">EventLogEntryType</see> corresponds to the
+            <see cref="T:EternalPlay.ReusableCore.Logging.Significances">Significance</see> value of the given <i>logEntry</i>.  The table below
+            shows the mapping:
+            </para>
+            <para>
+            <list type="table">
+            <listheader>
+            <term>Significance Value</term>
+            <description>EventLogEntryType Value</description>
+            </listheader>
+            <item>
+            <term>None &amp; Low</term>
+            <description>Information</description>
+            </item>
+            <item>
+            <term>Medium</term>
+            <description>Warning</description>
+            </item>
+            <item>
+            <term>High</term>
+            <description>Error</description>
+            </item>
+            </list>
+            </para>
+            </remarks>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.UserErrorLogEntry">
+            <summary>
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> for representing error conditions generated by a user.
+            </summary>
+            <remarks>
+            <para>
+            This <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> type should be used to represent invalid activity that occurs within
+            a system and is initiated by the user.  For example, a log entry could be entered when a user attempts to enter
+            string data in a numerical field or omits a required item when attempting to add data record.
+            </para>
+            <para>
+            This class is serializable to meet the requirments of the logging system for log entries.  If updating or
+            extending this class, any properties should either be value typed, or typed as objects that support
+            serialization and derivatives should be properly marked as serializable.
+            </para>
+            </remarks>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.LogEntry"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserErrorLogEntry.#ctor">
+            <summary>
+            Default constructor for <see cref="T:EternalPlay.ReusableCore.Logging.UserErrorLogEntry">UserErrorLogEntry</see>.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserErrorLogEntry.#ctor(System.String,System.String)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.UserErrorLogEntry">UserErrorLogEntry</see> with the given <i>category</i>
+            and <i>description</i>.
+            </summary>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="description">
+            General description of the nature of the log entry.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserErrorLogEntry.#ctor(System.String,System.String,EternalPlay.ReusableCore.Logging.Significances)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.UserErrorLogEntry">UserErrorLogEntry</see> with the given <i>category</i>,
+            <i>description</i> and <i>significance</i>
+            </summary>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="description">
+            General description of the nature of the log entry.
+            </param>
+            <param name="significance">
+            <see cref="T:EternalPlay.ReusableCore.Logging.Significances">Significance</see> value that describes the importance of the log entry.
+            </param>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.Significances"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserErrorLogEntry.#ctor(System.String,System.String,EternalPlay.ReusableCore.Logging.Significances,System.String)">
+            <summary>
+            Contsructs a <see cref="T:EternalPlay.ReusableCore.Logging.UserErrorLogEntry">UserErrorLogEntry</see> with the given <i>category</i>,
+            <i>description</i>, <i>significance</i> and <i>userId</i>.
+            </summary>
+            <param name="category">
+            Category that the log entry belongs to.  The category is an arbitrary token that can be used by consumers
+            of the Logging system to group log entries together.
+            </param>
+            <param name="description">
+            General description of the nature of the log entry.
+            </param>
+            <param name="significance">
+            <see cref="T:EternalPlay.ReusableCore.Logging.Significances">Significance</see> value that describes the importance of the log entry.
+            </param>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.Significances"/>
+            <param name="userId">
+            User identification token to associate with the log entry.
+            </param>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.Significances"/>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserErrorLogEntry.#ctor(EternalPlay.ReusableCore.Logging.UserErrorLogEntry)">
+            <summary>
+            Copy constructor for UserErrorLogEntry
+            </summary>
+            <param name="userErrorLogEntry">UserErrorLogEntry to copy</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserErrorLogEntry.Clone">
+            <summary>
+            Implementation of the IClonable interface defined on the base class.
+            </summary>
+            <returns>object reference to a cloned copy of the log entry</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserErrorLogEntry.Deserialize(System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Deserializes the given <i>logEntryXml</i> into a <see cref="T:EternalPlay.ReusableCore.Logging.UserErrorLogEntry">UserErrorLogEntry</see>
+            </summary>
+            <param name="logEntryXml">
+            <see cref="T:System.Xml.XPath.IXPathNavigable">IXPathNavigable</see> reference to the xml representation of the UserErrorLogEntry.
+            </param>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.UserErrorLogEntry">UserErrorLogEntry</see> deserialized from <i>logEntryXml</i>.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.UserErrorLogEntry.Deserialize(System.String)">
+            <summary>
+            Deserializes the given <i>logEntryXml</i> into a <see cref="T:EternalPlay.ReusableCore.Logging.UserErrorLogEntry">UserErrorLogEntry</see>
+            </summary>
+            <param name="logEntryXml">
+            XML string representation of the UserErrorLogEntry.
+            </param>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.UserErrorLogEntry">UserErrorLogEntry</see> deserialized from <i>logEntryXml</i>.
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.WindowsEventLogDestinationFactory">
+            <summary>
+            Concrete factory implementation of <see cref="T:EternalPlay.ReusableCore.Logging.DestinationFactory">DestinationFactory</see> that creates objects
+            related to a Windows event log destination.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.WindowsEventLogDestinationFactory.#ctor(System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Constructs the factory with the given <i>configuration</i> XML.
+            </summary>
+            <param name="configuration">
+            <see cref="T:System.Xml.XPath.IXPathNavigable">IXPathNavigable</see> reference to the configuration XML used for creating
+            destination objects.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.WindowsEventLogDestinationFactory.CreateDestinationReader">
+            <summary>
+            Creates an object that retrieves log entries from the Windows event log.
+            </summary>
+            <returns>
+            Retrieval from the Windows event log is not currently supported; this implementation always returns <b>null</b>.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.WindowsEventLogDestinationFactory.CreateDestinationWriter">
+            <summary>
+            Creates an object that writes log entries to a Windows event log destination
+            </summary>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.IDestinationWriter">IDestinationWriter</see> interface to an object that writes log entries
+            to the Windows event log.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.WindowsEventLogDestinationFactory.CreateDestinationGarbageCollector">
+            <summary>
+            Creates an object that retrieves log entries from the Windows event log.
+            </summary>
+            <returns>
+            Retrieval from the Windows event log is not currently supported; this implementation always returns <b>null</b>.
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.LoggingManager">
+            <summary>
+            Class exposing static methods for managing log entries.
+            </summary>
+            <remarks>
+            <para>
+            The <see cref="T:EternalPlay.ReusableCore.Logging.LoggingManager">LoggingManager</see> exposes static methods for using Logging within an
+            application.  The primary method for logging is
+            <see cref="M:EternalPlay.ReusableCore.Logging.LoggingManager.RouteLogEntry(EternalPlay.ReusableCore.Logging.LogEntry)">RouteLogEntry</see>.
+            </para>
+            <para>
+            Internally <see cref="T:EternalPlay.ReusableCore.Logging.LoggingManager">LoggingManager</see> is implemented as a thread-safe singleton.  The
+            singelton pattern allows logging configuration data to be loaded and managed only one time in a single instance.
+            The static methods can then use this configuration data without exposing the management of that configuration
+            data to external users.
+            </para>
+            <para>
+            To ensure the usability of this EternalPlay.ReusableCore component infrastructure in all application types, the EternalPlay.ReusableCore logging classes
+            will be designed and implemented in a thread-safe way where possible.  The ability to make a singleton class
+            thread safe has some complications specific to the implementation pattern and to the .NET framework as well.
+            More information on thread safety requirments for the singleton pattern within .NET can be obtained from the
+            <see href="http://msdn2.microsoft.com/en-us/library/ms998558.aspx">MSDN Library</see>
+            </para>
+            </remarks>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.LoggingManager"/>
+            <seealso cref="M:EternalPlay.ReusableCore.Logging.LoggingManager.RouteLogEntry(EternalPlay.ReusableCore.Logging.LogEntry)"/>
+            <seealso href="http://msdn2.microsoft.com/en-us/library/ms998558.aspx">.NET Singleton Implementation</seealso>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingManager.#ctor">
+            <summary>
+            Private primary constructor for the <see cref="T:EternalPlay.ReusableCore.Logging.LoggingManager">LoggingManager</see> class.
+            </summary>
+            <remarks>
+            <para>
+            This constructor is marked as private so that <see cref="T:EternalPlay.ReusableCore.Logging.LoggingManager">LoggingManager</see> instances
+            can only be instantiated internally by the private code responsible for ensuring that only one instance
+            of <see cref="T:EternalPlay.ReusableCore.Logging.LoggingManager">LoggingManager</see> exists.
+            </para>
+            </remarks>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Logging.LoggingManager._instance">
+            <summary>
+            The one and only instance of the <see cref="T:EternalPlay.ReusableCore.Logging.LoggingManager">LoggingManager</see> class.
+            </summary>
+            <remarks>
+            <para>
+            This member is declared volatile to ensure thread saftey during instantiation.  For more information
+            see the <see href="http://msdn2.microsoft.com/en-us/library/ms998558.aspx">MSDN Library</see>.
+            </para>
+            </remarks>
+            <seealso cref="T:EternalPlay.ReusableCore.Logging.LoggingManager"/>
+            <seealso href="http://msdn2.microsoft.com/en-us/library/ms998558.aspx">.NET Singleton Implementation</seealso>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Logging.LoggingManager._lock">
+            <summary>
+            Internal object for thread synchronization management.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingManager.LoadConfiguration">
+            <summary>
+            Loads the logging configuration used for routing <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> objects when
+            <see cref="M:EternalPlay.ReusableCore.Logging.LoggingManager.RouteLogEntry(EternalPlay.ReusableCore.Logging.LogEntry)">RouteLogEntry</see> is callled.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingManager.RouteFromConfiguration(EternalPlay.ReusableCore.Logging.LogEntry)">
+            <summary>
+            Private instance method that actually performs log routing.
+            </summary>
+            <param name="logEntry">
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> base reference to the log entry to be routed.
+            </param>
+            <remarks>
+            <para>
+            This method is used by the public static method with the same name.  By using the instance version of this
+            method, configuration information is available directly on the instance, without having to provide static
+            access to the configuration information.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingManager.RetrieveTypedLogEntries``1">
+            <summary>
+            Gets a <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1">Generic ReadOnlyCollection</see> containing all log entries of
+            type <i>T</i> contained in the configured logging destinations
+            </summary>
+            <typeparam name="T">
+            Type of log entries to retrieve.
+            </typeparam>
+            <returns>
+            Read only <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1">Generic ReadOnlyCollection</see> of log entries of type <i>T</i>.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingManager.RetrieveLogEntries">
+            <summary>
+            Gets a <see cref="T:System.Collections.Generic.IList`1">Generic IList</see> interface containing all log entries
+            contained in the configured logging destinations
+            </summary>
+            <returns>
+            Read only <see cref="T:System.Collections.Generic.IList`1">Generic IList</see> of all log entries in the
+            configured destinations
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingManager.RetrieveLogEntries(System.String,System.Int32)">
+            <summary>
+            Gets a <see cref="T:System.Collections.Generic.IList`1">Generic IList</see> interface containing log entries
+            contained in the configured logging destinations
+            </summary>
+            <param name="category">Category of entries to retrieve</param>
+            <param name="numberOfEntries">Number of entries to retrieve</param>
+            <returns>
+            Read only <see cref="T:System.Collections.Generic.IList`1">Generic IList</see> containing the given number log entries in the
+            configured destinations that have the given category
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingManager.RetrieveLogEntries(System.String,System.DateTime)">
+            <summary>
+            Gets a <see cref="T:System.Collections.Generic.IList`1">Generic IList</see> interface containing log entries
+            contained in the configured logging destinations
+            </summary>
+            <param name="category">Category of entries to retrieve</param>
+            <param name="oldestEntryAge">Maximum entry age of entries to retrieve</param>
+            <returns>
+            Read only <see cref="T:System.Collections.Generic.IList`1">Generic IList</see> of log entries in the
+            configured destinations that have the given category an are no older than the maximum entry age
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingManager.RetrieveLogEntries(System.String,System.TimeSpan)">
+            <summary>
+            Gets a <see cref="T:System.Collections.Generic.IList`1">Generic IList</see> interface containing log entries
+            contained in the configured logging destinations
+            </summary>
+            <param name="category">Category of entries to retrieve</param>
+            <param name="maximumEntryAge">Maximum entry age of entries to retrieve</param>
+            <returns>
+            Read only <see cref="T:System.Collections.Generic.IList`1">Generic IList</see> of log entries in the
+            configured destinations that have the given category an are no older than the maximum entry age
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingManager.RetrieveLogEntries(System.String,System.String,System.Int32)">
+            <summary>
+            Gets a <see cref="T:System.Collections.Generic.IList`1">Generic IList</see> interface containing log entries
+            contained in the configured logging destinations
+            </summary>
+            <param name="category">Category of entries to retrieve</param>
+            <param name="userId">User to retrieve entries for</param>
+            <param name="numberOfEntries">Number of entries to retrieve</param>
+            <returns>
+            Read only <see cref="T:System.Collections.Generic.IList`1">Generic IList</see> containing the given number log entries in the
+            configured destinations that have the given category
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingManager.RetrieveLogEntries(System.String,System.String,System.DateTime)">
+            <summary>
+            Gets a <see cref="T:System.Collections.Generic.IList`1">Generic IList</see> interface containing log entries
+            contained in the configured logging destinations
+            </summary>
+            <param name="category">Category of entries to retrieve</param>
+            <param name="userId">User to retrieve entries for</param>
+            <param name="oldestEntryAge">Maximum entry age of entries to retrieve</param>
+            <returns>
+            Read only <see cref="T:System.Collections.Generic.IList`1">Generic IList</see> of log entries in the
+            configured destinations that have the given category an are no older than the maximum entry age
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingManager.RetrieveLogEntries(System.String,System.String,System.TimeSpan)">
+            <summary>
+            Gets a <see cref="T:System.Collections.Generic.IList`1">Generic IList</see> interface containing log entries
+            contained in the configured logging destinations
+            </summary>
+            <param name="category">Category of entries to retrieve</param>
+            <param name="userId">User to retrieve entries for</param>
+            <param name="maximumEntryAge">Maximum entry age of entries to retrieve</param>
+            <returns>
+            Read only <see cref="T:System.Collections.Generic.IList`1">Generic IList</see> of log entries in the
+            configured destinations that have the given category an are no older than the maximum entry age
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingManager.RetrieveLogEntry(System.Guid)">
+            <summary>
+            Retrieves a <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> with the given <i>logEntryId</i>.
+            </summary>
+            <param name="logEntryId">
+            <see cref="T:System.Guid">Guid</see> entry id of the log entry to retrieve.
+            </param>
+            <returns>
+            This method will search all configured readable destinations for the given <i>logEntryId</i> and returns
+            the corresponding <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> if it is found, otherwise a <b>null</b> reference
+            is returned.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingManager.RouteLogEntry(EternalPlay.ReusableCore.Logging.LogEntry)">
+            <summary>
+            Routes a <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> based on configuration for the specific log entry type recieved.
+            </summary>
+            <param name="logEntry">
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> base reference to the log entry to be routed.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.LoggingManager.RouteLogEntry(EternalPlay.ReusableCore.Logging.LogEntry,EternalPlay.ReusableCore.Logging.ISequenceManager)">
+            <summary>
+            Routes a <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> based on configuration for the specific log entry type
+            recieved as well as by information provided by the <i>sequenceManager</i>.
+            </summary>
+            <param name="logEntry">
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> base reference to the log entry to be routed.
+            </param>
+            <param name="sequenceManager">
+            <see cref="T:EternalPlay.ReusableCore.Logging.ISequenceManager">ISequenceManager</see> containing sequencing information for the
+            given <i>logEntry</i>.
+            </param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LoggingManager.Application">
+            <summary>
+            Gets the string that represents the application name for the current configuration.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LoggingManager.LoggingCulture">
+            <summary>
+            Gets the <see cref="T:System.Globalization.CultureInfo">CultureInfo</see> representing the culture configured for logging.
+            </summary>
+            <remarks>
+            This culture is determined by the logging configuration and is read-only.  To change the logging culture
+            update the logging configuration to use the desired culture.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LoggingManager.IsCollectingExtendedData">
+            <summary>
+            Gets a  boolean indicating if the logging system is currently collecting extended data for each log entry.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LoggingManager.GarbageCollectionManager">
+            <summary>
+            Gets the logging garbage collection manager.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LoggingManager.Configuration">
+            <summary>
+            The <see cref="T:EternalPlay.ReusableCore.Logging.LoggingConfiguration">LoggingConfiguration</see> object containing the configuration data
+            necessary for routing messages.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LoggingManager.Instance">
+            <summary>
+            Private accessor for the single instance of the <see cref="T:EternalPlay.ReusableCore.Logging.LoggingManager">LoggingManager</see> class.
+            </summary>
+            <remarks>
+            <para>
+            When referencing the object instance of the <see cref="T:EternalPlay.ReusableCore.Logging.LoggingManager">LoggingManager</see> this property
+            should always be used, as it contains the thread-safe initialization process for the object instance.
+            If the object has already been instantiated, a reference will be returned, otherwise it will be created
+            then returned.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Logging.LoggingManager.IsWebEnvironment">
+            <summary>
+            Static boolean property that when true, indicates that the Logging components are executing in an
+            ASP.NET environment.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.SqlServerLogDestination">
+            <summary>
+            Logging destination class for writing <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> objects to SQL server.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.IDestinationGarbageCollector">
+            <summary>
+            Interface implemented by logging destinations that defines functionality for retrieving log entries from the
+            destination.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.IDestinationGarbageCollector.ClearGarbageCollectionDefinitions(System.String)">
+            <summary>
+            Clears all persisted garbage collection definitions for the given application
+            </summary>
+            <param name="application"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.IDestinationGarbageCollector.CollectGarbage(System.String,EternalPlay.ReusableCore.Logging.CollectionDefinition)">
+            <summary>
+            Run garbage collection for the given application and collection definition
+            </summary>
+            <param name="application">Application name</param>
+            <param name="collectionDefinition">Defines the parameters for garbage collection</param>
+            <returns>Number of entries garbage collected</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.IDestinationGarbageCollector.GetAutoStartGarbageCollection(System.String)">
+            <summary>
+            Gets a boolean indicating if automatic garbage collection is enabled for the given application
+            </summary>
+            <param name="application">Application name</param>
+            <returns><b>true</b> if automatic garbage collection is enabled, otherwise <b>false</b></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.IDestinationGarbageCollector.GetGarbageCollectionDefinitions(System.String)">
+            <summary>
+            Gets a list of scheduled garbage collections for the given application.
+            </summary>
+            <param name="application">Application name</param>
+            <returns>Generic list of <see cref="T:EternalPlay.ReusableCore.Logging.CollectionDefinition">CollectionDefinitions</see> objects.</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.IDestinationGarbageCollector.SaveAutoStartGarbageCollection(System.String,System.Boolean)">
+            <summary>
+            Saves the auto start setting for garbage colletion for the given application.
+            </summary>
+            <param name="application">Application name</param>
+            <param name="autoStart">Boolean indicating if garbage collection should automatically start</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.IDestinationGarbageCollector.SaveGarbageCollectionSchedules(System.String,System.Collections.Generic.IList{EternalPlay.ReusableCore.Logging.CollectionDefinition})">
+            <summary>
+            Saves a collection of garbage collection schedules for the given application.
+            </summary>
+            <param name="application">Application name</param>
+            <param name="collectionSchedules">Collection of schedules to save</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.#ctor(System.String)">
+            <summary>
+            Constructs a <see cref="T:EternalPlay.ReusableCore.Logging.SqlServerLogDestination">SqlServerLogDestination</see> with the given
+            <i>writingConnectionString</i> data.
+            </summary>
+            <param name="connectionString">
+            Connection string to use when writing new log entries to SQL Server.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.WriteToDestination(EternalPlay.ReusableCore.Logging.LogEntry)">
+            <summary>
+            Writes the given <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to a SQL Server database.
+            </summary>
+            <param name="logEntry">
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> object containing information about the event to log.
+            </param>
+            <remarks>
+            This method is called by the <see cref="M:EternalPlay.ReusableCore.Logging.DestinationWriter.WriteLogEntry(EternalPlay.ReusableCore.Logging.LogEntry)">LogEntry.WriteLogEntry</see>
+            implementation of the <see cref="T:EternalPlay.ReusableCore.Logging.IDestinationWriter">IDestinationWriter</see> interface.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.CollectGarbage(System.String,EternalPlay.ReusableCore.Logging.CollectionType)">
+            <summary>
+            Runs garbage collection on all log entries with the given application name associated with the destination garbage collector.
+            </summary>
+            <param name="application">
+            Application name
+            </param>
+            <param name="collectionType">Type of collection to perform, either archival or deletion</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.CollectGarbage(System.String,EternalPlay.ReusableCore.Logging.CollectionType,System.DateTime)">
+            <summary>
+            Runs garbage collection on all log entries for the destination garbage collector with the given application name and that are
+            dated before the given as of date
+            </summary>
+            <param name="application">
+            Application name
+            </param>
+            <param name="collectionType">Type of collection to perform, either archival or deletion</param>
+            <param name="oldestDateTimeToKeep">Maxium date time of messages to keep</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.CollectGarbage(System.String,EternalPlay.ReusableCore.Logging.CollectionType,System.TimeSpan)">
+            <summary>
+            Runs garbage collection on all log entries for the destination garbage collector with the given application name that are older
+            than the given maximum entry date.
+            </summary>
+            <param name="application">
+            Application name
+            </param>
+            <param name="collectionType">Type of collection to perform, either archival or deletion</param>
+            <param name="maximumEntryAge">TimeSpan representing the maximum entry age</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.CollectGarbage(System.String,EternalPlay.ReusableCore.Logging.CollectionType,System.Type)">
+            <summary>
+            Runs garbage collection on all log entries of the given <i>logEntryType</i> with the given application name associated with
+            the destination garbage collector.
+            </summary>
+            <param name="application">Application Name</param>
+            <param name="collectionType">Type of collection to perform, either archival or deletion</param>
+            <param name="logEntryType">
+            <see cref="T:System.Type">Type</see> reference to the log entry type of the log entries to delete.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.CollectGarbage(System.String,EternalPlay.ReusableCore.Logging.CollectionType,EternalPlay.ReusableCore.Logging.Significances)">
+            <summary>
+            Runs garbage collection on all log entries of the given significances with the given application name associated with
+            the destination garbage collector.
+            </summary>
+            <param name="application">Application Name</param>
+            <param name="collectionType">Type of collection to perform, either archival or deletion</param>
+            <param name="significances">
+            Significances to archive
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.CollectGarbage(System.String,EternalPlay.ReusableCore.Logging.CollectionType,System.DateTime,System.Type)">
+            <summary>
+            Runs garbage collection on all log entries for the destination garbage collector of the given <i>logEntryType</i>, with the given
+            application and that are dated before the given as of date
+            </summary>
+            <param name="application">Application Name</param>
+            <param name="collectionType">Type of collection to perform, either archival or deletion</param>
+            <param name="oldestDateTimeToKeep">Maxium date time of messages to keep</param>
+            <param name="logEntryType">
+            <see cref="T:System.Type">Type</see> reference to the log entry type of the log entries to delete.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.CollectGarbage(System.String,EternalPlay.ReusableCore.Logging.CollectionType,System.TimeSpan,System.Type)">
+            <summary>
+            Runs garbage collection on all log entries for the destination garbage collector of the given <i>logEntryType</i>, with the given
+            application and that are older than the given maximum age.
+            </summary>
+            <param name="application">Application Name</param>
+            <param name="collectionType">Type of collection to perform, either archival or deletion</param>
+            <param name="maximumEntryAge">TimeSpan representing the maximum entry age to keep</param>
+            <param name="logEntryType">
+            <see cref="T:System.Type">Type</see> reference to the log entry type of the log entries to delete.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.CollectGarbage(System.String,EternalPlay.ReusableCore.Logging.CollectionType,System.DateTime,EternalPlay.ReusableCore.Logging.Significances)">
+            <summary>
+            Runs garbage collection on all log entries of the given significances with the given application name associated with
+            the destination garbage collector that are older than the given date time.
+            </summary>
+            <param name="application">Application Name</param>
+            <param name="collectionType">Type of collection to perform, either archival or deletion</param>
+            <param name="oldestDateTimeToKeep">Maxium date time of messages to keep</param>
+            <param name="significances">
+            Significances to archive
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.CollectGarbage(System.String,EternalPlay.ReusableCore.Logging.CollectionType,System.TimeSpan,EternalPlay.ReusableCore.Logging.Significances)">
+            <summary>
+            Runs garbage collection on all log entries of the given significances with the given application name associated with
+            the destination garbage collector that are older than the given maxim age
+            </summary>
+            <param name="application">Application Name</param>
+            <param name="collectionType">Type of collection to perform, either archival or deletion</param>
+            <param name="maximumEntryAge">TimeSpan representing the maximum entry age to keep</param>
+            <param name="significances">
+            Significances to archive
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.CollectGarbage(System.String,EternalPlay.ReusableCore.Logging.CollectionType,System.Type,EternalPlay.ReusableCore.Logging.Significances)">
+            <summary>
+            Runs garbage collection on all log entries of the given significances and entry type with the given application name associated with
+            the destination garbage collector.
+            </summary>
+            <param name="application">Application Name</param>
+            <param name="collectionType">Type of collection to perform, either archival or deletion</param>
+            <param name="logEntryType">
+            <see cref="T:System.Type">Type</see> reference to the log entry type of the log entries to delete.
+            </param>
+            <param name="significances">
+            Significances to archive
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.CollectGarbage(System.String,EternalPlay.ReusableCore.Logging.CollectionType,System.DateTime,System.Type,EternalPlay.ReusableCore.Logging.Significances)">
+            <summary>
+            Runs garbage collection on all log entries of the given significances and entry type with the given application name associated with
+            the destination garbage collector thate are older than the given oldest date to keep.
+            </summary>
+            <param name="application">Application Name</param>
+            <param name="collectionType">Type of collection to perform, either archival or deletion</param>
+            <param name="oldestDateTimeToKeep">Maxium date time of messages to keep</param>
+            <param name="logEntryType">
+            <see cref="T:System.Type">Type</see> reference to the log entry type of the log entries to delete.
+            </param>
+            <param name="significances">
+            Significances to archive
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.CollectGarbage(System.String,EternalPlay.ReusableCore.Logging.CollectionType,System.TimeSpan,System.Type,EternalPlay.ReusableCore.Logging.Significances)">
+            <summary>
+            Runs garbage collection on all log entries of the given significances and entry type with the given application name associated with
+            the destination garbage collector thate are older than the given maximum entry age.
+            </summary>
+            <param name="application">Application Name</param>
+            <param name="collectionType">Type of collection to perform, either archival or deletion</param>
+            <param name="maximumEntryAge">TimeSpan representing the maximum entry age to keep</param>
+            <param name="logEntryType">
+            <see cref="T:System.Type">Type</see> reference to the log entry type of the log entries to delete.
+            </param>
+            <param name="significances">
+            Significances to archive
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.ClearGarbageCollectionDefinitions(System.String)">
+            <summary>
+            Clears all persisted garbage collection definitions for the given application
+            </summary>
+            <param name="application"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.CollectGarbage(System.String,EternalPlay.ReusableCore.Logging.CollectionDefinition)">
+            <summary>
+            Runs garbage collection for the given application using the given collection definition
+            </summary>
+            <param name="application">Application Name</param>
+            <param name="collectionDefinition">Defines the parameters for garbage collection</param>
+            <returns>Number of entries garbage collected</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.GetAutoStartGarbageCollection(System.String)">
+            <summary>
+            Gets a boolean indicating if automatic garbage collection is enabled for the given application
+            </summary>
+            <param name="application">Application name</param>
+            <returns><b>true</b> if automatic garbage collection is enabled, otherwise <b>false</b></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.GetGarbageCollectionDefinitions(System.String)">
+            <summary>
+            Gets a list of scheduled garbage collections for the given application.
+            </summary>
+            <param name="application">Application name</param>
+            <returns>Generic list of <see cref="T:EternalPlay.ReusableCore.Logging.CollectionDefinition">CollectionDefinition</see> objects.</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.SaveAutoStartGarbageCollection(System.String,System.Boolean)">
+            <summary>
+            Saves the auto start setting for garbage colletion for the given application.
+            </summary>
+            <param name="application">Application name</param>
+            <param name="autoStart">Boolean indicating if garbage collection should automatically start</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.SaveGarbageCollectionSchedules(System.String,System.Collections.Generic.IList{EternalPlay.ReusableCore.Logging.CollectionDefinition})">
+            <summary>
+            Saves a collection of garbage collection schedules for the given application.
+            </summary>
+            <param name="application">Application name</param>
+            <param name="collectionSchedules">Collection of schedules to save</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.GetLogEntry(System.Guid)">
+            <summary>
+            Gets a log entry with the given <i>entryId</i>.
+            </summary>
+            <param name="entryId">
+            <see cref="T:System.Guid">Guid</see> entry id of the <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> to retrieve.
+            </param>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.LogEntry">LogEntry</see> represented by the givent entry id.  If no entry with the given
+            <i>entryId</i> is found, <b>null</b> is returned.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.RetrieveLogEntries(System.String)">
+            <summary>
+            Gets all log entries from the destination that have the given application token.
+            </summary>
+            <param name="application">Application to retrieve log entries for</param>
+            <returns>
+            <see cref="T:System.Collections.Generic.IList`1">IList&lt;T&gt;</see> containing all log entries from the destination.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.RetrieveLogEntries(System.String,System.String,System.Int32)">
+            <summary>
+            Gets the given number of log entries from the destination that are associated with the given
+            application and category
+            </summary>
+            <param name="application">Application name</param>
+            <param name="category">Log entry category to retrieve</param>
+            <param name="numberOfEntries">Number of entries to retrieve</param>
+            <returns>
+            <see cref="T:System.Collections.Generic.IList`1">IList&lt;T&gt;</see> containing log entries meeting the given parameters
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.RetrieveLogEntries(System.String,System.String,System.DateTime)">
+            <summary>
+            Gets all log entries from the destination that are associated with the given
+            application and category which are no older than the given entry age
+            </summary>
+            <param name="application">Application name</param>
+            <param name="category">Log entry category to retrieve</param>
+            <param name="oldestEntryAge">Maximum entry age of messages to retrieve</param>
+            <returns>
+            <see cref="T:System.Collections.Generic.IList`1">IList&lt;T&gt;</see> containing log entries meeting the given parameters
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.RetrieveLogEntries(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Gets the given number of log entries from the destination that are associated with the given
+            application, category and user
+            </summary>
+            <param name="application">Application name</param>
+            <param name="category">Log entry category to retrieve</param>
+            <param name="user">Log entry user to retrieve</param>
+            <param name="numberOfEntries">Number of entries to retrieve</param>
+            <returns>
+            <see cref="T:System.Collections.Generic.IList`1">IList&lt;T&gt;</see> containing log entries meeting the given parameters
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.RetrieveLogEntries(System.String,System.String,System.String,System.DateTime)">
+            <summary>
+            Gets all log entries from the destination that are associated with the given
+            application, category and user which are no older than the given entry age
+            </summary>
+            <param name="application">Application name</param>
+            <param name="category">Log entry category to retrieve</param>
+            <param name="user">Log entry user to retrieve</param>
+            <param name="oldestEntryAge">Maximum entry age of messages to retrieve</param>
+            <returns>
+            <see cref="T:System.Collections.Generic.IList`1">IList&lt;T&gt;</see> containing log entries meeting the given parameters
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerLogDestination.RetrieveTypedLogEntries``1(System.String)">
+            <summary>
+            Gets all log entries of type <i>T</i> from the destination, that have the given application token
+            </summary>
+            <typeparam name="T">Type of log entries to retrieve</typeparam>
+            <param name="application">Application to retrieve log entries for</param>
+            <returns>
+            <see cref="T:System.Collections.Generic.IList`1">IList&lt;T&gt;</see> containing all log entries of type <i>T</i> from the destination.
+            </returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Logging.SqlServerDestinationFactory">
+            <summary>
+            Concrete factory implementation of <see cref="T:EternalPlay.ReusableCore.Logging.DestinationFactory">DestinationFactory</see> that creates objects
+            related to a SQL server destination.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerDestinationFactory.#ctor(System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Constructs the factory with the given <i>configuration</i> XML.
+            </summary>
+            <param name="configuration">
+            <see cref="T:System.Xml.XPath.IXPathNavigable">IXPathNavigable</see> reference to the configuration XML used for creating
+            destination objects.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerDestinationFactory.CreateDestinationReader">
+            <summary>
+            Creates an object that reads log entries from a SQL Server destination
+            </summary>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.IDestinationReader">IDestinationReader</see> interface to an object that reads log entries
+            from SQL Server.
+            </returns>        
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerDestinationFactory.CreateDestinationWriter">
+            <summary>
+            Creates an object that writes log entries to a SQL Server destination
+            </summary>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.IDestinationWriter">IDestinationWriter</see> interface to an object that writes log entries
+            to SQL Server.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerDestinationFactory.CreateDestinationGarbageCollector">
+            <summary>
+            Creates an object that retrieves log entries from the destination.
+            </summary>
+            <returns>
+            <see cref="T:EternalPlay.ReusableCore.Logging.IDestinationGarbageCollector">IDestinationGarbageCollector</see> interface to an object that retrieves log entries
+            from SQL Server.
+            </returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Logging.SqlServerDestinationFactory.GetInstance(System.Xml.XPath.IXPathNavigable)">
+            <summary>
+            Private static method for creating a log destination from the given configuration.  This method is reused
+            by all the factor creation methods to retrieve a new instance of a SQL server logging destionation.
+            </summary>
+            <param name="configuration">Configuration XML</param>
+            <returns>
+            New <see cref="T:EternalPlay.ReusableCore.Logging.SqlServerLogDestination">SqlServerLogDestination</see> based on the given
+            <i>configuration</i>
+            </returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,1911 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EternalPlay.ReusableCore.Web</name>
+    </assembly>
+    <members>
+        <member name="T:EternalPlay.ReusableCore.Web.SiteMapNodeAttributes">
+            <summary>
+            Strongly typed representation of custom attributes applied to the site map
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.SiteMapNodeAttributes.ReplaceTitleWithUserName(System.Web.SiteMapNode)">
+            <summary>
+            Flag indicating whether the title should be replaced with the user name, or hidden if unathenticated.
+            <remarks>Default value is false</remarks>
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.SiteMapNodeAttributes.TitleFromQueryString(System.Web.SiteMapNode)">
+            <summary>
+            Retrieves the query string key name to use in getting the value for the title
+            </summary>
+            <param name="node"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.SiteMapNodeAttributes.Visible(System.Web.SiteMapNode)">
+            <summary>
+            Flag indicating whether the node should be visible in navigation
+            <remarks>Default value is true</remarks>
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.SiteMapNodeAttributes.MenuVisible(System.Web.SiteMapNode)">
+            <summary>
+            Flag indicating whether the node should be visible in menu navigation. 
+            If the Visible attribute is specified then it suppresses this attributes value.
+            <remarks>Default value is true.</remarks>
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.SiteMapNodeAttributes.BreadcrumbVisible(System.Web.SiteMapNode)">
+            <summary>
+            Flag indicating whether the node should be visible in breadcrumb navigation
+            If the Visible attribute is specified then it suppresses this attributes value.
+            <remarks>Default value is true.</remarks>
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.SiteMapNodeAttributes.ConvertStringToBool(System.String,System.Boolean)">
+            <summary>
+            Convert a string value to a boolean value
+            </summary>
+            <param name="value">String to convert</param>
+            <param name="defaultValue">Default value if string is null or unmatched to a known convertible value</param>
+            <returns>Boolean value</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.SiteMapNodeAttributes.IsAttributeSpecified(System.Web.SiteMapNode,System.String)">
+            <summary>
+            Indicate if the node attribute is specified
+            </summary>
+            <param name="node">Node to check</param>
+            <param name="attribute">Attribute name to check</param>
+            <returns>True if the attribute is specified</returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.ContentPopup">
+            <summary>
+            Wraps developer content into a client side popup.  
+            Responsible for rendering the content and providing close functionality.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ContentPopup.OnLoad(System.EventArgs)">
+            <summary>
+            Handle basic load functionality
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ContentPopup.OnPreRender(System.EventArgs)">
+            <summary>
+            Regiser client script needed to support close link
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ContentPopup.CreateChildControls">
+            <summary>
+            Build control heiarchy
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ContentPopup.AddParsedSubObject(System.Object)">
+            <summary>
+            Adds parsed controls to the local list.  Parsed controls are added to control hiearchy in CreateChildControls
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ContentPopup.FindContainingContentPopup(System.Web.UI.Control)">
+            <summary>
+            Finds the first Content PopUp containing the provided control.
+            </summary>
+            <param name="control">The control suspected of being contained by a content pop up.</param>
+            <returns>Null if no containing content pop up was found, or a reference to the container.</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ContentPopup.AddParsedControls">
+            <summary>
+            Add all of the contained parsed controls to a div control
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ContentPopup.CreateAndAddPopUpHeader">
+            <summary>
+            Create and add the header elements
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ContentPopup.CreateAndAddPopUpFooter">
+            <summary>
+            Create and add the title bar control
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ContentPopup.TargetingContentPopupLink">
+            <summary>
+            Reference to a content popup link that targets this content popup
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ContentPopup.ZIndex">
+            <summary>
+            Set the z-index value of the content popup to a desired value.  Defaults to 1000.
+            </summary>
+            <remarks>Setting this value too low may cause problems with display.</remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ContentPopup.TitleText">
+            <summary>
+            Text shown as the title, withing the pop-up header
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ContentPopup.CloseLinkText">
+            <summary>
+            Text shown in the close link, within the pop-up footer
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ContentPopup.HeaderCssClass">
+            <summary>
+            Class name applied to the pop-up header
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ContentPopup.ContainerCssClass">
+            <summary>
+            Class name applied to the parsed content container
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ContentPopup.FooterCssClass">
+            <summary>
+            Class name applied to the pop-up footer 
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.EasyCookie">
+            <summary>
+            Encapsulate basic cookie functionality in a way that is easy to use
+            1. Can assign user profile information to a cookie
+            2. Will load from the request object if it can
+            3. Can persist to the response object's cookie collection
+            4. Can remove cookie from the response object's cookie collection
+            5. Can determine pre-existance in the request object's cookie collection (cookies and values)
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EasyCookie.#ctor(System.String)">
+            <summary>
+            Constructs an Easy Cookie
+            </summary>
+            <param name="cookieName">The cookie name</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EasyCookie.#ctor(System.String,System.DateTime)">
+            <summary>
+            Cosntructs an Easy Cookie
+            </summary>
+            <param name="cookieName">The cookie name</param>
+            <param name="cookieExpiration">The cookie expiration date time</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EasyCookie.Persist">
+            <summary>
+            Adds the cookie to the response's cookie collection
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EasyCookie.Remove">
+            <summary>
+            Expires the cookie and sends to browser - effectively removing it
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EasyCookie.Remove(System.String)">
+            <summary>
+            Removes a specific value from the cookie's list of values
+            </summary>
+            <param name="key">Name of the value to remove</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EasyCookie.AssignProfileData">
+            <summary>
+            Assign profile information to the cookie
+            </summary>
+            <returns>Flag indicatign if any data was updated</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EasyCookie.ExistsInRequest">
+            <summary>
+            Determines whether the cookie exists in the request object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EasyCookie.ExistsInRequest(System.String)">
+            <summary>
+            Determines whether the specific cookie valeu exists in the request object.  
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EasyCookie.DoesCookieExistsInRequest(System.String)">
+            <summary>
+            Determines whether the named cookie exists in the request object
+            </summary>
+            <param name="cookieName">Name of the cookie to check</param>
+            <returns>True if exists</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EasyCookie.DoesCookieValueExistsInRequest(System.String,System.String)">
+            <summary>
+            Determines whether the named cookie and a specific value key exist in the request object
+            </summary>
+            <param name="cookieName">Name of the cookie to check</param>
+            <param name="valueKey">Key for the cookie value to check</param>
+            <returns>True if exists</returns>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EasyCookie.Name">
+            <summary>
+            The cookie's name.
+            </summary>
+            <value>Name of the cookie</value>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EasyCookie.Expiration">
+            <summary>
+            Date time used to set the cookie expiration.  Default is Now().
+            </summary>
+            <remarks>Setting the property to this DateTime.Now.AddMonths(1) will make it expire in one year.</remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EasyCookie.Item(System.String)">
+            <summary>
+            get and set cookie values using a key
+            </summary>
+            <param name="key">Name of a cookie value to retrieve</param>
+            <returns>cookie value</returns>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EasyCookie.Cookie">
+            <summary>
+            Reference to the cookie that this class represents.
+            If this is the first time the cookie is requested it will be created in this order
+            1.  From the request object
+            2.  A new instance
+            </summary>
+            <remarks>The EasyCookie needs to be persisted for the cookie values to go out in the response</remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EasyCookie.UserProfile">
+            <summary>
+            Retrieves the current user profile object reference
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.EntryHour">
+            <summary>
+            Extends the entry for integers to specialize for entry of hour specific integers.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.EntryInteger">
+            <summary>
+            Extends the entry base to specialize for integer entry.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.EntryBase">
+            <summary>
+            Provides the base for richly functional text entry controls
+            
+            Primary Features:
+            1.  Auto Select
+            2.  Label association and placement
+            3.  Keystroke Filtering
+            4.  Required validation
+            5.  Range validation
+            6.  Pattern validation
+            </summary>
+            <remarks>
+            Successful label association requires that a label id be provided.  The label will not be able to find the text box otherwise.
+            Successful error message generation requires that a user friendly name be provided.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryBase.OnInit(System.EventArgs)">
+            <summary>
+            Ensure child controls are created.
+            </summary>
+            <param name="e">An System.EventArgs object that contains the event data.</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryBase.OnPreRender(System.EventArgs)">
+            <summary>
+            Prepare the control for full functionality
+            </summary>
+            <param name="e">An System.EventArgs object that contains the event data.</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryBase.Focus">
+            <summary>
+            Redirect focus requests to the text box
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryBase.CreateChildControls">
+            <summary>
+            Child controls are created, initialized and assigned her or in a function called from here, and NOWHERE else.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryBase.CreateChildControl(EternalPlay.ReusableCore.Web.EntryBase.ContainedControlType)">
+            <summary>
+            Create, initialize and return individual child controls
+            </summary>
+            <param name="controlType">Type of control to create</param>
+            <returns>Created control</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryBase.AssociateChildControls">
+            <summary>
+            Associate child validation controls with the child textbox control
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryBase.AssociateLabelWithTextBox">
+            <summary>
+            Provides client side script to hook up the provided label with the child text box control.
+            If an associated label id was not provided the method quietly short-circuits.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryBase.EnforceRequiredAttributes">
+            <summary>
+            Check that required attributes are set, if not throw an error.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryBase.InitializeAutoSelect">
+            <summary>
+            Hooks up client side auto select functionality if AutoSelect is true.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryBase.InitializeKeystrokeFilter">
+            <summary>
+            Hooks up client side keystroke filtering if enabled and an expression has been provided.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryBase.InitializeValidators">
+            <summary>
+            Initializes validator controls.
+            1. Set display value uniformly on all validators
+            2. Enable Range validator if Min and Max are both present
+            2.a Assign Range error message if appropriate
+            2.b Apply pattern validation expressions when Min and Max have been provided and no other expression has been provided 
+            3. Assign Pattern error message if appropriate
+            4. Assign Required error message if appropriate
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryBase.PlaceErrorText">
+            <summary>
+            Place the error text at the location specified
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryBase.InitializeControl">
+            <summary>
+            Perform control initialization.  Short circuits if already done and no subseqent changes to indirectly set property values.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryBase.NeutralInitialization">
+            <summary>
+            Perform initialization that needs to be done regardless of Editable vs. ReadOnly status
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryBase.EditableInitialization">
+            <summary>
+            Perform initialization for an editable entry control
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryBase.ReadOnlyInitialization">
+            <summary>
+            Set the text box as read only and turn off validators so they are not delivered to the client
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.AssociatedLabelId">
+            <summary>
+            Gets or sets the Id of the label that will be hooked up to the entry control's child text box control.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.Display">
+            <summary>
+            Gets or sets the display behavior of the error message in validation controls.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.EnableAutoSelect">
+            <summary>
+            Gets or sets the value enabling\disabling auto slection of text box contents when receiving focus.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.EnableKeystrokeFiltering">
+            <summary>
+            Gets or sets the value enabling\disabling keystroke filtering.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.KeystrokeFilterExpression">
+            <summary>
+            Gets or sets the regular expression used to filter keystrokes
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.ErrorTextPlacement">
+            <summary>
+            Gets or sets the value indicating where the error text will be placed.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.ReadOnly">
+            <summary>
+            Gets or sets a value indicating whether the contents of the Entry control can be changed.
+            </summary>
+            <remarks>
+            No validation will be sent to the client when a control is set to read-only using this property.  
+            To set the text box to read-only and still get validation you must set the <code>TextBoxReadOnly</code> property to true.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.TagKey">
+            <summary>
+            Gets the Tag Key for a span that contains the text box and validation controls
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.UserFriendlyName">
+            <summary>
+            Gets or sets the user friendly name used to construct error messages
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.ValidationGroup">
+            <summary>
+            Gets or sets the validation group specification for contained validation controls
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.Width">
+            <summary>
+            Gets or sets the width of the text box control.
+            </summary>
+            <remarks>Convienant passthrough to the <code>TextBoxWidth</code> property</remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.PatternValidator">
+            <summary>
+            Provides reference to the pattern validator child control 
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.PatternValidatorCssClass">
+            <summary>
+            Gets or sets the CssClass for the child PatternValidator control
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.PatternValidatorErrorMessage">
+            <summary>
+            Gets or sets the error message value for the pattern validator
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.PatternValidatorExpression">
+            <summary>
+            Gets or sets the regular expression for the pattern validator
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.PatternValidatorId">
+            <summary>
+            Gets or sets the Id for the child validation control
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.PatternValidatorText">
+            <summary>
+            Gets or sets the text value for the pattern validator
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.MaximumValue">
+            <summary>
+            Gets or sets the Maximum value for range validation
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.MinimumValue">
+            <summary>
+            Gets or sets the Minimum value for range validation
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.RangeValidator">
+            <summary>
+            Provides reference to the range validator child control 
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.RangeValidatorCssClass">
+            <summary>
+            Gets or sets the CssClass for the child RangeValidator control
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.RangeValidatorErrorMessage">
+            <summary>
+            Gets or sets the error message value for the range validator
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.RangeValidatorId">
+            <summary>
+            Gets or sets the Id for the child validation control
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.RangeValidatorText">
+            <summary>
+            Gets or sets the text value for the range validator
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.Required">
+            <summary>
+            Gets or sets value indicating that an entry control text value is required for submission
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.RequiredValidator">
+            <summary>
+            Provides reference to the required field validator child control 
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.RequiredValidatorCssClass">
+            <summary>
+            Gets or sets the CssClass for the child RequiredValidator control
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.RequiredValidatorErrorMessage">
+            <summary>
+            Gets or sets the error message value for the required validator
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.RequiredValidatorId">
+            <summary>
+            Gets or sets the Id for the child validation control
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.RequiredValidatorText">
+            <summary>
+            Gets or sets the text value for the required validator
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.TextBox">
+            <summary>
+            Provides reference to the child control 
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.TextBoxCssClass">
+            <summary>
+            Gets or sets the CssClass for the child control
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.TextBoxId">
+            <summary>
+            Gets or sets the Id for the child control
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.TextBoxClientId">
+            <summary>
+            Gets the client Id for the child control
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.TextBoxReadOnly">
+            <summary>
+            Gets or sets a value indicating whether the contents of the TextBox control can be changed.
+            </summary>
+            <remarks>
+            Validation will be sent to the client when a control is set to read-only using this property.  
+            To set the text box to read-only and not get validation you must set the <code>ReadOnly</code> property to true.
+            </remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.TextBoxTabIndex">
+            <summary>
+            Gets or sets the tab index of the child control
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.TextBoxText">
+            <summary>
+            Gets or sets the text for the child control
+            </summary>
+            <remarks>Functionality is redundant with the <code>Text</code> property</remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.TextBoxTooltip">
+            <summary>
+            Gets or sets the tooltip for the child control
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.TextBoxWidth">
+            <summary>
+            Gets or sets the width of the child control
+            </summary>
+            <remarks>Functionality is redundant with the <code>Width</code> property</remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryBase.Text">
+            <summary>
+            Gets or sets the text box text value.
+            </summary>
+            <remarks>Convienant passthrough to the <code>TextBoxText</code> property</remarks>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.EntryBase.ContainedControlType">
+            <summary>
+            Enumerated control types contained within the composite control.  Ony one exists at a time
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.EntryBase.ContainedControlType.PatternValidator">
+            <summary>
+            RegularExpressionValidator control
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.EntryBase.ContainedControlType.RangeValidator">
+            <summary>
+            RangeValidator control
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.EntryBase.ContainedControlType.RequiredValidator">
+            <summary>
+            RequiredFieldValidator control
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.EntryBase.ContainedControlType.EntryTextBox">
+            <summary>
+            TextBox control
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.EntryBase.ErrorTextLocation">
+            <summary>
+            Value indicating where the error text should be located
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.EntryBase.ErrorTextLocation.AdjacentToTextBox">
+            <summary>
+            Error text will be placed adjacent to the text box control
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.EntryBase.ErrorTextLocation.AdjacentToLabel">
+            <summary>
+            Error text will be place adjacent to the associated label
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryInteger.OnInit(System.EventArgs)">
+            <summary>
+            Initializing integer entry with default settings
+            </summary>
+            <param name="e">An System.EventArgs object that contains the event data.</param>
+            <remarks>
+            Only setting values if no attribute value has already been set - these are defaults for integers.  Attributes will be set before oninit runs.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryHour.OnInit(System.EventArgs)">
+            <summary>
+            Initializing hour entry with default settings
+            </summary>
+            <param name="e">An System.EventArgs object that contains the event data.</param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryHour.HourNotation">
+            <summary>
+            Indicates the hour notation required, either military (24) or meridian (12).  This effects the Min and Max for range.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.EntryHour.HourNotationStyle">
+            <summary>
+            Enumeration of hour notion styles
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.EntryHour.HourNotationStyle.Meridian">
+            <summary>
+            12-Hour clock convention. The 12 hour clock is a timekeeping convention in which the 24 hours of the day are divided into two periods called ante meridiem (a.m., from Latin, literally "before the middle day", idiomatically "before the middle of the day") and post meridiem (p.m., "after the middle of the day").
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.EntryHour.HourNotationStyle.Military">
+            <summary>
+            24-Hour clock convention. The 24-hour clock is a convention of time keeping in which the day runs from midnight to midnight and is divided into 24 hours, numbered from 0 to 23. This system is the most commonly used time notation in the world today.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.EntrySecond">
+            <summary>
+            Extends the entry for integers to specialize for entry of second specific integers.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntrySecond.OnInit(System.EventArgs)">
+            <summary>
+            Initializing second entry with default settings
+            </summary>
+            <param name="e">An System.EventArgs object that contains the event data.</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.EntryMinute">
+            <summary>
+            Extends the entry for integers to specialize for entry of minute specific integers.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryMinute.OnInit(System.EventArgs)">
+            <summary>
+            Initializing minute entry with default settings
+            </summary>
+            <param name="e">An System.EventArgs object that contains the event data.</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.EntryException">
+            <summary>
+            Foundational exception for errors coming out of entry controls
+            </summary>
+            <remarks>
+            Any more customized exceptions for entry controls should derive from this class.
+            </remarks>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.WebException">
+            <summary>
+            Foundational exception type for EternalPlay.ReusableCore.Web.
+            </summary>
+            <remarks>
+            Any more customized exceptions under EternalPlay.ReusableCore.Web should derive from this class.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.WebException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.Web.WebException">WebException</see> class.
+            </summary>
+            <remarks>
+            <para>
+            This constructor initializes the <see cref="P:System.Exception.Message">Message</see> property of the new
+            instance to a system-supplied message that describes the error and takes into account the current system
+            culture.  This constructor will leave the <see cref="P:System.Exception.InnerException">InnerException</see>
+            property null.
+            </para>
+            <para>
+            All derived classes should provide this default constructor.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.WebException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.Web.WebException">WebException</see> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">
+            The message that describes the error. 
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.WebException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.Web.WebException">WebException</see> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">
+            The message that describes the error. 
+            </param>
+            <param name="innerException">
+            The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if
+            no inner exception is specified.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.WebException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.Web.WebException">WebException</see> class with serialized
+            data. 
+            </summary>
+            <param name="info">
+            The <see cref="T:System.Runtime.Serialization.SerializationInfo">SerializationInfo</see> that holds the serialized object data about the
+            exception being thrown. 
+            </param>
+            <param name="context">
+            The <see cref="T:System.Runtime.Serialization.StreamingContext">StreamingContext</see> that contains contextual information about the
+            source or destination.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.Web.EntryException">EntryException</see> class.
+            </summary>
+            <remarks>
+            <para>
+            This constructor initializes the <see cref="P:System.Exception.Message">Message</see> property of the new
+            instance to a system-supplied message that describes the error and takes into account the current system
+            culture.  This constructor will leave the <see cref="P:System.Exception.InnerException">InnerException</see>
+            property null.
+            </para>
+            <para>
+            All derived classes should provide this default constructor.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.Web.EntryException">EntryException</see> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">
+            The message that describes the error. 
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.Web.EntryException">EntryException</see> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">
+            The message that describes the error. 
+            </param>
+            <param name="innerException">
+            The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if
+            no inner exception is specified.
+            </param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EternalPlay.ReusableCore.Web.EntryException">EntryException</see> class with serialized
+            data. 
+            </summary>
+            <param name="info">
+            The <see cref="T:System.Runtime.Serialization.SerializationInfo">SerializationInfo</see> that holds the serialized object data about the
+            exception being thrown. 
+            </param>
+            <param name="context">
+            The <see cref="T:System.Runtime.Serialization.StreamingContext">StreamingContext</see> that contains contextual information about the
+            source or destination.
+            </param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.ClientScriptType">
+            <summary>
+            Client Script Resources available for registration
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.ClientScriptType.CrossBrowserFunctions">
+            <summary>
+            Script resource containing cross-browser friendly functions
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.ClientScriptType.ContentPopup">
+            <summary>
+            Script resource containing content popup specific functionality
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.ClientScriptType.Expander">
+            <summary>
+            Script resource containing expander specific functionality
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.ClientScriptType.EntryControls">
+            <summary>
+            Script resource containing entry control specific functionality
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.EntryYear">
+            <summary>
+            Extends the entry for integers to specialize for entry of year specific integers.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryYear.OnInit(System.EventArgs)">
+            <summary>
+            Initializing year entry with default settings
+            </summary>
+            <param name="e">An System.EventArgs object that contains the event data.</param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.EntryYear.Sql2005DateYearConstraint">
+            <summary>
+            This constrains dates to the range:  1753 through 1999.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.ButtonSubmit">
+            <summary>
+            Provides a basic submit button
+            
+            Primary Features:
+            1.  Constrains button to a single client side click\submission
+            2.  Assigns default text if none provided
+            3.  Assigns a post click text value
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ButtonSubmit.OnInit(System.EventArgs)">
+            <summary>
+            Prepare the control for full functionality
+            
+            1.  Assign default text if necessary
+            </summary>
+            <param name="e">An System.EventArgs object that contains the event data.</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ButtonSubmit.OnPreRender(System.EventArgs)">
+            <summary>
+            Perform activities that depend on programmatic changes occuring since init
+            
+            1.  Enforce 1-Click functionality
+            </summary>
+            <param name="e">An System.EventArgs object that contains the event data.</param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ButtonSubmit.PostText">
+            <summary>
+            Gets or sets the text to be displayed after a user clicks the submit button
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.UrlBuilder">
+            <summary>
+            Extension of the UriBuilder class that helps manage querystring key value pairs
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.UrlBuilder._queryString">
+            <summary>
+            Private member for QueryString property
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.UrlBuilder.#ctor">
+            <summary>
+            Constructs a default UrlBuilder
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.UrlBuilder.#ctor(System.String)">
+            <summary>
+            Constructs a UrlBuilder from the given URI string
+            </summary>
+            <param name="uri"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.UrlBuilder.#ctor(System.Uri)">
+            <summary>
+            Constructs a UrlBuilder from the given Uri object
+            </summary>
+            <param name="uri"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.UrlBuilder.#ctor(System.Web.UI.Page)">
+            <summary>
+            Constructs a UrlBuilder from a page object
+            </summary>
+            <param name="page"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.UrlBuilder.ToString">
+            <summary>
+            Gets a string representation of the constructed Url
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.UrlBuilder.Navigate">
+            <summary>
+            Navigates to the constructed Url, ending the current response stream
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.UrlBuilder.Navigate(System.Boolean)">
+            <summary>
+            Navigates to the constructed Url, optionally ending the current response stream
+            </summary>
+            <param name="endResponse">Boolean indicating of the current response stream should be terminated</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.UrlBuilder.BuildQuery">
+            <summary>
+            Private method that converts the internal query string dictionary into a uri query
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.UrlBuilder.PopulateQueryString">
+            <summary>
+            Populates the internal dictionary from the internal uri.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.UrlBuilder.Redirect(System.Boolean)">
+            <summary>
+            Reusable function for executing a response redirect to the internal uri
+            </summary>
+            <param name="endResponse"></param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.UrlBuilder.QueryString">
+            <summary>
+            Gets the dictionary 
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.UrlBuilder.PageName">
+            <summary>
+            Gets and sets the page name for the Url
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.SiteMapMenu">
+            <summary>
+            Derived from System.Web.UI.WebControls.Menu to extend its functionality
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.SiteMapMenu.OnMenuItemDataBound(System.Web.UI.WebControls.MenuEventArgs)">
+            <summary>
+            Modify the menu items as they are bound
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.SiteMapMenu.RenderContents(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Renders the System.Web.UI.WebControls.Menu control.
+            </summary>
+            <param name="writer">The System.Web.UI.HtmlTextWriter that represents the output stream used to write content to a Web page.</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.SiteMapMenu.RemoveItemFromMenu(System.Web.UI.WebControls.Menu,System.Web.UI.WebControls.MenuItem)">
+            <summary>
+            Removes the menu item from the menu
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.SiteMapMenu.ApplyCustomSiteMapNodeAttributes(System.Web.UI.WebControls.Menu,System.Web.UI.WebControls.MenuItem)">
+            <summary>
+            Apply custom sitemap node attributes to the menu item, or take appropriate action 
+            </summary>
+            <param name="menu">The menu to be acted upon</param>
+            <param name="item">The specific menu item to evaluate and act upon</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.IControlIdentification">
+            <summary>
+            Interface exposing a Control Identification object reference
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.IControlIdentification.ControlId">
+            <summary>
+            Implementing classes should return a reference to the Control Identification server control in the pages child control collection (creating and adding as needed)
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.UserFeedbackLink">
+            <summary>
+            HyperLink extension class used specifically for linking to a user feedback popup page.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.UserFeedbackLink.OnInit(System.EventArgs)">
+            <summary>
+            Control initialization
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.UserFeedbackLink.OnPreRender(System.EventArgs)">
+            <summary>
+            Pre-Render processing
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.LayerConduit">
+            <summary>
+            The layer conduit provides methods for translating values from a Cvila model in the business layer into the presentation layer user interface controls and back again.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.LayerConduit.BuildListFromSelectedCheckBoxes(System.Web.UI.WebControls.ListControl)">
+            <summary>
+            Builds a list of Guids from the selected items in the provided checkbox list
+            </summary>
+            <param name="checkBoxList">Checkbox list to build list from</param>
+            <returns>List representing checked items</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.LayerConduit.SelectCheckBoxesFromList(System.Collections.Generic.IList{System.Guid},System.Web.UI.WebControls.ListControl)">
+            <summary>
+            Selects items in a checkbox list that match items in the list of Guids
+            </summary>
+            <param name="list">Values to be selected</param>
+            <param name="checkBox">Checkbox list to be modified</param>
+            <remarks>Selections are additive only. Meaning, if the checkbox list comes in with items selected that are not in the list they will remain selected.</remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.LayerConduit.SelectRadioButtonListItemFromGuid(System.Web.UI.WebControls.ListControl,System.Guid)">
+            <summary>
+            Selects item in radio button list that matches the guid provided, if Guid is empty then nothing is selected (i.e. SelectedIndex = -1)
+            </summary>
+            <param name="radioButtonList">Value selected from this list</param>
+            <param name="value">Value to be selected</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.LayerConduit.ConvertNullableGuidToString(System.Nullable{System.Guid})">
+            <summary>
+            Converts the nullable guid to a string
+            </summary>
+            <param name="value">Nullable guid to convert</param>
+            <returns>String with guid value or empty string if null</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.LayerConduit.ConvertStringToNullableGuid(System.String)">
+            <summary>
+            Converts the string to a nullable guid
+            </summary>
+            <param name="value">String to convert</param>
+            <returns>Nullable guid represenation of the string value</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.LayerConduit.ConvertGuidToGluvValueOrEmptyString(System.Guid)">
+            <summary>
+            Converts the Guid to its Gluv Value if it is not empty, if it is it returns an empty string
+            </summary>
+            <param name="value">Guid for which a Gluv Value is retrieved</param>
+            <returns>Gluv value or empty string</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.LayerConduit.ConvertGuidToGluvValueOrEmptyString(System.Nullable{System.Guid})">
+            <summary>
+            Converts the nullable Guid to its Gluv Value if it has value, if it is null it returns an empty string 
+            </summary>
+            <param name="value">Nullable Guid for which a Gluv Value is retrieved</param>
+            <returns>Gluv value or empty string</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.LayerConduit.ConvertUserGuidToUserName(System.Guid)">
+            <summary>
+            Converts the Guid version of a user Id into the user's name
+            </summary>
+            <param name="userId">Guid of user Id</param>
+            <returns>User Name</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.LayerConduit.ConvertUserGuidToUserName(System.String)">
+            <summary>
+            Converts the string version of a user Id into the user's name
+            </summary>
+            <param name="userId">String of user Id, which is a guid</param>
+            <returns>User Name</returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.ControlResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Button_Submit_PostText">
+            <summary>
+              Looks up a localized string similar to Submitting.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Button_Submit_Text">
+            <summary>
+              Looks up a localized string similar to Submit.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Entry_Day_UserFriendlyName">
+            <summary>
+              Looks up a localized string similar to Day.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Entry_Hour_UserFriendlyName">
+            <summary>
+              Looks up a localized string similar to Hour.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Entry_Minute_UserFriendlyName">
+            <summary>
+              Looks up a localized string similar to Minute.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Entry_Month_UserFriendlyName">
+            <summary>
+              Looks up a localized string similar to Month.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Entry_Pattern_ErrorMessage">
+            <summary>
+              Looks up a localized string similar to  was entered inappropriately.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Entry_Pattern_Integer_ErrorMessage">
+            <summary>
+              Looks up a localized string similar to  should be expressed as an integer.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Entry_Pattern_Integer_Expression">
+            <summary>
+              Looks up a localized string similar to ^[0-9\\-]*$.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Entry_Pattern_IntegerPositive_ErrorMessage">
+            <summary>
+              Looks up a localized string similar to  should be expressed as a positive integer.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Entry_Pattern_IntegerPositive_Expression">
+            <summary>
+              Looks up a localized string similar to ^[0-9]*$.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Entry_Pattern_Text">
+            <summary>
+              Looks up a localized string similar to ?.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Entry_Pattern_Year_ErrorMessage">
+            <summary>
+              Looks up a localized string similar to Enter four digit Year values, like 1971 or 2001..
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Entry_Range_ErrorMessage1">
+            <summary>
+              Looks up a localized string similar to  value must be between a minimum of .
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Entry_Range_ErrorMessage2">
+            <summary>
+              Looks up a localized string similar to  and a maximum of .
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Entry_Range_Text">
+            <summary>
+              Looks up a localized string similar to &gt;&lt;.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Entry_Required_ErrorMessage">
+            <summary>
+              Looks up a localized string similar to  is a required value.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Entry_Required_Text">
+            <summary>
+              Looks up a localized string similar to *.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Entry_Second_UserFriendlyName">
+            <summary>
+              Looks up a localized string similar to Second.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Entry_Year_UserFriendlyName">
+            <summary>
+              Looks up a localized string similar to Year.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Invariant_KeystrokeFilterExpression_NegativePositiveInteger">
+            <summary>
+              Looks up a localized string similar to [0-9\\-].
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlResources.Invariant_KeystrokeFilterExpression_PositiveInteger">
+            <summary>
+              Looks up a localized string similar to [0-9].
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.EntryMonth">
+            <summary>
+            Extends the entry for integers to specialize for entry of month specific integers.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryMonth.OnInit(System.EventArgs)">
+            <summary>
+            Initializing month entry with default settings
+            </summary>
+            <param name="e">An System.EventArgs object that contains the event data.</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.ControlScriptResources">
+            <summary>
+            Used to consolidate access to control resources
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ControlScriptResources.RegisterScriptResource(EternalPlay.ReusableCore.Web.ClientScriptType,System.Web.UI.Control)">
+            <summary>
+            Handles the registration of client script resources
+            </summary>
+            <param name="resourceItem">Resource item to be registered</param>
+            <param name="control">Control requesting the registration</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ControlScriptResources.ResolveScriptItemIntoResourceName(EternalPlay.ReusableCore.Web.ClientScriptType)">
+            <summary>
+            Resolve the resource item into the resource name
+            </summary>
+            <param name="resourceItem">Resource item that the name is retrieved for</param>
+            <returns>Resource name string</returns>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.AutoProfileCookiePersistence">
+            <summary>
+            Automatically persists profile data to a cookie when the user is authenticated.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.AutoProfileCookiePersistence.OnInit(System.EventArgs)">
+            <summary>
+            Hook up to the prerender event on the page
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.AutoProfileCookiePersistence.Page_PreRender(System.Object,System.EventArgs)">
+            <summary>
+            Persist profile information to cookie if the user is authenticated and profile information has changed since last persistence
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.AutoProfileCookiePersistence.CookieName">
+            <summary>
+            Name for the cookie that profile data is persisted to
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.AutoProfileCookiePersistence.ExpirationDays">
+            <summary>
+            Number of days that persisted cookie takes to expire
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.AutoProfileCookiePersistence.EZCookie">
+            <summary>
+            The easy cookie that is being used behind the scenes.  Constructed at first get.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.ContentPopupLink">
+            <summary>
+            Provides client side linkage to a content popup control within the same naming container.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ContentPopupLink.CreateChildControls">
+            <summary>
+            Create the child controls to be rendered
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ContentPopupLink.OnLoad(System.EventArgs)">
+            <summary>
+            Automatically call Databind on this control, so that page developer does not have to.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ContentPopupLink.OnDataBinding(System.EventArgs)">
+            <summary>
+            Handle the databinding event
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ContentPopupLink.OnPreRender(System.EventArgs)">
+            <summary>
+            Register client side scripts and attach client side onlcick event handler
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ContentPopupLink.DeepFindControl(System.String)">
+            <summary>
+            Find a server side control by walking up the naming containers
+            </summary>
+            <param name="targetId">ID of server side control to locate</param>
+            <returns>Reference to located server side control or null</returns>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ContentPopupLink.HasLinkTemplate">
+            <summary>
+            Indicates if the control has a link template
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ContentPopupLink.LinkTemplate">
+            <summary>
+            Link template property
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ContentPopupLink.Text">
+            <summary>
+            Text to be displayed
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ContentPopupLink.TargetId">
+            <summary>
+            ID for the target ContentPopUp control that this control will toggle visibility for on the client side.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ContentPopupLink.TargetClientId">
+            <summary>
+            Resolve the target Id into a client Id for the target
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ContentPopupLink.ToggleFunctionName">
+            <summary>
+            Javascript function to be called when the link is clicked.  Providing a non-default custom name for this property will basically override the default function call.  
+            If the default behavior is needed the custom function should call it.  The consumer is also responsible for ensuring the custom function is present.
+            </summary>
+            <remarks>The parameters will be identical to the default toggle function:  1) Reference to the event object, 2) String containing the client id of the conent popup.</remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ContentPopupLink.ShowOnLoad">
+            <summary>
+            Directs the control to show the contentpopup target on client side page load
+            </summary>
+            <remarks>This value is not stored in view state and will need to be set on every page load if a value other than the default is desired.</remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ContentPopupLink.LaunchPosition">
+            <summary>
+            Gets or sets the value directing the relative launch position of the target content popup
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.ContentPopupLinkContainer">
+            <summary>
+            Container for the content popup link template
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ContentPopupLinkContainer.#ctor(EternalPlay.ReusableCore.Web.ContentPopupLink)">
+            <summary>
+            Take the reference to the parent ContentPopUpLink instance and assign locally
+            </summary>
+            <param name="parent"></param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ContentPopupLinkContainer.Text">
+            <summary>
+            Container property, Text, for passthrough to the parent web control
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ContentPopupLinkContainer.TargetId">
+            <summary>
+            Container property, TargetId, passthrough to the parent web control
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.Expander">
+            <summary>
+            The Expander custom server control wraps Header and Body content areas. Providing collapsing\expanding functionality for the body of the control, while the Header portion stays stable.
+            </summary>
+            <remarks>
+            Non-templated usage will only handle text, while templated usage will handle rich content.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.Expander.CreateChildControls">
+            <summary>
+            Create the child controls to be rendered
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.Expander.OnLoad(System.EventArgs)">
+            <summary>
+            Automatically call Databind on this control, so that page developer does not have to.
+            </summary>
+            <param name="e">An System.EventArgs object that contains the event data.</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.Expander.OnDataBinding(System.EventArgs)">
+            <summary>
+            Handle the databinding event
+            </summary>
+            <param name="e">An System.EventArgs object that contains the event data.</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.Expander.OnPreRender(System.EventArgs)">
+            <summary>
+            Register client side scripts and attach client side onlcick event handler
+            </summary>
+            <param name="e">An System.EventArgs object that contains the event data.</param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.Expander.TagKey">
+            <summary>
+            Instructs control to render control as a DIV tag
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.Expander.InitialDisplayMode">
+            <summary>
+            Directs the control to initially show the expander as collapsed or expanded
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.Expander.BodyCssClass">
+            <summary>
+            Gets or sets the Body's Cascading Style Sheet (CSS) class rendered by the Web server control on the client.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.Expander.BodyId">
+            <summary>
+            Gets or sets the Body's ID
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.Expander.BodyTemplate">
+            <summary>
+            Body template property
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.Expander.BodyText">
+            <summary>
+            Text shown in the collapsable Body area of the expander control
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.Expander.CollapseElementCssClass">
+            <summary>
+            Gets or sets the Collapse element's Cascading Style Sheet (CSS) class rendered by the Web server control on the client.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.Expander.CollapseElementId">
+            <summary>
+            ID for the element shown when expander is in "expanded" mode
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.Expander.CollapseElementText">
+            <summary>
+            Text shown indicating that the expander can be collapsed
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.Expander.ExpandElementId">
+            <summary>
+            ID for the element shown when expander is in "collapse" mode
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.Expander.ExpandElementCssClass">
+            <summary>
+            Gets or sets the Expand element's Cascading Style Sheet (CSS) class rendered by the Web server control on the client.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.Expander.ExpandElementText">
+            <summary>
+            Text shown indicating that the expander can be collapsed
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.Expander.HeaderCssClass">
+            <summary>
+            Gets or sets the Header's Cascading Style Sheet (CSS) class rendered by the Web server control on the client.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.Expander.HeaderId">
+            <summary>
+            Gets or sets the Header's ID.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.Expander.HeaderTemplate">
+            <summary>
+            Header template property
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.Expander.HeaderText">
+            <summary>
+            Text shown in the non-collapsable Header area of the expander control
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.Expander.ExpanderDisplayMode">
+            <summary>
+            Enumeration listing the two expander display modes
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.Expander.ExpanderDisplayMode.Expanded">
+            <summary>
+            Body content is being displayed
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.Expander.ExpanderDisplayMode.Collapsed">
+            <summary>
+            Body content is being hidden
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.HeaderTemplateContainer">
+            <summary>
+            Container for the header template
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.HeaderTemplateContainer.#ctor(EternalPlay.ReusableCore.Web.Expander)">
+            <summary>
+            Take the reference to the parent control instance and assign locally
+            </summary>
+            <param name="parent">Reference to the parent web control that exposes a related template property</param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.HeaderTemplateContainer.HeaderCssClass">
+            <summary>
+            Container property, HeaderCssClass, passthrough to the parent web control
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.HeaderTemplateContainer.HeaderText">
+            <summary>
+            Container property, HeaderText, for passthrough to the parent web control
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.BodyTemplateContainer">
+            <summary>
+            Container for the body template
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.BodyTemplateContainer.#ctor(EternalPlay.ReusableCore.Web.Expander)">
+            <summary>
+            Take the reference to the parent control instance and assign locally
+            </summary>
+            <param name="parent">Reference to the parent web control that exposes a related template property</param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.BodyTemplateContainer.BodyText">
+            <summary>
+            Container property, BodyText, for passthrough to the parent web control
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.BodyTemplateContainer.BodyCssClass">
+            <summary>
+            Container property, BodyCssClass, passthrough to the parent web control
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.ControlIdentification">
+            <summary>
+            Encapsulates functionality that eases client side scripting by providing easy references to server controls (automatically resolves clientIDs)
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ControlIdentification.Register(System.Web.UI.Control)">
+            <summary>
+            Registers a control for client side reference by server ID ensuring that only one control with a given ID is registered at a time.
+            </summary>
+            <param name="controlReference">Reference to the control to be registered</param>
+            <remarks>If a control is registered multiple times with the same ID each time, only the last registration will remain.  They overwrite eachother so that each ID for registered controls is unique.</remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ControlIdentification.Register(EternalPlay.ReusableCore.Web.EntryBase)">
+            <summary>
+            Registers an entry control for client side reference by server ID ensuring that only one control with a given ID is registered at a time.
+            </summary>
+            <param name="entryControl">Reference to any entry control derived from EntryBase</param>
+            <remarks>The ID is taken from the entry control and the client id is taken from the contained child text box control</remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ControlIdentification.Register(System.String,System.String)">
+            <summary>
+            Registers a control for client side reference by server ID ensuring that only one control with a given ID is registered at a time.
+            </summary>
+            <param name="controlId">The server side id of the control to be registered</param>
+            <param name="controlClientId">The client side id fo the control to be registered</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ControlIdentification.DeepFindControl(System.String,System.Web.UI.Control)">
+            <summary>
+            Find a server side control by walking up the naming containers
+            </summary>
+            <param name="targetId">ID of server side control to locate</param>
+            <param name="startControl">Reference to the naming container to start searching within - progress will move from this naming container until it reaches the page</param>
+            <returns>Reference to located server side control or null</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ControlIdentification.Render(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Render Javascript block to client.  This only happens once for all controls on the page.
+            </summary>
+            <param name="writer"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ControlIdentification.BuildControlIdentificationJavaScript">
+            <summary>
+            Builds the javascript declaring and instantiating the control identification references
+            </summary>
+            <returns>JavaScript string</returns>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlIdentification.Namespace">
+            <summary>
+            Name used for the client side object holding control references.
+            </summary>
+            <example>ControlReference.MyTextBox.select();</example>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.ControlIdentification.HasRegisteredControls">
+            <summary>
+            Returns true if there are any controls registered
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.WebExceptionResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.WebExceptionResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.WebExceptionResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.WebExceptionResources.Entry_AssociatedLabelNotFound_MessageText">
+            <summary>
+              Looks up a localized string similar to The associated label was not found within the same naming container as the entry control.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.WebExceptionResources.Entry_KeystrokeFilterExpression_MessageText">
+            <summary>
+              Looks up a localized string similar to KeystrokeFilterExpression is required if keystroke filtering is turned on.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.WebExceptionResources.Entry_LabelRequiredForPlacement_MessageText">
+            <summary>
+              Looks up a localized string similar to ErrorTextPlacement of AdjacentToLabel requires the AssociatedLabelId value be provided.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.WebExceptionResources.Entry_MinAndMaxValues_MessageText">
+            <summary>
+              Looks up a localized string similar to MinimumValue and MaximumValue are required to both be present or absent.
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.WebExceptionResources.Entry_UserFriendlyName_MessageText">
+            <summary>
+              Looks up a localized string similar to UserFriendlyName is required if the control is editable.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.PersistencePropertyNames">
+            <summary>
+            Encapsulates persistence property names (i.e. the keys used for value retrieval)
+            Used when accessing the following locations, but not restricted to these
+            1.  User Profile "SiteCookieName"
+            2.  Cookies
+            3.  Application Settings
+            4.  Default User Page
+            </summary>
+            <remarks>This is intended to remove the need for literal strings in different locations.  To meet this requirement values in this class should be fairly general in nature; potentially useful in many applications</remarks>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.PersistencePropertyNames.Theme">
+            <summary>
+            Property name used to store the preferred theme for the user
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.PersistencePropertyNames.Culture">
+            <summary>
+            Property name used to store the preferred language for the user
+            </summary>
+            <example>English="en-US", Arabic="ar-IQ"</example>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.PersistencePropertyNames.SiteCookie">
+            <summary>
+            Property name used to store the preferred language for the user
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.PersistencePropertyNames.LandingPage">
+            <summary>
+            Property name used to store the preferred landing page for the user
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.StyleUtility">
+            <summary>
+            Encapsulates cascading style sheet related functionality
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.StyleUtility.CssClassReadOnly">
+            <summary>
+            Class used to indicate that a control should appear read-only
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.StyleUtility.AddCssClass(System.String,System.Web.UI.WebControls.WebControl[])">
+            <summary>
+            Manage the addition of css class values from the web control's <code>CssClass</code> property
+            </summary>
+            <param name="cssClassName">Css class name to be added</param>
+            <param name="webControl">Web control reference(s) to be managed</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.StyleUtility.RemoveCssClass(System.String,System.Web.UI.WebControls.WebControl[])">
+            <summary>
+            Manage the removal of css class values from the web control's <code>CssClass</code> property
+            </summary>
+            <param name="cssClassName">Css class name to be removed</param>
+            <param name="webControl">Web control reference to be managed</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.SiteMapBreadcrumbs">
+             <summary>
+             Derived from SiteMapPath to extend its functionality
+             </summary>
+            [DefaultProperty("Text")]
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.SiteMapBreadcrumbs.InitializeItem(System.Web.UI.WebControls.SiteMapNodeItem)">
+            <summary>
+            Perform custom initialization of site map node items
+            </summary>
+            <param name="item">The System.Web.UI.WebControls.SiteMapNodeItem to initialize</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.SiteMapBreadcrumbs.RenderContents(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Renders the nodes in the System.Web.UI.WebControls.SiteMapPath control.
+            </summary>
+            <param name="writer">The System.Web.UI.HtmlTextWriter that represents the output stream used to write content to a Web page.</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.SiteMapBreadcrumbs.ApplyCustomSiteMapNodeAttributes(System.Web.UI.WebControls.SiteMapNodeItem)">
+            <summary>
+            Apply custom sitemap node attributes to a sitemapnodeitem, or take appropriate action 
+            </summary>
+            <param name="item">The SiteMapNodeItem to be acted upon</param>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.SiteMapBreadcrumbs.ShowRootNode">
+            <summary>
+            Indicates whether the root node will be visible or not
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.SiteMapBreadcrumbs.MinimumVisibleNodes">
+            <summary>
+            If the number of visible nodes is less than this number then the entire control will not render
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.UserFeedbackSubmitter">
+            <summary>
+            Feedback submission control class.  Uses information provided by the UserFeedBackLink control to
+            aid in the submission of user feedback.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.UserFeedbackSubmitter.OnInit(System.EventArgs)">
+            <summary>
+            Control initialization
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.UserFeedbackSubmitter.GetUserFeedbackEntries(System.Web.HttpApplicationState,System.Web.SessionState.HttpSessionState)">
+            <summary>
+            Stack of user feedback log entries.
+            </summary>
+            <remarks>
+            When submitting, the feedback log entry is popped off the stack and sent.  If the user never submits
+            the feedback, the entry stays on the stack and can be cleared off at a later point, for example at
+            session end, using the SubmitEmptyEntries method.
+            </remarks>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.UserFeedbackSubmitter.SubmitFeedbackLogEntry(System.String)">
+            <summary>
+            Submits the feedback entry with the given feedback message.
+            </summary>
+            <param name="feedbackMessage">User provided feedback message</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.UserFeedbackSubmitter.SubmitEmptyEntries(System.Web.HttpApplicationState,System.Web.SessionState.HttpSessionState)">
+            <summary>
+            Submits all feedbacks that were initiated by the user, but never actually submitted.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.EntryDay">
+            <summary>
+            Extends the entry for integers to specialize for entry of day specific integers.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.EntryDay.OnInit(System.EventArgs)">
+            <summary>
+            Initializing day entry with default settings
+            </summary>
+            <param name="e">An System.EventArgs object that contains the event data.</param>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.PopupLaunchPosition">
+            <summary>
+            Each value directs the popup to launch in a different location relative to the pop up link
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.PopupLaunchPosition.Auto">
+            <summary>
+            Popup launch position is determined automatically
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.PopupLaunchPosition.TopLeft">
+            <summary>
+            Popup launched to a top left position
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.PopupLaunchPosition.TopRight">
+            <summary>
+            Popup launched to a top right position
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.PopupLaunchPosition.BottomLeft">
+            <summary>
+            Popup launched to a bottom left position
+            </summary>
+        </member>
+        <member name="F:EternalPlay.ReusableCore.Web.PopupLaunchPosition.BottomRight">
+            <summary>
+            Popup launched to a bottom right position
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.BasePage">
+            <summary>
+            Providing basic page functionality.  Intended to be derived by pages used in web applications.
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.BasePage.OnInitComplete(System.EventArgs)">
+            <summary>
+            Perform post initialization specific activities
+            
+            1. Bind Data
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.BasePage.OnBindData(System.EventArgs)">
+            <summary>
+            Perform Data Binding Activities
+            
+            1.  Gluv List Binding
+            2.  General Control Binding
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.BasePage.OnPreRender(System.EventArgs)">
+            <summary>
+            Perform activities that can wait until pre-render
+            
+            1. Assign resource strings
+            2. Register controls with control identification
+            3. Place focus on a control
+            4. Populate UI controls with values
+            5. Enable or disable controls
+            6. Prepare client side
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.BasePage.Render(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Handle render activities unique to base page
+            
+            1.  Add the Control Identification object to the end of the controls collection if it is populated.
+            </summary>
+            <param name="writer"></param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.BasePage.CreatePageUrlBuilder(System.String)">
+            <summary>
+            Utility function for derived pages that will create a UrlBuilder for the given relative path.
+            </summary>
+            <param name="relativePath">Page url as a relative path.</param>
+            <returns>UrlBuilder with an absolute Uri</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.BasePage.RebindData">
+            <summary>
+            Re-initiates data binding sequence for the page heirarchy
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.BasePage.ResolveApplicationPath(System.String)">
+            <summary>
+            Replaces a leading tilde with the application path, if the application path is not "/" root.
+            </summary>
+            <param name="path">path to be resolved</param>
+            <returns>path string</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.BasePage.RetrievePageTitle">
+            <summary>
+            Retrieve Page Title from site map or use default of file name
+            </summary>
+            <returns>page title</returns>
+        </member>
+        <member name="E:EternalPlay.ReusableCore.Web.BasePage.BindData">
+            <summary>
+            Page load cycle event when data is bound to controls
+            </summary>
+        </member>
+        <member name="P:EternalPlay.ReusableCore.Web.BasePage.ControlId">
+            <summary>
+            Returns a reference to the Control Identification server control.  Lazy loads.
+            </summary>
+        </member>
+        <member name="T:EternalPlay.ReusableCore.Web.ListControlExtensions">
+            <summary>
+            Extensions methods for ListControl
+            </summary>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ListControlExtensions.SetSelectedGuidValue(System.Web.UI.WebControls.ListControl,System.Nullable{System.Guid})">
+            <summary>
+            Extends ListControl to allow nullable guids to be assigned to the selected value
+            </summary>
+            <param name="listControl">Instance of type being extended</param>
+            <param name="value">nullable guid value to be assigned</param>
+            <returns>Newly set selected value</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ListControlExtensions.GetSelectedGuidValue(System.Web.UI.WebControls.ListControl)">
+            <summary>
+            Extends ListControl to allow the selected value to be retrieved as a nullable guid
+            </summary>
+            <param name="listControl">Instance of type being extended</param>
+            <returns>Selected value as a nullable guid</returns>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ListControlExtensions.InsertEmptyItem(System.Web.UI.WebControls.ListControl,System.String)">
+            <summary>
+            Inserts an empty item as the first item in the ListControl
+            </summary>
+            <param name="listControl">ListControl being extended</param>
+            <param name="emptyItemText">Text for the included empty item</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ListControlExtensions.DataBindLookupGroup(System.Web.UI.WebControls.ListControl,System.Guid)">
+            <summary>
+            Bind a Gluv lookup group to a ListControl
+            </summary>
+            <param name="listControl">ListControl being extended</param>
+            <param name="lookupGroupId">Lookup group to bind</param>
+        </member>
+        <member name="M:EternalPlay.ReusableCore.Web.ListControlExtensions.DataBindLookupGroup(System.Web.UI.WebControls.ListControl,System.Guid,System.String)">
+            <summary>
+            Bind a Gluv lookup group to a ListControl
+            </summary>
+            <param name="listControl">ListControl being extended</param>
+            <param name="lookupGroupId">Lookup group to bind</param>
+            <param name="emptyItemText">Text for the included empty item</param>
+        </member>
+    </members>
+</doc>

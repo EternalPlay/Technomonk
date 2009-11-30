@@ -1,0 +1,44 @@
+﻿/*
+PURPOSE = Provide style available to all pages under the technomonk master
+
+--- Table of Contents ---
+1. CRITICAL LAYOUT
+   [postition, display, float, z-index, top, left, width, height, margin, border-width, padding]
+2. LOOK & FEEL
+
+--- Color Palette ---
+Darkest:000000, black
+Dark:666666, dull gray
+Medium:999999, light gray
+Light:cccccc, pale gray
+Lightest: ffffff, white
+
+--- Font Families ---
+Titles and Controls:  Verdana, Arial, Sans-Serif
+Text:  Times New Roman, Serif
+*/
+
+HTML, BODY {
+    margin:10px;
+    padding:0px;
+    border:0px;
+}
+
+.PageTitle {
+    font-family: Verdana, Arial, Sans-Serif;
+    font-size: large;
+    margin: 5px;
+    margin-bottom: 2em;
+}
+
+.ContentHeader {
+    font-family: Verdana, Arial, Sans-Serif;
+    font-size: medium;
+    margin: 5px;
+    margin-bottom: 1em;
+}
+
+.ContentMain {
+    font-family: Times New Roman, Serif;
+    font-size:  small;
+}

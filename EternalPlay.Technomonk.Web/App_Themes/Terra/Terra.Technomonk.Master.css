@@ -1,0 +1,18 @@
+﻿/*
+
+Colour Lovers
+Palette:Terra?
+URL: http://www.colourlovers.com/palette/292482/Terra
+
+Scale/Combo  Name           Color Families   #RGB
+Light  1,    Terra Terra,   Tan/Brown:       #031634
+Dark   1,    Terra,         Tan/Brown:       #CDB380
+Light  2,    Aqua,          Green/Blue:      #036564
+Medium 2,    Aqua Profunda  Green/Blue:      #033649
+Dark   2,    Abisso         Blue             #031634
+*/
+
+BODY {
+    background-color:#E8DDCB;
+    color:#031634;
+}
