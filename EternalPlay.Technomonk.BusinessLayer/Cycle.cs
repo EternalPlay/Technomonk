@@ -58,7 +58,7 @@ namespace EternalPlay.Technomonk.BusinessLayer {
         /// <summary>
         /// Determines if the Cycle is active based on the as of date
         /// </summary>
-        public bool IsActive {
+        public bool IsCurrent {
             get {
                 return (this.StartDate <= this.AsOf && this.AsOf <= this.EndDate);
             }

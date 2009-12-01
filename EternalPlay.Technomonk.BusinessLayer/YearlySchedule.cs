@@ -66,7 +66,7 @@ namespace EternalPlay.Technomonk.BusinessLayer {
         /// </remarks>
         public Cycle ActiveCycle {
             get {
-                return this.Cycles.Where(cycle => cycle.IsActive).FirstOrDefault();
+                return this.Cycles.Where(cycle => cycle.IsCurrent).FirstOrDefault();
             }
         }
         #endregion

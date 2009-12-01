@@ -83,7 +83,7 @@ namespace EternalPlay.Technomonk.BusinessLayer {
         /// </remarks>
         public bool IsActive {
             get {
-                return (this.Cycle.IsActive && this.AsOf >= this.StartDate);
+                return (this.Cycle.IsCurrent && this.AsOf >= this.StartDate);
             }
         }
 
