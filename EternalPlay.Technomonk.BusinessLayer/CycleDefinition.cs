@@ -21,10 +21,7 @@ namespace EternalPlay.Technomonk.BusinessLayer {
         #region Properties
         internal static ICollection<Quality> QualityDefinitions {
             get {
-                if (_cycleDefinition == null)
-                    _cycleDefinition = LoadQualitiesFromDefinition();
-
-                return _cycleDefinition;
+                return _cycleDefinition ?? (_cycleDefinition = LoadQualitiesFromDefinition());
             }
         }
         #endregion
