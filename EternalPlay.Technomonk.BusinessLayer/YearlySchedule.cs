@@ -50,10 +50,7 @@ namespace EternalPlay.Technomonk.BusinessLayer {
         /// </summary>
         public ICollection<Cycle> Cycles {
             get {
-                if (_cycles == null)
-                    _cycles = BuildCycles(_asOf, this);
-
-                return _cycles;
+                return _cycles ?? (_cycles = BuildCycles(_asOf, this));
             }
         }
 
